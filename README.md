@@ -10,4 +10,4 @@ require(httr),
 require(httpuv),
 require(XML),
 require(data.table)
-
+require(plyr)
