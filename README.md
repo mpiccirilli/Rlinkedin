@@ -15,8 +15,8 @@ install_github("mpiccirilli/Rlinkedin")
 require(Rlinkedin)
 
 app.name <- "mikesapp"
-api.key <- ""  # provided in Application Details
-secret.key <- "" # provided in Application Details
+api.key <- ""  # aka 'consumer key', provided in Application Details
+secret.key <- "" # aka 'consumer key', provided in Application Details
 
 in.auth <- inOAuth(app.name, api.key, secret.key)
 
