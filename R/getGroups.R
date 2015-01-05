@@ -1,3 +1,16 @@
+#' Get info from your LinkedIn Groups
+#'
+#' @param token Authorization token 
+#' @param details 
+#' @return Returns information about what groups you belong to, either with or without detailed information
+#' @examples
+#' \dontrun{
+#' 
+#' my.groups <- getGroups(in.auth, details=TRUE)
+#' }
+#' @export
+
+
 getGroups <- function(token, details=FALSE)
 {
   # This function will get all the groups a user (including self) is a member of

@@ -1,3 +1,15 @@
+#' Get Posts from your LinkedIn Groups
+#'
+#' @param token Authorization token 
+#' @return Returns posts from groups you belong to
+#' @examples
+#' \dontrun{
+#' 
+#' my.groups <- getGroupPosts(in.auth)
+#' }
+#' @export
+
+
 getGroupPosts <- function(token)
 {
   membership_url <- "https://api.linkedin.com/v1/people/"

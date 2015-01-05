@@ -1,3 +1,16 @@
+#' Get LinkedIn Connections
+#'
+#' @param token Authorization token 
+#' @return Returns a dataframe of LinkedIn connections
+#' @examples
+#' \dontrun{
+#' 
+#' my.connections <- getMyConnections(in.auth)
+#' }
+#' @export
+
+
+
 getMyConenctions <- function(token)
 { 
   # returns default fields
@@ -7,5 +20,3 @@ getMyConenctions <- function(token)
   q.df <- ldply(xmlToList(q.content), data.frame)
   return(q.df)
 }
-
-

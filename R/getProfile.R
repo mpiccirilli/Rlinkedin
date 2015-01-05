@@ -1,3 +1,17 @@
+#' Get LinkedIn Profile Information
+#'
+#' @param token Authorization token 
+#' @param connections TRUE or FALSE. If TRUE, will return profile information of your connections
+#' @param id Id number of a LinkedIn member
+#' @return Returns profile information of yourself, your connections, or an idividual LinkedIn member
+#' @examples
+#' \dontrun{
+#' 
+#' profiles <- getProfile(in.auth, connections=TRUE)
+#' }
+#' @export
+
+
 getProfile <- function(token, connections=FALSE, id=NULL)
 {
  

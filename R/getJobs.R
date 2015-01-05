@@ -1,3 +1,16 @@
+#' LinkedIn Job Recommendations and Job Search
+#'
+#' @param token Authorization token 
+#' @param suggestions LinkedIn job recommendations
+#' @return Returns LinkedIn job recommendation or search for jobs via LinkedIn
+#' @examples
+#' \dontrun{
+#' 
+#' my.jobs <- getJobs(in.auth, suggestions=TRUE)
+#' }
+#' @export
+
+
 getJobs <- function(token, suggestions=TRUE)
 {
   
