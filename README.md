@@ -3,6 +3,8 @@ Rlinkedin
 
 This is a development version of an R package to access the LinkedIn API via R
 
+Collaboration is welcomed! 
+
 
 Installation and Authentication
 -------
