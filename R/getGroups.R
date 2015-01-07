@@ -28,8 +28,7 @@ getGroups <- function(token, details=FALSE)
     url <- paste0(membership_url,"~",membership_fields)
     query <- GET(url, config(token=token))
     q.content <- content(query)
-    q.list <- xmlToList(q.content)
-    q.df <- do.call(data.frame, unlist(q.list, recursive=FALSE))
+    q.df <- groupsToDF(q.content)
     return(q.df)
   }
     

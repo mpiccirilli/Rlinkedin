@@ -110,3 +110,44 @@ jobBookmarksToDF <- function(x)
   return(df)
 }
 
+groupsToDF <- function(x)
+{
+  gp.nodes <- getNodeSet(x, "//group-membership")
+  
+  gp.id <- lapply(gp.nodes, xpathSApply, "./group/id", xmlValue)
+  gp.id[sapply(gp.id, is.list)] <- NA
+  gp.id <- unlist(gp.id)
+  
+  gp.name <- lapply(gp.nodes, xpathSApply, "./group/name", xmlValue)
+  gp.name[sapply(gp.name, is.list)] <- NA
+  gp.name <- unlist(gp.name)
+  
+  gp.status <- lapply(gp.nodes, xpathSApply, "./membership-state/code", xmlValue)
+  gp.status[sapply(gp.status, is.list)] <- NA
+  gp.status <- unlist(gp.status)
+  
+  gp.allow.messages <- lapply(gp.nodes, xpathSApply, "./allow-messages-from-members", xmlValue)
+  gp.allow.messages[sapply(gp.allow.messages, is.list)] <- NA
+  gp.allow.messages <- unlist(gp.allow.messages)
+  
+  gp.email.freq <- lapply(gp.nodes, xpathSApply, "./email-digest-frequency/code", xmlValue)
+  gp.email.freq[sapply(gp.email.freq, is.list)] <- NA
+  gp.email.freq <- unlist(gp.email.freq)
+
+  gp.email.mgr <- lapply(gp.nodes, xpathSApply, "./email-annoucements-from-manages", xmlValue)
+  gp.email.mgr[sapply(gp.email.mgr, is.list)] <- NA
+  gp.email.mgr <- unlist(gp.email.mgr)
+  
+  gp.email.new.posts <- lapply(gp.nodes, xpathSApply, "./email-for-every-new-post", xmlValue)
+  gp.email.new.posts[sapply(gp.email.new.posts, is.list)] <- NA
+  gp.email.new.posts <- unlist(gp.email.new.posts)
+  
+  q.df <- data.frame(group_id=gp.id,
+                     group_name=gp.name,
+                     member_status=gp.status,
+                     allow_messages_from_members=gp.allow.messages,
+                     email_frequency=gp.email.freq,
+                     manager_announcements=gp.email.mgr,
+                     email_new_posts=gp.email.new.posts)
+  return(q.df)
+}
