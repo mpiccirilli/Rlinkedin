@@ -5,6 +5,32 @@ unlistWithNAs <- function(node_set, node_path)
   x.list <- unlist(x.list)
 }
 
+nullObjTest <- function(x) is.null(x) | all(sapply(x, is.null))  
+
+rmNullElements <- function(x)
+{
+  x <- Filter(Negate(nullObjTest),x)
+  lapply(x, function(x) if (is.list(x)) rmNullElements(x) else x)
+}
+
+
+listToXML <- function(node, sublist)
+{
+  sublist <- rmNullElements(sublist)
+  for(i in 1:length(sublist)){
+    child <- newXMLNode(names(sublist)[i], parent=node)  
+    if (typeof(sublist[[i]]) == "list"){
+      listToXML(child, sublist[[i]])
+    }
+    else{
+      xmlValue(child) <- sublist[[i]]
+    }
+  } 
+}
+
+
+
+
 
 jobsToDF <- function(x)
 {
