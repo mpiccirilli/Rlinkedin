@@ -104,9 +104,9 @@ submitGroupPost
 --------
 Create a group discussion 
 
-There are two response types here: 
-201 Created: Your discussion has been created, most likely you posted to an unmoderated group
-202 Accepted: Your discussion is pending approval, most likely you posted to a moderated group
+There are two response types here: <br>
+201 Created: Your discussion has been created, most likely you posted to an unmoderated group<br>
+202 Accepted: Your discussion is pending approval, most likely you posted to a moderated group<br>
 
 ```{r}
 id <- my.groups$group_id[1]
