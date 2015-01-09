@@ -9,7 +9,7 @@ Collaboration is welcomed!
 Installation and Authentication
 -------
 
-Installing ane establishing a connection to the LinkedIn API. 
+Installing and establishing a connection to the LinkedIn API. 
 
 ```{r}
 require(devtools)
