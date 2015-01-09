@@ -115,3 +115,37 @@ connectionsToDF <- function(x)
   )
   return(q.df)
 }
+
+
+profileToList <- function(x)
+{
+  nodes <- getNodeSet(x, "//person")
+  
+  q.list <- list(id=unlistWithNAs(nodes, "./id"),
+                 fname=unlistWithNAs(nodes, "./first-name"),
+                 lname=unlistWithNAs(nodes, "./last-name"),
+                 formatted_name=unlistWithNAs(nodes, "./formatted-name"),
+                 headline=unlistWithNAs(nodes, "./headline"),
+                 industry=unlistWithNAs(nodes, "./industry"),
+                 connections=unlistWithNAs(nodes, "./num-connections"),
+                 summary=unlistWithNAs(nodes, "./summary"),
+                 profile_url=unlistWithNAs(nodes, "./public-profile-url"),
+                 positions=positionsToList(x))
+  return(q.list)
+}
+
+positionsToList <- function(x)
+{
+  nodes <- getNodeSet(x, "//position")
+  q.list <- list(position_id=unlistWithNAs(nodes, "./id"),
+                     position_title=unlistWithNAs(nodes, "./title"),
+                     position_summary=unlistWithNAs(nodes, "./summary"),
+                     start_year=unlistWithNAs(nodes, "./start-date/year"),
+                     end_year=unlistWithNAs(nodes, "./end-date/year"),
+                     is_current=unlistWithNAs(nodes, "./is-current"),
+                     company_id=unlistWithNAs(nodes, "./company/id"),
+                     company_name=unlistWithNAs(nodes, "./company/name")
+  )
+  return(q.list)
+}
+
