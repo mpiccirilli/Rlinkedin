@@ -82,3 +82,40 @@ Returns posts from groups you belong to
 ```{r}
 my.group.posts <- getGroupPosts(in.auth)
 ```
+
+
+submitShare
+--------
+Share an update to your networks feed. 
+
+Note: If one of the content elements is specified you must also include include a url for the post
+```{r}
+comment <- "Test connecting to the LinkedIn API via R"
+title <- "Im creating an R package to connect to the LinkedIn API, this is a test post from R!"
+url <- "https://github.com/mpiccirilli"
+desc <- "Dev version of access to LinkedIn API via R. Collaboration is welcomed!"
+
+submitShare(in.auth, comment=comment, content_tile=title, content_url=url, content_desc=desc)
+
+```
+
+
+submitGroupPost
+--------
+Create a group discussion 
+
+There are two response types here: 
+201 Created: Your discussion has been created, most likely you posted to an unmoderated group
+202 Accepted: Your discussion is pending approval, most likely you posted to a moderated group
+
+```{r}
+id <- 77616  # id number for The R Project for Statistical Computing
+disc.title <- "Test connecting to the LinkedIn API via R"
+disc.summary <- "Im creating an R package to connect to the LinkedIn API, this is a test post from R!"
+url <- "https://github.com/mpiccirilli"
+content.desc <- "Dev version of access to LinkedIn API via R. Collaboration is welcomed!"
+
+submitGroupPost(in.auth, 77616, disc_title=disc.title, disc_summary=disc.summary, content_url=url, content_desc=content.desc)
+
+```
+
