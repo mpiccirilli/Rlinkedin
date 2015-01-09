@@ -95,7 +95,7 @@ title <- "Im creating an R package to connect to the LinkedIn API, this is a tes
 url <- "https://github.com/mpiccirilli"
 desc <- "Dev version of access to LinkedIn API via R. Collaboration is welcomed!"
 
-submitShare(in.auth, comment=comment, content_tile=title, content_url=url, content_desc=desc)
+submitShare(in.auth, comment=comment, content_tile=title, content_url=url, content_desc=desc, visibility = "anyone")
 
 ```
 
