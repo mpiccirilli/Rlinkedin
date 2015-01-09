@@ -62,6 +62,10 @@ individual.profile <- getProfile(in.auth, id = my.connections$id[1])
 class(my.profile)
 ## [1] "list"
 
+names(my.profile)
+## [1] "id"              "fname"           "lname"           "formatted_name"  "headline"       
+## [6] "industry"        "connections"     "profile_summary" "profile_url"     "positions"    
+
 head(my.profile, 5)
 
 ##  $id
