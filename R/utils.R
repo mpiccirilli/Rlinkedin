@@ -67,7 +67,6 @@ jobBookmarksToDF <- function(x)
 }
 
 
-
 groupsToDF <- function(x)
 {
   nodes <- getNodeSet(x, "//group-membership")
@@ -98,5 +97,3 @@ groupPostToDF <- function(x)
   )
   return(q.df)
 }
-
-
