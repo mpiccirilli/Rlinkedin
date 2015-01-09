@@ -34,6 +34,7 @@ my.connections <- getMyConenctions(in.auth)
 colnames(my.connections)
 ## [1] "id"       "fname"    "lname"    "headline" "industry" "area"     "country"  "api_url"  "site_url"
 
+require(plyr)
 conn.freq <- count(my.connections, c("industry", "area"))
 head(conn.freq[order(-conn.freq$freq),])
 
