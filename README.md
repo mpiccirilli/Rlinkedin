@@ -58,7 +58,7 @@ job.bookmarks <- getJobs(token = in.auth, bookmarks = TRUE)
 
 searchJobs
 --------
-Job Search API is a part of our Vetted API Access Program. You must apply and get LinkedIn's approval before using this API.
+Job Search API is a part of their Vetted API Access Program. You must apply and get LinkedIn's approval before using this API.
 
 I have currently only included a search based on keywords. I will include more soon...
 
