@@ -32,18 +32,18 @@ Get your connections and basic/default information about them.
 my.connections <- getMyConenctions(in.auth)
 
 colnames(my.connections)
-[1] "id"       "fname"    "lname"    "headline" "industry" "area"     "country"  "api_url"  "site_url"
+## [1] "id"       "fname"    "lname"    "headline" "industry" "area"     "country"  "api_url"  "site_url"
 
 conn.freq <- count(my.connections, c("industry", "area"))
 head(conn.freq[order(-conn.freq$freq),])
 
-           industry                       area   freq
- Financial Services   Greater New York City Area   43
-           Research   Greater New York City Area   18
-   Higher Education   Greater New York City Area   13
-         Accounting   Greater New York City Area   10
-               <NA>   Greater New York City Area   10
-  Computer Software   Greater New York City Area    9
+##           industry                       area   freq
+## Financial Services   Greater New York City Area   43
+##           Research   Greater New York City Area   18
+##   Higher Education   Greater New York City Area   13
+##         Accounting   Greater New York City Area   10
+##               <NA>   Greater New York City Area   10
+##  Computer Software   Greater New York City Area    9
 
 ```
 
