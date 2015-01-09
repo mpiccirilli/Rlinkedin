@@ -1,7 +1,7 @@
 #' Get Posts from your LinkedIn Groups
 #'
 #' @param token Authorization token 
-#' @return Returns posts from groups you belong to
+#' @return Returns posts of groups you belong to
 #' @examples
 #' \dontrun{
 #' 

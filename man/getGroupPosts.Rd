@@ -10,7 +10,7 @@ getGroupPosts(token)
 \item{token}{Authorization token}
 }
 \value{
-Returns posts from groups you belong to
+Returns posts of groups you belong to
 }
 \description{
 Get Posts from your LinkedIn Groups

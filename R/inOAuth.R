@@ -17,6 +17,7 @@
 
 inOAuth <- function(application_name, consumer_key, consumer_secret)
 {
+  require(httpuv)
   full_url <- oauth_callback()
   message <- paste("Copy and paste into 'OAuth 2.0 Redirect URLs' on LinkeIn Application Details:", full_url, "\nWhen done, press any key to continue...")
   invisible(readline(message))

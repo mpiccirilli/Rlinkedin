@@ -10,7 +10,6 @@
 #' @export
 
 
-
 getMyConenctions <- function(token)
 { 
   # returns default fields

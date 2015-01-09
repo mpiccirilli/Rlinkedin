@@ -44,7 +44,7 @@ jobsToDF <- function(x)
                      job_desc=unlistWithNAs(nodes, "./description-snippet"),
                      location=unlistWithNAs(nodes, "./location-description")
                      )
-  return(df)
+  return(q.df)
 }
 
 
@@ -63,7 +63,7 @@ jobBookmarksToDF <- function(x)
                    job_desc=unlistWithNAs(nodes, "./job/description-snippet"),
                    post_timestamp=unlistWithNAs(nodes, "./job/posting-timestamp")
                    )
-  return(df)
+  return(q.df)
 }
 
 

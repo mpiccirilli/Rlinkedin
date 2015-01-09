@@ -11,7 +11,7 @@ getProfile(token, connections = FALSE, id = NULL)
 
 \item{connections}{TRUE or FALSE. If TRUE, will return profile information of your connections}
 
-\item{id}{Id number of a LinkedIn member}
+\item{id}{Numeric ID number of a LinkedIn member}
 }
 \value{
 Returns profile information of yourself, your connections, or an idividual LinkedIn member

@@ -1,12 +1,15 @@
-#' LinkedIn Job Recommendations and Job Search
+#' LinkedIn Bookmarked and Recommended Jobs
 #'
 #' @param token Authorization token 
 #' @param suggestions LinkedIn job recommendations
-#' @return Returns LinkedIn job recommendation or search for jobs via LinkedIn
+#' @param bookmarks Jobs you've bookmarked
+#' @return Returns LinkedIn recommended or bookmarked jobs
 #' @examples
 #' \dontrun{
 #' 
-#' my.jobs <- getJobs(in.auth, suggestions=TRUE)
+#' job.suggestions <- getJobs(in.auth, suggestions=TRUE)
+#' job.bookmarks <- getJobs(in.auth, bookmarks=TRUE)
+#' 
 #' }
 #' @export
 
@@ -14,9 +17,6 @@
 getJobs <- function(token, suggestions=TRUE, bookmarks=FALSE)
 { 
   
-  if(isTRUE(suggestions) && isTRUE(bookmarks)){
-    print("Please select either suggestions or bookmarks")
-  }
   
   if(isTRUE(suggestions)){
   url <- "http://api.linkedin.com/v1/people/~/suggestions/job-suggestions"
@@ -32,5 +32,9 @@ getJobs <- function(token, suggestions=TRUE, bookmarks=FALSE)
     q.content <- content(query)
     q.df <- jobBookmarksToDF(q.content)
     return(q.df)
+  }
+  
+  if(isTRUE(suggestions) && isTRUE(bookmarks)){
+    print("Please select either suggestions or bookmarks")
   }
 }

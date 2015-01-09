@@ -1,7 +1,7 @@
 #' Get info from your LinkedIn Groups
 #'
 #' @param token Authorization token 
-#' @param details 
+#' @param details Group details, TRUE or FALSE
 #' @return Returns information about what groups you belong to, either with or without detailed information
 #' @examples
 #' \dontrun{
@@ -40,9 +40,9 @@ getGroups <- function(token, details=FALSE)
     q.content <- content(query)
     gp.ids <- groupsToDF(q.content)$group_id
     q.df <- data.frame()
-    for(i in 1:length(group.ids))
+    for(i in 1:length(gp.ids))
     {
-      url <- paste0(details_url, group.ids[i], details_fields)  
+      url <- paste0(details_url, gp.ids[i], details_fields)  
       query <- GET(url, config(token=token))
       q.content <- content(query)
       gp.id <- q.content["number(//group/id/text())"]

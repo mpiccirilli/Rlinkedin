@@ -9,7 +9,7 @@ getGroups(token, details = FALSE)
 \arguments{
 \item{token}{Authorization token}
 
-\item{details}{}
+\item{details}{Group details, TRUE or FALSE}
 }
 \value{
 Returns information about what groups you belong to, either with or without detailed information

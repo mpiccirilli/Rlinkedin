@@ -2,25 +2,29 @@
 % Please edit documentation in R/getJobs.R
 \name{getJobs}
 \alias{getJobs}
-\title{LinkedIn Job Recommendations and Job Search}
+\title{LinkedIn Bookmarked and Recommended Jobs}
 \usage{
-getJobs(token, suggestions = TRUE)
+getJobs(token, suggestions = TRUE, bookmarks = FALSE)
 }
 \arguments{
 \item{token}{Authorization token}
 
 \item{suggestions}{LinkedIn job recommendations}
+
+\item{bookmarks}{Jobs you've bookmarked}
 }
 \value{
-Returns LinkedIn job recommendation or search for jobs via LinkedIn
+Returns LinkedIn recommended or bookmarked jobs
 }
 \description{
-LinkedIn Job Recommendations and Job Search
+LinkedIn Bookmarked and Recommended Jobs
 }
 \examples{
 \dontrun{
 
-my.jobs <- getJobs(in.auth, suggestions=TRUE)
+job.suggestions <- getJobs(in.auth, suggestions=TRUE)
+job.bookmarks <- getJobs(in.auth, bookmarks=TRUE)
+
 }
 }
 
