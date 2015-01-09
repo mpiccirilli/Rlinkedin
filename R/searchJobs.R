@@ -1,14 +1,13 @@
 searchJobs <- function(token, keywords, count=20)
 {
   # In order to utilize this function you need to apply for Vetted API Access
+  # Right now I only have a search based on keywords. 
+  # Need to include more parameters
+  # Count can range from 1 to 20
   # Throttle limits: Up to 100 returns per search, 10 returns per page. Each page is one API call. 
   
-  keywords <- "Data Scientist"
+  
   kw.search <- URLencode(keywords)
-  count <- 20
-  
-  
-  
   start <- 0
   base_url <- paste0("https://api.linkedin.com/v1/job-search?start=",start,"&count=",count,"&")
   kw.url <- paste0("keywords=",kw.search)
