@@ -97,3 +97,21 @@ groupPostToDF <- function(x)
   )
   return(q.df)
 }
+
+
+connectionsToDF <- function(x)
+{ 
+  nodes <- getNodeSet(x, "//person")
+  
+  q.df <- data.frame(id=unlistWithNAs(nodes, "./id"),
+                     fname=unlistWithNAs(nodes, "./first-name"),
+                     lname=unlistWithNAs(nodes, "./last-name"),
+                     headline=unlistWithNAs(nodes, "./headline"),
+                     industry=unlistWithNAs(nodes, "./industry"),
+                     area=unlistWithNAs(nodes, "./location/name"),
+                     country=unlistWithNAs(nodes, "./location/country/code"),
+                     api_url=unlistWithNAs(nodes, "./api-standard-profile-request/url"),
+                     site_url=unlistWithNAs(nodes, "./site-standard-profile-request/url")
+  )
+  return(q.df)
+}
