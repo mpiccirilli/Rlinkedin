@@ -50,7 +50,21 @@ getJobs
 Returns LinkedIn job recommendations or search for jobs via LinkedIn. 
 Currently I have only included the job recommendations.  I will update with the job search function soon.
 ```{r}
-my.jobs <- getJobs(in.auth, suggestions = TRUE)
+job.recs <- getJobs(token = in.auth, suggestions = TRUE)
+
+job.bookmarks <- getJobs(token = in.auth, bookmarks = TRUE)
+
+```
+
+searchJobs
+--------
+Job Search API is a part of our Vetted API Access Program. You must apply and get LinkedIn's approval before using this API.
+
+I have currently only included a search based on keywords. I will include more soon...
+
+```{r}
+search.jobs <- searchJobs(token = in.auth, keywords = "data scientist")
+
 ```
 
 
