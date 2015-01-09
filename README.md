@@ -54,9 +54,7 @@ getProfile
 Get profile information of yourself, your connections, or an individual.
 ```{r}
 my.profile <- getProfile(in.auth)
-
 connections.profiles <- getProfile(in.auth, connections = TRUE)
-
 individual.profile <- getProfile(in.auth, id = my.connections$id[1])
 
 class(my.profile)
