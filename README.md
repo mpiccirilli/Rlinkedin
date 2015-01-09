@@ -80,6 +80,7 @@ getGroupPosts
 --------
 Returns posts from groups you belong to
 ```{r}
+# This is broken right now
 my.group.posts <- getGroupPosts(in.auth)
 ```
 
