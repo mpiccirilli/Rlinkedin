@@ -38,7 +38,7 @@ getGroups <- function(token, details=FALSE)
     url <- paste0(membership_url,"~",membership_fields)
     query <- GET(url, config(token=token))
     q.content <- content(query)
-    group.ids <- unlist(xpathApply(q.content, "//group/id", xmlValue))
+    gp.ids <- groupsToDF(q.content)$group_id
     q.df <- data.frame()
     for(i in 1:length(group.ids))
     {
@@ -49,8 +49,10 @@ getGroups <- function(token, details=FALSE)
       gp.name <- q.content["string(//group/name/text())"]
       gp.s.desc <- q.content["string(//group/short-description/text())"]
       gp.l.desc <- q.content["string(//group/description/text())"]
-      temp.df <- data.frame(group_id=gp.id, group_name=gp.name,
-                            group_desc_short=gp.s.desc, group_desc_long=gp.l.desc)
+      temp.df <- data.frame(group_id=gp.id,
+                            group_name=gp.name,
+                            group_desc_short=gp.s.desc,
+                            group_desc_long=gp.l.desc)
       q.df <- rbind(q.df, temp.df)
     }
     return(q.df)
