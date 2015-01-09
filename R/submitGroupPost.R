@@ -20,7 +20,7 @@
 #' url <- "https://github.com/mpiccirilli"
 #' content.desc <- "Dev version of access to LinkedIn API via R. Collaboration is welcomed!"
 #' 
-#' submitGroupPost(in.auth, 77616, disc_title=disc.title, disc_summary=disc.summary, content_url=url, content_desc=content.desc)
+#' submitGroupPost(in.auth, group_id=id, disc_title=disc.title, disc_summary=disc.summary, content_url=url, content_desc=content.desc)
 #' }
 #' @export
 
