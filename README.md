@@ -47,8 +47,7 @@ individual.profile <- getProfile(in.auth, id = my.connections$id[1])
 
 getJobs
 --------
-Returns LinkedIn job recommendations or search for jobs via LinkedIn. 
-Currently I have only included the job recommendations.  I will update with the job search function soon.
+Returns LinkedIn job recommendations or bookmarks.
 ```{r}
 job.recs <- getJobs(token = in.auth, suggestions = TRUE)
 
