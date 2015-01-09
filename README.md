@@ -37,7 +37,7 @@ colnames(my.connections)
 conn.freq <- count(my.connections, c("industry", "area"))
 head(conn.freq[order(-freqs$freq),])
 
-             industry                       area freq
+           industry                       area freq
  Financial Services Greater New York City Area   43
            Research Greater New York City Area   18
    Higher Education Greater New York City Area   13
