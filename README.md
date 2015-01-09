@@ -110,7 +110,7 @@ There are two response types here:
 202 Accepted: Your discussion is pending approval, most likely you posted to a moderated group
 
 ```{r}
-id <- 77616  # id number for The R Project for Statistical Computing
+id <- my.groups$group_id[1]
 disc.title <- "Test connecting to the LinkedIn API via R"
 disc.summary <- "Im creating an R package to connect to the LinkedIn API, this is a test post from R!"
 url <- "https://github.com/mpiccirilli"
