@@ -117,6 +117,10 @@ getGroups
 Returns information about what groups you belong to, either with or without detailed information
 ```{r}
 my.groups <- getGroups(in.auth, details=TRUE)
+colnames(my.groups)
+## [1] "group_id"                    "group_name"                  "member_status"              
+## [4] "allow_messages_from_members" "email_frequency"             "manager_announcements"      
+## [7] "email_new_posts"   
 ```
 
 
