@@ -58,6 +58,22 @@ my.profile <- getProfile(in.auth)
 connections.profiles <- getProfile(in.auth, connections = TRUE)
 
 individual.profile <- getProfile(in.auth, id = my.connections$id[1])
+
+class(my.profile)
+## [1] "list"
+
+head(my.profile, 5)
+
+##  $id
+##  [1] "RIWnbCCRy2"
+##  $fname
+##  [1] "Michael"
+##  $lname
+##  [1] "Piccirilli"
+##  $formatted_name
+##  [1] "Michael Piccirilli"
+##  $headline
+##  [1] "Graduate Student in Statistics at Columbia University"
 ```
 
 
