@@ -6,7 +6,6 @@ searchJobs <- function(token, keywords, count=20)
   # Count can range from 1 to 20
   # Throttle limits: Up to 100 returns per search, 10 returns per page. Each page is one API call. 
   
-  
   kw.search <- URLencode(keywords)
   start <- 0
   base_url <- paste0("https://api.linkedin.com/v1/job-search?start=",start,"&count=",count,"&")
@@ -32,6 +31,4 @@ searchJobs <- function(token, keywords, count=20)
     q.df <- rbind(q.df, q.tmp)
   }
   return(q.df)
-  
-  
 }
