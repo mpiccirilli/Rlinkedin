@@ -84,9 +84,11 @@ getJobs
 Returns LinkedIn job recommendations or bookmarks.
 ```{r}
 job.recs <- getJobs(token = in.auth, suggestions = TRUE)
-
 job.bookmarks <- getJobs(token = in.auth, bookmarks = TRUE)
 
+colnames(job.recs)
+## [1] "job_id"       "company_id"   "company_name" "poster_id"    "poster_fname" "poster_lname" "job_headline"
+## [8] "salary"       "job_desc"     "location"    
 ```
 
 searchJobs
@@ -97,6 +99,15 @@ I have currently only included a search based on keywords. I will include more s
 
 ```{r}
 search.jobs <- searchJobs(token = in.auth, keywords = "data scientist")
+colnames(search.jobs)
+## [1] "job_id"       "company_id"   "company_name" "poster_id"    "poster_fname" "poster_lname" "job_headline"
+## [8] "salary"       "job_desc"     "location"    
+
+head(search.jobs[,c(3,7, 10)], 3)
+##   company_name                                                 job_headline             location
+##   Bloomberg LP          Employee Services & Support Advisor at Bloomberg LP    New York, NY, USA
+##           FILD                           Manager, People Operations at FILD      Upper West Side
+##        KPMG US      Associate Director, Marketing Experienced Hires at KPMG         New York, NY
 
 ```
 
