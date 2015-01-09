@@ -35,9 +35,8 @@ getProfile <- function(token, connections=FALSE, id=NULL)
     url <- paste0(base_url, "id=", id, basicprofile_fields)
     query <- GET(url, config(token=token))
     q.content <- content(query)
-    q.list <- xmlToList(q.content)
-    q.df <- do.call(data.frame, unlist(q.list, recursive=FALSE))
-    return(q.df)
+    q.list <- profileToList(q.content)
+    return(q.list)
   }
   
   # if connections=TRUE && id=NULL
@@ -46,8 +45,8 @@ getProfile <- function(token, connections=FALSE, id=NULL)
   url <- paste0(base_url, "~/connections",basicprofile_fields)
   query <- GET(url, config(token=token))
   q.content <- content(query)
-  q.df <- ldply(xmlToList(q.content), data.frame)
-  return(q.df)
+  q.list <- profileToList(q.content)
+  return(q.list)
   }
   
   # if connections=TRUE && id=#

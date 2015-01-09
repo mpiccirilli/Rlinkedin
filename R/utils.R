@@ -128,7 +128,7 @@ profileToList <- function(x)
                  headline=unlistWithNAs(nodes, "./headline"),
                  industry=unlistWithNAs(nodes, "./industry"),
                  connections=unlistWithNAs(nodes, "./num-connections"),
-                 summary=unlistWithNAs(nodes, "./summary"),
+                 profile_summary=unlistWithNAs(nodes, "./summary"),
                  profile_url=unlistWithNAs(nodes, "./public-profile-url"),
                  positions=positionsToList(x))
   return(q.list)
