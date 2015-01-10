@@ -5,7 +5,7 @@
 \title{Create a Group Discussion Post}
 \usage{
 submitGroupPost(token, group_id, disc_title = NULL, disc_summary = NULL,
-  content_url = NULL, img_url = NULL, content_title = NULL,
+  content_url = NULL, content_img = NULL, content_title = NULL,
   content_desc = NULL)
 }
 \arguments{
@@ -13,15 +13,15 @@ submitGroupPost(token, group_id, disc_title = NULL, disc_summary = NULL,
 
 \item{group_id}{Numeric Group ID}
 
-\item{disc_title}{Group Discussion Title}
+\item{disc_title}{Group Discussion Title, required}
 
-\item{disc_summary}{Group Discussion Summary}
+\item{disc_summary}{Group Discussion Summary, required}
 
 \item{content_url}{Url for content, optinal}
 
-\item{img_url}{Url for an image, optional}
+\item{content_img}{Url for an image, optional}
 
-\item{content_title}{Title for content, optional}
+\item{content_title}{Title for content, required}
 
 \item{content_desc}{Description of content, optional}
 }
@@ -29,12 +29,12 @@ submitGroupPost(token, group_id, disc_title = NULL, disc_summary = NULL,
 Creates a group discussion
 }
 \description{
-Create a Group Discussion Post
+Must include a minimum of a discussion title, discussion summary, and content title"
 }
 \examples{
 \dontrun{
 
-my.groups <- my.groups <- getGroups(in.auth)
+my.groups <- getGroups(in.auth)
 
 id <- my.groups$group_id[1]
 disc.title <- "Test connecting to the LinkedIn API via R"

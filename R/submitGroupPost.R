@@ -1,18 +1,21 @@
 #' Create a Group Discussion Post
 #'
+#'
+#' Must include a minimum of a discussion title, discussion summary, and content title"
+#'
 #' @param token Authorization token 
 #' @param group_id Numeric Group ID
-#' @param disc_title Group Discussion Title
-#' @param disc_summary Group Discussion Summary
+#' @param disc_title Group Discussion Title, required
+#' @param disc_summary Group Discussion Summary, required
 #' @param content_url Url for content, optinal
-#' @param img_url Url for an image, optional
-#' @param content_title Title for content, optional
+#' @param content_img Url for an image, optional
+#' @param content_title Title for content, required
 #' @param content_desc Description of content, optional
 #' @return Creates a group discussion 
 #' @examples
 #' \dontrun{
 #' 
-#' my.groups <- my.groups <- getGroups(in.auth)
+#' my.groups <- getGroups(in.auth)
 #' 
 #' id <- my.groups$group_id[1]
 #' disc.title <- "Test connecting to the LinkedIn API via R"
@@ -25,18 +28,22 @@
 #' @export
 
 
-
-submitGroupPost <- function(token, group_id, disc_title=NULL, disc_summary=NULL, content_url=NULL, img_url=NULL, content_title=NULL, content_desc=NULL)
+submitGroupPost <- function(token, group_id, disc_title=NULL, disc_summary=NULL, content_url=NULL, content_img=NULL, content_title=NULL, content_desc=NULL)
 {
   base_url <- "https://api.linkedin.com/v1/groups/"  
   url <- paste0(base_url, group_id, "/posts")
   share.xml <- newXMLNode("post")
-  xml.list <- list(title=disc_title, disc_summary=summary, content=list(title=content_title, description=content_desc, `submitted-url`=content_url, `submitted-image-url`=img_url))
+  xml.list <- list(title=disc_title, summary=disc_summary, content=list(title=content_title, description=content_desc, `submitted-url`=content_url, `submitted-image-url`=content_img))
   listToXML(share.xml, xml.list)
   share.xml <- as(share.xml, "character")
-  post.share <- POST(url=url, body=share.xml,  config(token=token), verbose())
-  
-  # Build in return function to show if it's been '201 Created' or '202 Accepted'
-  # 201 Created means you posted to an unmoderated group
-  # 202 Accepted means you posted to a moderated group and it's pending approval
+  post.share <- POST(url=url, body=share.xml,  config(token=token))
+  if(post.share$status_code==202){
+    print("Post created, pending moderator approval")
+  }
+  if(post.share$status_code==201){
+    print("Post created")
+  }
+  if(post.share$status_code!=201 && post.share$status_code!=202) {
+    print("Bad request. Please include a minimum of a discussion title, discussion summary, and content title")
+  }
 }

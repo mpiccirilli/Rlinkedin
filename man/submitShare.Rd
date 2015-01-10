@@ -27,7 +27,7 @@ submitShare(token, comment = NULL, content_title = NULL,
 Creates a post to the network feed
 }
 \description{
-If one of the content elements is specified you must also include include a url for the post
+If one of the content elements is specified you must also include a url for the post
 }
 \examples{
 \dontrun{
