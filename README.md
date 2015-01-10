@@ -132,8 +132,11 @@ getGroupPosts
 --------
 Returns posts from groups you belong to
 ```{r}
-# This is broken right now
-my.group.posts <- getGroupPosts(in.auth)
+# Currently set to only return the past 10 posts from each group
+my.group.posts <- getGroupPosts(token = in.auth)
+colnames(my.group.posts)
+## [1] "post_id"          "creator_fname"    "creator_lname"    "creator_headline" "post_title"      
+## [6] "post_summary"     "num_likes"        "num_comments"   
 ```
 
 
