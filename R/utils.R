@@ -69,8 +69,8 @@ jobBookmarksToDF <- function(x)
 
 groupsToDF <- function(x)
 {
-  nodes <- getNodeSet(x, "//group-membership")
   
+  nodes <- getNodeSet(x, "//group-membership") 
   q.df <- data.frame(group_id=unlistWithNAs(nodes, "./group/id"),
                      group_name=unlistWithNAs(nodes, "./group/name"),
                      member_status=unlistWithNAs(nodes, "./membership-state/code"),
@@ -82,18 +82,22 @@ groupsToDF <- function(x)
   return(q.df)
 }
 
-
 groupPostToDF <- function(x)
 { 
+  if(as.numeric(xmlAttrs(x[["//posts[@total]"]])[[1]])==0){
+    return(NULL)
+  }
   nodes <- getNodeSet(x, "//post")
-
+  n.likes <- as.vector(unlist(xpathApply(x, "//likes", function(x){xmlAttrs(x)[1]})))
+  n.comments <- as.vector(unlist(xpathApply(x, "//comments", function(x){xmlAttrs(x)[1]})))
   q.df <- data.frame(post_id=unlistWithNAs(nodes, "./id"),
-                     post_type=unlistWithNAs(nodes, "./type/code"),
-                     creator_id=unlistWithNAs(nodes, "./creator/id"),
-                     creator_fname=unlistWithNAs(nodes, "./creator/fname"),
-                     creator_lname=unlistWithNAs(nodes, "./creator/lname"),
-                     headline=unlistWithNAs(nodes, "./creator/headline"),
-                     title=unlistWithNAs(nodes, "./title")
+                     creator_fname=unlistWithNAs(nodes, "./creator/first-name"),
+                     creator_lname=unlistWithNAs(nodes, "./creator/last-name"),
+                     creator_headline=unlistWithNAs(nodes, "./creator/headline"),
+                     post_title=unlistWithNAs(nodes, "./title"),
+                     post_summary=unlistWithNAs(nodes, "./summary"),
+                     num_likes=n.likes,
+                     num_comments=n.comments
   )
   return(q.df)
 }
@@ -102,7 +106,6 @@ groupPostToDF <- function(x)
 connectionsToDF <- function(x)
 { 
   nodes <- getNodeSet(x, "//person")
-  
   q.df <- data.frame(id=unlistWithNAs(nodes, "./id"),
                      fname=unlistWithNAs(nodes, "./first-name"),
                      lname=unlistWithNAs(nodes, "./last-name"),

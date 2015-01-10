@@ -12,7 +12,7 @@ getGroups(token, details = FALSE)
 \item{details}{Group details, TRUE or FALSE}
 }
 \value{
-Returns information about what groups you belong to, either with or without detailed information
+Returns information about what groups you belong to, either with or without group details.
 }
 \description{
 Get info from your LinkedIn Groups

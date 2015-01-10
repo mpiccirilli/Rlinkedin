@@ -13,7 +13,7 @@ getGroupPosts(token)
 Returns posts of groups you belong to
 }
 \description{
-Get Posts from your LinkedIn Groups
+Currently this will retreive only the last 10 posts from each group
 }
 \examples{
 \dontrun{
