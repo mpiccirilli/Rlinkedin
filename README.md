@@ -147,10 +147,9 @@ comment <- "Test connecting to the LinkedIn API via R"
 title <- "Im creating an R package to connect to the LinkedIn API, this is a test post from R!"
 url <- "https://github.com/mpiccirilli"
 desc <- "Dev version of access to LinkedIn API via R. Collaboration is welcomed!"
-
-submitShare(in.auth, comment=comment, content_tile=title, content_url=url, content_desc=desc, visibility = "anyone")
-
+submitShare(token = in.auth, comment=comment, content_title=title, content_url=url, content_desc=desc)
 ```
+![submitShare](https://github.com/mpiccirilli/Rlinkedin/blob/master/images/submitShare.png)
 
 
 submitGroupPost
