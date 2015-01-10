@@ -130,9 +130,9 @@ colnames(my.group.details)
 
 getGroupPosts
 --------
-Returns posts from groups you belong to
+Returns posts from groups you belong to.  Currently set to only return the past 10 posts from each group, I will add functionality to return max (I believe max is 200).
+
 ```{r}
-# Currently set to only return the past 10 posts from each group
 my.group.posts <- getGroupPosts(token = in.auth)
 colnames(my.group.posts)
 ## [1] "post_id"          "creator_fname"    "creator_lname"    "creator_headline" "post_title"      
