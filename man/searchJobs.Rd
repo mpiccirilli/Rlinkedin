@@ -4,25 +4,39 @@
 \alias{searchJobs}
 \title{Job Search API: Search for Jobs on LinkedIn}
 \usage{
-searchJobs(token, keywords, count = 20)
+searchJobs(token, keywords = NULL, company_name = NULL, job_title = NULL,
+  country_code = NULL, postal_code = NULL, distance = NULL)
 }
 \arguments{
 \item{token}{Authorization token}
 
-\item{count}{Authorization token}
+\item{company_name}{Company search by company name}
 
-\item{keyword}{Keyword job search}
+\item{job_title}{Title search by job title}
+
+\item{country_code}{ISO3166 country code, must be in lower case}
+
+\item{postal_code}{Postal Code must combined with country-code}
+
+\item{distance}{Distance matches members within a distance from a central point. This is measured in miles. This is best used in combination with both country-code and postal-code.}
+
+\item{keyword}{Keyword search jobs by keyword}
 }
 \value{
 Returns jobs based input parameters
 }
 \description{
+The Job Search API enables search across LinkedIn's job postings.
+}
+\details{
 Job Search API is a part of our Vetted API Access Program. You must apply and get LinkedIn's approval before using this API.
+
+Throttle limits: Up to 100 returns per search, 10 returns per page. Each page is one API call.
 }
 \examples{
 \dontrun{
 
-search.results <- searchJobs(in.auth, "data scientist")
+search.results <- searchJobs(in.auth, keywords = "data scientist")
 }
 }
 
