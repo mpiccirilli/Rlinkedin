@@ -1,12 +1,22 @@
-unlistWithNAs <- function(node_set, node_path)
-{
-  x.list <- lapply(node_set, xpathSApply, node_path, xmlValue)
-  x.list[sapply(x.list, is.list)] <- NA
-  x.list <- unlist(x.list)
+unlistWithNAs <- function(node_set, node_path, type="Values")
+{  
+  if(type=="Attrs"){
+    x.list <- lapply(node_set, xpathSApply, node_path, function(x){xmlAttrs(x)[[1]]})
+    x.list[sapply(x.list, is.list)] <- 0
+    x.list <- as.numeric(unlist(x.list))
+    return(x.list)
+  }
+  if(type=="Values"){
+    x.list <- lapply(node_set, xpathSApply, node_path, xmlValue)
+    x.list[sapply(x.list, is.list)] <- NA
+    x.list <- unlist(x.list)
+    return(x.list)
+  }
 }
 
-nullObjTest <- function(x) is.null(x) | all(sapply(x, is.null))  
 
+
+nullObjTest <- function(x) is.null(x) | all(sapply(x, is.null))  
 rmNullElements <- function(x)
 {
   x <- Filter(Negate(nullObjTest),x)
@@ -32,7 +42,34 @@ listToXML <- function(node, sublist)
 jobsToDF <- function(x)
 {
   nodes <- getNodeSet(x, "//job")
-  
+  xyr <- unlistWithNAs(nodes, "./expiration-date/year")
+  xm <- unlistWithNAs(nodes, "./expiration-date/month")
+  xd <- unlistWithNAs(nodes, "./expiration-date/day")
+  xdate <- as.POSIXct(paste(xyr,xm,xd,sep="-"))
+  t <- as.POSIXct(as.numeric(unlistWithNAs(nodes, "./posting-timestamp"))/1000,
+                  origin="1970-01-01 00:00:00")
+  q.df <- data.frame(job_id=unlistWithNAs(nodes, "./id"),
+                     post_timestamp=t,
+                     exp_date=xdate,
+                     company_id=unlistWithNAs(nodes, "./company/id"),
+                     company_name=unlistWithNAs(nodes, "./company/name"),
+                     position_title=unlistWithNAs(nodes, "./position/title"),
+                     job_type=unlistWithNAs(nodes, "./job-type/name"),
+                     location=unlistWithNAs(nodes, "./location/name"),
+                     poster_id=unlistWithNAs(nodes, "./job-poster/id"),
+                     poster_fname=unlistWithNAs(nodes, "./job-poster/first-name"),
+                     poster_lname=unlistWithNAs(nodes, "./job-poster/last-name"),
+                     poster_headline=unlistWithNAs(nodes, "./job-poster/headline"),
+                     job_desc=unlistWithNAs(nodes, "./description"),
+                     salary=unlistWithNAs(nodes, "./salary")
+  )
+  return(q.df)
+}
+
+
+jobRecsToDF <- function(x)
+{
+  nodes <- getNodeSet(x, "//job")
   q.df <- data.frame(job_id=unlistWithNAs(nodes, "./id"),
                      company_id=unlistWithNAs(nodes, "./company/id"),
                      company_name=unlistWithNAs(nodes, "./company/name"),
@@ -48,11 +85,9 @@ jobsToDF <- function(x)
 }
 
 
-
 jobBookmarksToDF <- function(x)
 {
   nodes <- getNodeSet(x, "//job-bookmark")
-  
   q.df <- data.frame(app_status=unlistWithNAs(nodes, "./is-applied"),
                    saved_time=unlistWithNAs(nodes, "./saved-timestamp"),
                    job_id=unlistWithNAs(nodes, "./job/id"), 
@@ -69,7 +104,6 @@ jobBookmarksToDF <- function(x)
 
 groupsToDF <- function(x)
 {
-  
   nodes <- getNodeSet(x, "//group-membership") 
   q.df <- data.frame(group_id=unlistWithNAs(nodes, "./group/id"),
                      group_name=unlistWithNAs(nodes, "./group/name"),
@@ -81,6 +115,7 @@ groupsToDF <- function(x)
                      )
   return(q.df)
 }
+
 
 groupPostToDF <- function(x)
 { 
@@ -122,33 +157,125 @@ connectionsToDF <- function(x)
 
 profileToList <- function(x)
 {
-  nodes <- getNodeSet(x, "//person")
-  
-  q.list <- list(id=unlistWithNAs(nodes, "./id"),
-                 fname=unlistWithNAs(nodes, "./first-name"),
-                 lname=unlistWithNAs(nodes, "./last-name"),
-                 formatted_name=unlistWithNAs(nodes, "./formatted-name"),
-                 headline=unlistWithNAs(nodes, "./headline"),
-                 industry=unlistWithNAs(nodes, "./industry"),
-                 connections=unlistWithNAs(nodes, "./num-connections"),
-                 profile_summary=unlistWithNAs(nodes, "./summary"),
-                 profile_url=unlistWithNAs(nodes, "./public-profile-url"),
-                 positions=positionsToList(x))
+  # Need to build in positions
+  xml <- xmlTreeParse(x, useInternalNodes=TRUE)
+  n.positions <- unlistWithNAs(getNodeSet(xml, "//person"), "./positions", "Attrs")
+  n.persons <- length(persons)
+  q.list <- list()
+  for(i in 1:n.persons)
+  {
+    profile.list <- list(connection_id=xmlValue(persons[[i]]$id),
+                         fname=xmlValue(persons[[i]]$`first-name`),
+                         lname=xmlValue(persons[[i]]$`last-name`),
+                         formatted_name=xmlValue(persons[[i]]$`formatted-name`),
+                         location=xmlValue(persons[[i]]$location),
+                         headline=xmlValue(persons[[i]]$headline),
+                         industry=xmlValue(persons[[i]]$industry),
+                         num_connections=xmlValue(persons[[i]]$`num-connections`),
+                         profile_url=xmlValue(persons[[i]]$`public-profile-url`),
+                         num_positions=n.positions[i]
+    )
+    q.list[[i]] <- profile.list
+  }
   return(q.list)
 }
 
-positionsToList <- function(x)
+searchPeopleToDF <- function(x)
 {
-  nodes <- getNodeSet(x, "//position")
-  q.list <- list(position_id=unlistWithNAs(nodes, "./id"),
-                     position_title=unlistWithNAs(nodes, "./title"),
-                     position_summary=unlistWithNAs(nodes, "./summary"),
-                     start_year=unlistWithNAs(nodes, "./start-date/year"),
-                     end_year=unlistWithNAs(nodes, "./end-date/year"),
-                     is_current=unlistWithNAs(nodes, "./is-current"),
-                     company_id=unlistWithNAs(nodes, "./company/id"),
-                     company_name=unlistWithNAs(nodes, "./company/name")
+  # Need to build in positions 
+  nodes <- getNodeSet(x, "//person")  
+  q.df <- data.frame(id=unlistWithNAs(nodes, "./id"),
+                     fname=unlistWithNAs(nodes, "./first-name"),
+                     lname=unlistWithNAs(nodes, "./last-name"),
+                     formatted_name=unlistWithNAs(nodes, "./formatted-name"),
+                     location=unlistWithNAs(nodes,"./location/name"),
+                     headline=unlistWithNAs(nodes, "./headline"),
+                     industry=unlistWithNAs(nodes, "./industry"),
+                     connections=unlistWithNAs(nodes, "./num-connections"),
+                     profile_summary=unlistWithNAs(nodes, "./summary"),
+                     num_positions=unlistWithNAs(nodes, "./positions", "Attrs")
   )
-  return(q.list)
+  return(q.df)
 }
+
+
+
+connectionUpdatesToDF <- function(x)
+{ 
+  nodes <- getNodeSet(x, "//update[./update-type='CONN']")
+  t <- as.POSIXct(as.numeric(unlistWithNAs(nodes, "./timestamp"))/1000,
+                  origin="1970-01-01 00:00:00")
+  q.df <- data.frame(timestamp=t,
+                     update_type=unlistWithNAs(nodes, "./update-type"),
+                     connection_id=unlistWithNAs(nodes, "./update-content/person/id"),
+                     connection_fname=unlistWithNAs(nodes, "./update-content/person/first-name"),
+                     connection_lname=unlistWithNAs(nodes, "./update-content/person/last-name"),
+                     connection_headline=unlistWithNAs(nodes, "./update-content/person/headline"),
+                     connection_profile=unlistWithNAs(nodes, "./update-content/person/site-standard-profile-request/url"),
+                     new_connection_id=unlistWithNAs(nodes, "./update-content/person/connections/person/id"),
+                     new_connection_fname=unlistWithNAs(nodes, "./update-content/person/connections/person/first-name"),
+                     new_connection_lname=unlistWithNAs(nodes, "./update-content/person/connections/person/last-name"),
+                     new_connection_headline=unlistWithNAs(nodes, "./update-content/person/connections/person/headline"),
+                     new_connection_profile=unlistWithNAs(nodes, "./update-content/person/connections/person/site-standard-profile-request/url")) 
+  return(q.df)
+}
+
+shareUpdatesToDF <- function(x)
+{
+  nodes <- getNodeSet(x, "//update[./update-type='SHAR']")
+  t <- as.POSIXlt(as.numeric(unlistWithNAs(nodes, "./timestamp"))/1000,
+                  origin="1970-01-01 00:00:00")
+  q.df <- data.frame(timestamp=t,
+                     update_type=unlistWithNAs(nodes, "./update-type"),
+                     connection_id=unlistWithNAs(nodes, "./update-content/person/id"),
+                     connection_fname=unlistWithNAs(nodes, "./update-content/person/first-name"),
+                     connection_lname=unlistWithNAs(nodes, "./update-content/person/last-name"),
+                     connection_headline=unlistWithNAs(nodes, "./update-content/person/headline"),
+                     connection_profile=unlistWithNAs(nodes, "./update-content/person/site-standard-profile-request/url"),
+                     share_id=unlistWithNAs(nodes, "./update-content/person/current-share/id"),
+                     share_visibility=unlistWithNAs(nodes, "./update-content/person/current-share/visibility/code"),
+                     share_comment=unlistWithNAs(nodes, "./update-content/person/current-share/comment"),
+                     share_link=unlistWithNAs(nodes, "./update-content/person/current-share/content/submitted-url"),
+                     share_title=unlistWithNAs(nodes, "./update-content/person/current-share/content/title"),
+                     share_description=unlistWithNAs(nodes, "./update-content/person/current-share/content/description"),
+                     share_likes=unlistWithNAs(nodes, "./num-likes"))
+  return(q.df)
+}
+
+groupUpdatesToDF <- function(x)
+{
+  nodes <- getNodeSet(x, "//update[./update-type='JGRP']")
+  t <- as.POSIXlt(as.numeric(unlistWithNAs(nodes, "./timestamp"))/1000,
+                  origin="1970-01-01 00:00:00")
+  q.df <- data.frame(timestamp=t,
+                     update_type=unlistWithNAs(nodes, "./update-type"),
+                     connection_id=unlistWithNAs(nodes, "./update-content/person/id"),
+                     connection_fname=unlistWithNAs(nodes, "./update-content/person/first-name"),
+                     connection_lname=unlistWithNAs(nodes, "./update-content/person/last-name"),
+                     connection_headline=unlistWithNAs(nodes, "./update-content/person/headline"),
+                     connection_profile=unlistWithNAs(nodes, "./update-content/person/site-standard-profile-request/url"),
+                     group_id=unlistWithNAs(nodes, "./update-content/person/member-groups/member-group/id"),
+                     group_name=unlistWithNAs(nodes, "./update-content/person/member-groups/member-group/name"),
+                     group_url=unlistWithNAs(nodes, "./update-content/person/member-groups/member-group/site-group-request/url")
+  )
+}
+
+companyUpdatesToDF <- function(x)
+{
+  nodes <- getNodeSet(x, "//update[./update-type='CMPY']")
+  t <- as.POSIXlt(as.numeric(unlistWithNAs(nodes, "./timestamp"))/1000,
+                  origin="1970-01-01 00:00:00")
+  q.df <- data.frame(timestamp=t,
+                     update_type=unlistWithNAs(nodes, "./update-type"),
+                     company_id=unlistWithNAs(nodes, "./update-content/company/id"),
+                     company_name=unlistWithNAs(nodes, "./update-content/company/name"),
+                     update_id=unlistWithNAs(nodes, "./update-content/company-status-updates/share/id"),
+                     update_visibility=unlistWithNAs(nodes, "./update-content/company-status-update/share/visibility/code"),
+                     update_comment=unlistWithNAs(nodes, "./update-content/company-status-update/share/comment"),
+                     update_url=unlistWithNAs(nodes, "./update-content/company-status-update/share/content/submitted-url"),
+                     update_title=unlistWithNAs(nodes, "./update-content/company-status-update/share/content/title"),
+                     update_description=unlistWithNAs(nodes, "./update-content/company-status-update/share/content/description"),
+                     likes=unlistWithNAs(nodes, "./num-likes"))
+}
+
 

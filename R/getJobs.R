@@ -22,7 +22,7 @@ getJobs <- function(token, suggestions=TRUE, bookmarks=FALSE)
   url <- "http://api.linkedin.com/v1/people/~/suggestions/job-suggestions"
   query <- GET(url, config(token = token))
   q.content <- content(query)
-  q.df <- jobsToDF(q.content)
+  q.df <- jobRecsToDF(q.content)
   return(q.df)
   }
   
