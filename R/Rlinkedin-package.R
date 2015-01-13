@@ -14,5 +14,5 @@
 #' @aliases Rlinkedin
 #' @docType package
 #' @author Michael Piccirilli \email{mrp2181@@columbia.edu}
-#' @import httr XML
+#' @import httr XML httpuv
 NULL

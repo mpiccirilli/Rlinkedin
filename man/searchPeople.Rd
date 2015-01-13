@@ -34,7 +34,7 @@ searchPeople(token, keywords = NULL, first_name = NULL, last_name = NULL,
 
 \item{postal_code}{Must be combined with the country-code parameter.}
 
-\item{distance}{Distance Matches members within a distance from a central point. This is measured in miles.}
+\item{distance}{Distance matches members within a distance from a central point. This is measured in miles.}
 }
 \value{
 Returns people search based input parameters
