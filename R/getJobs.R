@@ -1,8 +1,8 @@
-#' LinkedIn Bookmarked and Recommended Jobs
+#' Bookmarked and Recommended Jobs on LinkedIn
 #'
 #' @param token Authorization token 
-#' @param suggestions LinkedIn job recommendations
-#' @param bookmarks Jobs you've bookmarked
+#' @param suggestions Suggestions LinkedIn job recommendations
+#' @param bookmarks Bookmarks LinkedIn jobs you've bookmarked
 #' @return Returns LinkedIn recommended or bookmarked jobs
 #' @examples
 #' \dontrun{
@@ -10,15 +10,20 @@
 #' job.suggestions <- getJobs(in.auth, suggestions=TRUE)
 #' job.bookmarks <- getJobs(in.auth, bookmarks=TRUE)
 #' 
+#' job.fail <- getJobs(in.auth) \# Will return null
+#' 
 #' }
 #' @export
 
 
-getJobs <- function(token, suggestions=TRUE, bookmarks=FALSE)
+getJobs <- function(token, suggestions=NULL, bookmarks=NULL)
 { 
   
+  if(!is.null(suggestions) && !is.null(bookmarks) || is.null(suggestions) && is.null(bookmarks)){
+    print("Please select either suggestions or bookmarks")
+  }
   
-  if(isTRUE(suggestions)){
+  if(isTRUE(suggestions) && is.null(bookmarks)){
   url <- "http://api.linkedin.com/v1/people/~/suggestions/job-suggestions"
   query <- GET(url, config(token = token))
   q.content <- content(query)
@@ -26,15 +31,11 @@ getJobs <- function(token, suggestions=TRUE, bookmarks=FALSE)
   return(q.df)
   }
   
-  if(isTRUE(bookmarks)){
+  if(isTRUE(bookmarks) && is.null(suggestions)){
     url <- "https://api.linkedin.com/v1/people/~/job-bookmarks"
     query <- GET(url, config(token = token))
     q.content <- content(query)
     q.df <- jobBookmarksToDF(q.content)
     return(q.df)
-  }
-  
-  if(isTRUE(suggestions) && isTRUE(bookmarks)){
-    print("Please select either suggestions or bookmarks")
   }
 }

@@ -36,7 +36,7 @@ searchJobs <- function(token, keywords=NULL, company_name=NULL, job_title=NULL, 
   pstl_code <- if(!is.null(postal_code)) URLencode(paste0("postal-code=",postal_code,"&"))
   dist <- if(!is.null(distance)) URLencode(paste0("distance=",distance,"&")) # miles
   ct <- URLencode(paste0("count=",10))
-  url <- paste0(base_url, kw, comp_name, jb_ttl, curr_sch, ctry_code, pstl_code, dist, ct)
+  url <- paste0(base_url, kw, comp_name, jb_ttl, ctry_code, pstl_code, dist, ct)
   query <- GET(url, config(token=token))
   q.content <- content(query)
   if(!is.na(q.content[["number(//error/status)"]]==403)){
