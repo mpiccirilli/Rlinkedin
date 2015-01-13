@@ -29,7 +29,8 @@ getGroups <- function(token, details=FALSE)
     url <- paste0(membership_url,"~",membership_fields)
     query <- GET(url, config(token=token))
     q.content <- content(query)
-    if(as.numeric(xmlAttrs(q.content[["//group-memberships[@total]"]])[[1]])==0){
+    r <- xmlRoot(q.content)
+    if(xmlAttrs(r)[[1]]==0){
       print("You are not currently a member of any groups.")
     }
     else {
@@ -44,7 +45,8 @@ getGroups <- function(token, details=FALSE)
     url <- paste0(membership_url,"~",membership_fields)
     query <- GET(url, config(token=token))
     q.content <- content(query)
-    if(as.numeric(xmlAttrs(q.content[["//group-memberships[@total]"]])[[1]])==0){
+    r <- xmlRoot(q.content)
+    if(xmlAttrs(r)[[1]]==0){
       print("You are not currently a member of any groups.")
     }
     else {

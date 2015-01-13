@@ -9,5 +9,5 @@ Depends:
     httr,
     XML,
     httpuv    
-License: MIT
+License: GPL-2
 LazyData: true
