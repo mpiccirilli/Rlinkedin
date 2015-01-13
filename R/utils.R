@@ -159,6 +159,7 @@ profileToList <- function(x)
 {
   # Need to build in positions
   xml <- xmlTreeParse(x, useInternalNodes=TRUE)
+  persons <- xpathApply(xml, "//person", xmlChildren)
   n.positions <- unlistWithNAs(getNodeSet(xml, "//person"), "./positions", "Attrs")
   n.persons <- length(persons)
   q.list <- list()
