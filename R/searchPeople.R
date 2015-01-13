@@ -60,17 +60,19 @@ searchPeople <- function(token, keywords=NULL, first_name=NULL, last_name=NULL, 
     search.total <- as.numeric(xmlAttrs(q.content[["//people-search/people"]])[[1]])
     search.count <- if(search.total<10) search.total else as.numeric(xmlAttrs(q.content[["//people-search/people"]])[[2]])
     total.pages <- ceiling(search.total/search.count)
-    q.df <- data.frame()
-    for(i in 2:total.pages)
-    { 
-      if(i==1) start <- 0 else start <- (i-1)*search.count
-      full_url <- paste0(base_url, kw, fname, lname, comp, curr_comp, ttl, curr_ttl, sch_name,
-                    curr_sch, ctry_code, pstl_code, dist)
-      pages_url <- paste0(full_url, "start=",start,"&",ct)
-      query <- GET(pages_url, config(token = token))
-      q.content <- content(query)
-      q.tmp <- searchPeopleToDF(q.content)
-      q.df <- rbind(q.df, q.tmp)
+    if(total.pages>1){
+      q.df <- data.frame()
+      for(i in 2:total.pages)
+      { 
+        if(i==1) start <- 0 else start <- (i-1)*search.count
+        full_url <- paste0(base_url, kw, fname, lname, comp, curr_comp, ttl, curr_ttl, sch_name,
+                      curr_sch, ctry_code, pstl_code, dist)
+        pages_url <- paste0(full_url, "start=",start,"&",ct)
+        query <- GET(pages_url, config(token = token))
+        q.content <- content(query)
+        q.tmp <- searchPeopleToDF(q.content)
+        q.df <- rbind(q.df, q.tmp)
+      }
     }
     out <- rbind(p1,q.df)
     return(out)
