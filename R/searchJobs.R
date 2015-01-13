@@ -51,7 +51,7 @@ searchJobs <- function(token, keywords=NULL, company_name=NULL, job_title=NULL, 
     for(i in 2:total.pages)
     {
       if(i==1) start <- 0 else start <- (i-1)*search.count
-      full_url <- paste0(base_url,kw, comp_name, jb_ttl, curr_sch, ctry_code, pstl_code, dist)
+      full_url <- paste0(base_url,kw, comp_name, jb_ttl, ctry_code, pstl_code, dist)
       pages_url <- paste0(full_url, "start=",start,"&",ct)
       query <- GET(pages_url, config(token = token))
       q.content <- content(query)
