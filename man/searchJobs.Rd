@@ -10,17 +10,17 @@ searchJobs(token, keywords = NULL, company_name = NULL, job_title = NULL,
 \arguments{
 \item{token}{Authorization token}
 
-\item{company_name}{Company search by company name}
+\item{keywords}{Search jobs by keyword}
 
-\item{job_title}{Title search by job title}
+\item{company_name}{Search by company name}
+
+\item{job_title}{Search by job title}
 
 \item{country_code}{ISO3166 country code, must be in lower case}
 
-\item{postal_code}{Postal Code must combined with country-code}
+\item{postal_code}{Must combined with country-code}
 
 \item{distance}{Distance matches members within a distance from a central point. This is measured in miles. This is best used in combination with both country-code and postal-code.}
-
-\item{keyword}{Keyword search jobs by keyword}
 }
 \value{
 Returns jobs based input parameters

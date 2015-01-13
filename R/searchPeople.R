@@ -14,11 +14,11 @@
 #' @param current_company TRUE/FALSE
 #' @param title Job Title
 #' @param current_title TRUE/FALSE
-#' @param school_name School Name of a school
-#' @param curent_school TRUE/FALSE 
+#' @param school_name Name of a school
+#' @param current_school TRUE/FALSE 
 #' @param country_code TRUE/FALSE 
-#' @param postal_code Code Must be combined with the country-code parameter.
-#' @param distanace Distance Matches members within a distance from a central point. This is measured in miles.
+#' @param postal_code Must be combined with the country-code parameter.
+#' @param distance Distance matches members within a distance from a central point. This is measured in miles.
 #'
 #' @return Returns people search based input parameters
 #' @examples

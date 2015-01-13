@@ -1,8 +1,8 @@
 #' Bookmarked and Recommended Jobs on LinkedIn
 #'
 #' @param token Authorization token 
-#' @param suggestions Suggestions LinkedIn job recommendations
-#' @param bookmarks Bookmarks LinkedIn jobs you've bookmarked
+#' @param suggestions LinkedIn job recommendations
+#' @param bookmarks LinkedIn jobs you've bookmarked
 #' @return Returns LinkedIn recommended or bookmarked jobs
 #' @examples
 #' \dontrun{

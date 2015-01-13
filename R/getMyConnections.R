@@ -10,7 +10,7 @@
 #' @export
 
 
-getMyConenctions <- function(token)
+getMyConnections <- function(token)
 { 
   # returns default fields
   base_url <- "http://api.linkedin.com/v1/people/~/connections"

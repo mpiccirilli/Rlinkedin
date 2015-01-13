@@ -26,15 +26,15 @@ searchPeople(token, keywords = NULL, first_name = NULL, last_name = NULL,
 
 \item{current_title}{TRUE/FALSE}
 
-\item{school_name}{School Name of a school}
+\item{school_name}{Name of a school}
+
+\item{current_school}{TRUE/FALSE}
 
 \item{country_code}{TRUE/FALSE}
 
-\item{postal_code}{Code Must be combined with the country-code parameter.}
+\item{postal_code}{Must be combined with the country-code parameter.}
 
-\item{curent_school}{TRUE/FALSE}
-
-\item{distanace}{Distance Matches members within a distance from a central point. This is measured in miles.}
+\item{distance}{Distance Matches members within a distance from a central point. This is measured in miles.}
 }
 \value{
 Returns people search based input parameters

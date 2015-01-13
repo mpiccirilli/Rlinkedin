@@ -9,9 +9,9 @@ getJobs(token, suggestions = NULL, bookmarks = NULL)
 \arguments{
 \item{token}{Authorization token}
 
-\item{suggestions}{Suggestions LinkedIn job recommendations}
+\item{suggestions}{LinkedIn job recommendations}
 
-\item{bookmarks}{Bookmarks LinkedIn jobs you've bookmarked}
+\item{bookmarks}{LinkedIn jobs you've bookmarked}
 }
 \value{
 Returns LinkedIn recommended or bookmarked jobs

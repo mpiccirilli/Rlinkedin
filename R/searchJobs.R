@@ -8,11 +8,11 @@
 #'
 #'
 #' @param token Authorization token 
-#' @param keyword Keyword search jobs by keyword
-#' @param company_name Company search by company name
-#' @param job_title Title search by job title
+#' @param keywords Search jobs by keyword
+#' @param company_name Search by company name
+#' @param job_title Search by job title
 #' @param country_code  ISO3166 country code, must be in lower case
-#' @param postal_code Postal Code must combined with country-code
+#' @param postal_code Must combined with country-code
 #' @param distance Distance matches members within a distance from a central point. This is measured in miles. This is best used in combination with both country-code and postal-code.
 #' @return Returns jobs based input parameters
 #' @examples
