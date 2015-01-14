@@ -36,7 +36,7 @@ Connections API
 -----
 The [Connections API](https://developer.linkedin.com/documents/connections-api) returns a list of 1st degree connections for a user who has granted access to his/her account.
 
-You cannot "browse connections." That is, you cannot get connections of that your connection's connections (2nd degree connections).
+You cannot "browse connections." That is, you cannot get connections of your connections (2nd degree connections).
 
 Per LinkedIn: You may never store data returned from the Connections API.
 ```{r}
