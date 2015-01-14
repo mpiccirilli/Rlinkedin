@@ -4,7 +4,8 @@
 \alias{inOAuth}
 \title{LinkedIn Job Recommendations and Job Search}
 \usage{
-inOAuth(application_name, consumer_key, consumer_secret)
+inOAuth(application_name = NULL, consumer_key = NULL,
+  consumer_secret = NULL)
 }
 \arguments{
 \item{application_name}{Name of your application}
@@ -22,7 +23,11 @@ Establishes a connection to the LinkedIn API.
 \examples{
 \dontrun{
 
-in.auth <- inOAuth("myappname", "your_consumer_key", "your_consumer_secret")
+\\# To use the default API and Secret Key for the Rlinkedin package:
+in.auth <- inOAuth()
+
+\\# To use your own application's API and Secret Key:
+in.auth <- inOAuth("your_app_name", "your_consumer_key", "your_consumer_secret")
 }
 }
 
