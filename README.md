@@ -117,18 +117,18 @@ People Search API is a part of their Vetted API Access Program. You must [apply 
 Throttle limits: Up to 100 returns per search, 10 returns per page. Each page is one API call.
 
 The arguments available to be used in a search: <br>
--keywords <br>
--first name <br>
--last name <br>
--company name <br>
--current company (T/F) <br>
--title <br>
--current title <br>
--school name <br>
--current school (T/F) <br>
--country code <br>
--postal code <br>
--distance 
+- keywords <br>
+- first name <br>
+- last name <br>
+- company name <br>
+- current company (T/F) <br>
+- title <br>
+- current title <br>
+- school name <br>
+- current school (T/F) <br>
+- country code <br>
+- postal code <br>
+- distance 
 
 To Do: Include positions in results
 ```{r}
@@ -181,12 +181,12 @@ Job Search API is a part of their Vetted API Access Program. You must [apply her
 Throttle limits: Up to 100 returns per search, 10 returns per page. Each page is one API call.
 
 The arguments available to be used in a search: <br>
--keywords <br>
--company name <br>
--job_title <br>
--country code  <br>
--postal_code <br>
--distance <br>
+- keywords <br>
+- company name <br>
+- job_title <br>
+- country code  <br>
+- postal_code <br>
+- distance <br>
 
 
 ```{r}
