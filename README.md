@@ -17,6 +17,8 @@ You can establish an authenticated connection to the LinkedIn API in one of two 
 
 The default information is not approved to use the People Search API (searchPeople) or the Job Search API (searchJobs).  If you would like to utilize these functions you must create your own application and [apply here](https://help.linkedin.com/app/ask/path/api-dvr) for the "Vetted API Access". 
 
+If you use your own application name, API Key, and Secret Key, you must paste `http://localhost:1410/` into the *'OAuth 2.0 Redirect URLs'* input box and select all of the *'Scope'* parameters, both of which are in the **'OAuth User Agreement'** section. Otherwise, you will not be able to create an authorized connection and these functions will not work properly. 
+
 ```{r}
 require(devtools)
 install_github("mpiccirilli/Rlinkedin")
