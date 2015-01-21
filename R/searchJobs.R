@@ -38,7 +38,7 @@ searchJobs <- function(token, keywords=NULL, company_name=NULL, job_title=NULL, 
   query <- GET(url, config(token=token))
   q.content <- content(query)
   if(!is.na(q.content[["number(//error/status)"]]==403)){
-    print(q.content[["string(//error/message)"]])
+    stop(q.content[["string(//error/message)"]])
   }
   else {
     p1 <- jobsToDF(q.content)
