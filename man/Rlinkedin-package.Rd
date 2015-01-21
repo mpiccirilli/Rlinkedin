@@ -17,7 +17,8 @@ Michael Piccirilli \email{mrp2181@columbia.edu}
 \code{\link{inOAuth}}, \code{\link{getProfile}},
 \code{\link{getMyConnections}}, \code{\link{getGroupPosts}},
 \code{\link{getGroups}}, \code{\link{getJobs}},
-\code{\link{searchJobs}}, \code{\link{searchPeople}}
-\code{\link{submitGroupPost}}, \code{\link{submitShare}}
+\code{\link{searchJobs}}, \code{\link{searchPeople}},
+\code{\link{submitGroupPost}}, \code{\link{submitShare}},
+\code{\link{searchCompany}}
 }
 

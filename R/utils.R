@@ -15,7 +15,6 @@ unlistWithNAs <- function(node_set, node_path, type="Values")
 }
 
 
-
 nullObjTest <- function(x) is.null(x) | all(sapply(x, is.null))  
 rmNullElements <- function(x)
 {
@@ -199,6 +198,54 @@ searchPeopleToDF <- function(x)
   return(q.df)
 }
 
+companyToList <- function(x)
+{
+  xml <- xmlTreeParse(x, useInternalNodes=TRUE)
+  company <- xpathApply(xml, "//company", xmlChildren)
+  
+  nemails <- unlistWithNAs(getNodeSet(xml, "//company"), "./email-domains", "Attrs")
+  e.list <- list()
+  for(i in 1:nemails)
+  {
+    email.number <- paste0("email_domain",i)
+    email.list <- list(email=xmlValue(company[[1]]$`email-domains`[[i]]))
+    names(email.list) <- email.number
+    e.list <- c(e.list, email.list)
+  }
+  
+  nspecs <- unlistWithNAs(getNodeSet(xml, "//company"), "./specialties", "Attrs")
+  if(nspecs==0){
+    spec.list <- list(specialty="NA")
+  }
+  else {
+    spec.list <- list()
+    for(i in 1:nspecs)
+    {
+      spec.num <- paste0("specialty",i)
+      s.list <- list(spec=xmlValue(company[[1]]$specialties[[i]]))
+      names(s.list) <- spec.num
+      spec.list <- c(spec.list, s.list)
+    }
+  }
+    
+  nodes <- getNodeSet(xml, "//company")
+  q.list <- list(company_id=unlistWithNAs(nodes, "./id"),
+                 company_name=unlistWithNAs(nodes, "./name"),
+                 company_type=unlistWithNAs(nodes, "./company-type/name"),
+                 ticker=unlistWithNAs(nodes, "./ticker"),
+                 website=unlistWithNAs(nodes, "./website-url"),
+                 industry=unlistWithNAs(nodes, "./industries/industry/name"),
+                 company_status=unlistWithNAs(nodes, "./status/name"),
+                 twitter_handle=unlistWithNAs(nodes, "./twitter-id"),
+                 employee_count=unlistWithNAs(nodes, "./employee-count-range/name"),
+                 founded=unlistWithNAs(nodes, "./founded-year"),
+                 num_followers=unlistWithNAs(nodes, "./num-followers"),
+                 description=unlistWithNAs(nodes, "./description")
+  )
+  q.list <- c(q.list, spec.list, e.list)
+  return(q.list)
+  
+}
 
 
 connectionUpdatesToDF <- function(x)
@@ -239,7 +286,9 @@ shareUpdatesToDF <- function(x)
                      share_link=unlistWithNAs(nodes, "./update-content/person/current-share/content/submitted-url"),
                      share_title=unlistWithNAs(nodes, "./update-content/person/current-share/content/title"),
                      share_description=unlistWithNAs(nodes, "./update-content/person/current-share/content/description"),
-                     share_likes=unlistWithNAs(nodes, "./num-likes"))
+                     num_likes=unlistWithNAs(nodes, "./num-likes"),
+                     num_comments=unlistWithNAs(nodes, "./num-likes", "Attrs")
+                     )
   return(q.df)
 }
 
@@ -266,6 +315,10 @@ companyUpdatesToDF <- function(x)
   nodes <- getNodeSet(x, "//update[./update-type='CMPY']")
   t <- as.POSIXlt(as.numeric(unlistWithNAs(nodes, "./timestamp"))/1000,
                   origin="1970-01-01 00:00:00")
+  
+  
+  
+  
   q.df <- data.frame(timestamp=t,
                      update_type=unlistWithNAs(nodes, "./update-type"),
                      company_id=unlistWithNAs(nodes, "./update-content/company/id"),
@@ -276,7 +329,9 @@ companyUpdatesToDF <- function(x)
                      update_url=unlistWithNAs(nodes, "./update-content/company-status-update/share/content/submitted-url"),
                      update_title=unlistWithNAs(nodes, "./update-content/company-status-update/share/content/title"),
                      update_description=unlistWithNAs(nodes, "./update-content/company-status-update/share/content/description"),
-                     likes=unlistWithNAs(nodes, "./num-likes"))
+                     num_likes=unlistWithNAs(nodes, "./num-likes"),
+                     num_comments=unlistWithNAs(nodes, "./update-comments", "Attrs")
+                     )
 }
 
 
