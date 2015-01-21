@@ -53,7 +53,7 @@ searchPeople <- function(token, keywords=NULL, first_name=NULL, last_name=NULL, 
   query <- GET(url, config(token=token))
   q.content <- content(query)
   if(!is.na(q.content[["number(//error/status)"]]==403)){
-    print(q.content[["string(//error/message)"]])
+    stop(q.content[["string(//error/message)"]])
   }
   else {
     p1 <- searchPeopleToDF(q.content)
