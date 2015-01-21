@@ -1,7 +1,7 @@
 Rlinkedin
 =========
 
-This is a development version of an R package to access the LinkedIn API.  I was motivated to create this package after using and contributing to Pablo Barberá's awesome [Rfacebook](https://github.com/pablobarbera/Rfacebook) package. 
+This is a development version of an R package to access the LinkedIn API.  I was motivated to create this after using and contributing to Pablo Barberá's awesome [Rfacebook](https://github.com/pablobarbera/Rfacebook) package. 
 
 Contributions are welcomed, and if you come across any errors please don't hesitate to open a new issue.  At the bottom of this readme is a list of the functions I would still like to add to the package. 
 
