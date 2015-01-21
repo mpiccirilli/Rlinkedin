@@ -1,9 +1,13 @@
 Rlinkedin
 =========
 
-This is a development version of an R package to access the LinkedIn API via R
+This is a development version of an R package to access the LinkedIn API.  I was motivated to create this package after using and contributing to Pablo Barberá's awesome [Rfacebook](https://github.com/pablobarbera/Rfacebook) package. 
 
-Collaboration is welcomed! 
+Contributions are welcomed, and if you come across any errors please don't hesitate to open a new issue.  At the bottom of this readme is a list of the functions I would still like to add to the package. 
+
+If you'd like to contribute or simply learn more about accessing the API, get started by visiting the [LinkedIn Developer](https://developer.linkedin.com/) page.
+
+
 
 
 Installation and Authentication
@@ -185,9 +189,9 @@ Throttle limits: Up to 100 returns per search, 10 returns per page. Each page is
 The arguments available to be used in a search: <br>
 - keywords <br>
 - company name <br>
-- job_title <br>
+- job title <br>
 - country code  <br>
-- postal_code <br>
+- postal code <br>
 - distance <br>
 
 
@@ -206,6 +210,75 @@ head(search.jobs[,c(5,6,8)], 3)
 ##        KPMG US      Associate Director, Marketing Experienced Hires at KPMG         New York, NY
 
 ```
+
+
+Company APIs
+--------
+#### Company Profile API
+Use the [Company Profile API](https://developer.linkedin.com/documents/company-lookup-api-and-fields) to find companies using a company ID, a universal name, or an email domain.
+
+The universal name needs to be the exact name seen at the end of the URL on the company page on LinkedIn. In most cases this is simply the name of the company, but not always.  For example, let's consider Coca-Cola.  The company's LinkedIn page is:
+- https://www.linkedin.com/company/the-coca-cola-company
+
+Therefore, you would search "the coca cola company" or "the-coca-cola-company".  The same principles apply to other companies. See example below. 
+
+
+```{r}
+
+#### Search by Company Name ####
+company.name <- getCompany(token=in.auth, universal_name="the coca cola company")
+head(copmany.name)
+
+##  $company_id
+##  [1] "1694"
+
+##  $company_name
+##  [1] "The Coca-Cola Company"
+
+##  $company_type
+##  [1] "Public Company"
+
+##  $ticker
+##  [1] "KO"
+
+##  $website
+##  [1] "http://www.coca-colacompany.com"
+
+##  $industry
+##  [1] "Food & Beverages"
+ 
+ 
+#### Search by Email Domain ####
+company.email <- getCompany(token=in.auth, email_domain = "columbia.edu")
+head(company.email)
+
+##    company_id                                                 company_name
+##        263698     Columbia-Harlem Small Business Development Center (SBDC)
+##        269863          Columbia Center for New Media Teaching and Learning
+##        239158   Center for Technology, Innovation and Community Engagement
+##       2600576           Columbia University School of Continuing Education
+##       3328717                   Columbia University Information Technology
+##        444161                                  ICAP at Columbia University
+ 
+
+
+#### Search by Company ID ####
+# Select: Columbia University in the City of New York
+company.id <- getCompany(token=in.auth, company_id = company.email$company_id[14])
+
+class(company.id)
+##  [1] "list"
+
+length(company.id)
+##  [1] 279
+# This is so long because there are 261 email domain names associated 'columbia.edu'
+```
+
+#### Company Search API
+Use the [Company Search API](https://developer.linkedin.com/documents/company-search) to find companies using keywords, industry, location, or some other criteria. It returns a collection of matching companies. Each entry can contain much of the information available on the company page.
+
+Coming soon...
+
 
 
 Groups API
@@ -255,6 +328,7 @@ submitGroupPost(in.auth, group_id=id, disc_title=disc.title, disc_summary=disc.s
 
 
 
+
 Share API
 --------
 You can share network updates through the [Share API](https://developer.linkedin.com/documents/share-api).
@@ -276,7 +350,6 @@ submitShare(token = in.auth, comment=comment, content_title=title, content_url=u
 To Do:
 --------
 - Get Network Updates and Statistics API: The Get Network Updates API returns the users network updates, which is the LinkedIn term for the user's feed. This call returns most of what shows up in the middle column of the LinkedIn.com home page, either for the member or the member's connections.
-- Company Lookup API: Retrieves and displays one or more company profiles based on the company ID or universal name. Returns basic company profile data, such as name, website, and industry. Returns handles to additional company content, such as RSS stream and Twitter feed.
 - Company Search API: The Company Search API enables search across company pages.
 
 
