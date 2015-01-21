@@ -9,7 +9,7 @@
 #' \code{\link{getGroups}}, \code{\link{getJobs}}, 
 #' \code{\link{searchJobs}}, \code{\link{searchPeople}},
 #' \code{\link{submitGroupPost}}, \code{\link{submitShare}},
-#' \code{\link{searchCompany}}
+#' \code{\link{getCompany}}
 #' @name Rlinkedin-package
 #' @aliases Rlinkedin
 #' @docType package
