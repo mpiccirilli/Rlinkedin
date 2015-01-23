@@ -16,12 +16,12 @@ getProfile <- function(token, connections=FALSE, id=NULL)
 {
   
   base_url <- "https://api.linkedin.com/v1/people/"
-  basicprofile_fields <- ":(id,first-name,last-name,formatted-name,location:(name),headline,industry,num-connections,summary,specialties,positions,public-profile-url)"
+  profile_fields <- ":(id,first-name,last-name,formatted-name,location:(name),headline,industry,num-connections,summary,specialties,positions,public-profile-url)"
   
   # if connections=FALSE && id=NULL:
   # This will return all basic profile information about yourself
   if(is.null(id) && !isTRUE(connections)){
-    url <- paste0(base_url,"~",basicprofile_fields)
+    url <- paste0(base_url,"~",profile_fields)
     query <- GET(url, config(token=token))
     q.list <- profileToList(query)
     return(q.list)
@@ -31,7 +31,7 @@ getProfile <- function(token, connections=FALSE, id=NULL)
   # if connections=FALSE && id=#
   # This will return all basic profile information about person
   if(!isTRUE(connections) && length(id)==1){
-    url <- paste0(base_url, "id=", id, basicprofile_fields)
+    url <- paste0(base_url, "id=", id, profile_fields)
     query <- GET(url, config(token=token))
     q.list <- profileToList(query)
     return(q.list)
@@ -40,12 +40,11 @@ getProfile <- function(token, connections=FALSE, id=NULL)
   # if connections=TRUE && id=NULL
   # This will return profile information of all your connections
   if(isTRUE(connections) && is.null(id)){
-  url <- paste0(base_url, "~/connections",basicprofile_fields)
+  url <- paste0(base_url, "~/connections",profile_fields)
   query <- GET(url, config(token=token))
   q.list <- profileToList(query)
   return(q.list)
   }
-  
   # if connections=TRUE && id=#
   # give an error, cannot perform such search
   if(!is.null(id) && isTRUE(connections)){

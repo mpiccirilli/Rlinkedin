@@ -158,12 +158,36 @@ profileToList <- function(x)
 {
   # Need to build in positions
   xml <- xmlTreeParse(x, useInternalNodes=TRUE)
-  persons <- xpathApply(xml, "//person", xmlChildren)
+  persons <- xpathApply(xml, "//person", xmlChildren) 
   n.positions <- unlistWithNAs(getNodeSet(xml, "//person"), "./positions", "Attrs")
   n.persons <- length(persons)
   q.list <- list()
+  position.list <- list()
   for(i in 1:n.persons)
   {
+    if(xmlValue(persons[[i]]$id)=="private" || xmlAttrs(persons[[i]]$positions)[[1]]==0 ){
+      position.list <- list(positions=NA)
+    }
+    else {
+      p.nodes <- xmlChildren(persons[[i]]$positions)
+      for(j in 1:n.positions[i])
+      {
+        id.n <- paste0("position",j,"_id"); comp.n <- paste0("position",j,"_company"); 
+        ttl.n <- paste0("position",j,"_title"); year.n <- paste0("position",j,"_start_year"); 
+        month.n <- paste0("position",j,"_start_month"); curr.n <- paste0("position",j,"_is_current"); 
+        sum.n <- paste0("position",j,"_summary");  
+        p.list <- list(id=unlistWithNAs(p.nodes[j], "./id")[[1]],
+                              company=unlistWithNAs(p.nodes[j], "./company/name")[[1]],
+                              title=unlistWithNAs(p.nodes[j], "./title")[[1]],
+                              start_year=unlistWithNAs(p.nodes[j], "./start-date/year")[[1]],
+                              start_month=unlistWithNAs(p.nodes[j], "./start-date/month")[[1]],
+                              is_current=unlistWithNAs(p.nodes[j], "./is-current")[[1]],
+                              summary=unlistWithNAs(p.nodes[j], "./summary")[[1]]
+        )
+        names(p.list) <- c(id.n, comp.n, ttl.n, year.n, month.n, curr.n, sum.n)
+        position.list <- c(position.list, p.list)
+      }
+    }
     profile.list <- list(connection_id=xmlValue(persons[[i]]$id),
                          fname=xmlValue(persons[[i]]$`first-name`),
                          lname=xmlValue(persons[[i]]$`last-name`),
@@ -174,8 +198,8 @@ profileToList <- function(x)
                          num_connections=xmlValue(persons[[i]]$`num-connections`),
                          profile_url=xmlValue(persons[[i]]$`public-profile-url`),
                          num_positions=n.positions[i]
-    )
-    q.list[[i]] <- profile.list
+                         )
+    q.list[[i]] <- c(profile.list, position.list)
   }
   return(q.list)
 }
