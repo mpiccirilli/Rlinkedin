@@ -2,7 +2,7 @@
 % Please edit documentation in R/getCompany.R
 \name{getCompany}
 \alias{getCompany}
-\title{Company Profile API: Search for Companies on LinkedIn}
+\title{Company Profile API}
 \usage{
 getCompany(token, universal_name = NULL, email_domain = NULL,
   company_id = NULL)

@@ -1,4 +1,4 @@
-#' Company Profile API: Search for Companies on LinkedIn
+#' Company Profile API
 #'
 #'
 #' The Company Profile API retrieves and displays company profiles using a company ID, a universal name, or an email domain.
@@ -58,7 +58,7 @@ getCompany <- function(token, universal_name=NULL, email_domain=NULL, company_id
     if(!is.na(q.content[["number(//error/status)"]]==404)){
       stop(q.content[["string(//error/message)"]])
     }
-    q.list <- companyToList(query)
+    q.list <- companyProfileToList(query)
     return(q.list)
   }
   
@@ -71,7 +71,7 @@ getCompany <- function(token, universal_name=NULL, email_domain=NULL, company_id
     if(!is.na(q.content[["number(//error/status)"]]==404)){
       stop(q.content[["string(//error/message)"]])
     }
-    q.list <- companyToList(query)
+    q.list <- companyProfileToList(query)
     return(q.list)
   }
   # If more than one option is selected:

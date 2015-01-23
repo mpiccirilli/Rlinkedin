@@ -204,7 +204,7 @@ profileToList <- function(x)
   return(q.list)
 }
 
-companyToList <- function(x)
+companyProfileToList <- function(x)
 {
   xml <- xmlTreeParse(x, useInternalNodes=TRUE)
   company <- xpathApply(xml, "//company", xmlChildren)
@@ -250,7 +250,77 @@ companyToList <- function(x)
   )
   q.list <- c(q.list, spec.list, e.list)
   return(q.list)
+}
+
+
+companySearchToList <- function(x)
+{
+  xml <- xmlTreeParse(x, useInternalNodes=TRUE)
+  company <- xpathApply(xml, "//company", xmlChildren)
+  n.companies <- length(company)
   
+  for(i in 1:n.companies)
+  {
+    q.list[[i]] <- list(company_id=xmlValue(company[[4]]$id),
+                   company_name=xmlValue(company[[i]]$name),
+                   universal_name=xmlValue(company[[i]]$`universal-name`),
+                   website=xmlValue(company[[i]]$`website-url`),
+                   twitter_handle=xmlValue(company[[i]]$`twitter-id`),
+                   employee_count=xmlValue(company[[i]]$`employee-count-range`[[2]]),
+                   company_status=xmlValue(company[[i]]$status[[2]]),
+                   founded=xmlValue(company[[i]]$`founded-year`),
+                   num_followers=xmlValue(company[[i]]$`num-followers`),
+                   description=xmlValue(company[[i]]$description)
+                   )
+    
+    
+    
+    # Specialties:
+    nspecs <- tryCatch({
+      out <- xmlAttrs(company[[i]]$specialties)[[1]]
+    },
+    error=function(cond){
+      out <- 0
+      return(out)
+    })
+    spec.list <- list()
+    if(nspecs==0){
+      spec.list <- list(specialty="NA")
+    }
+    else {
+      for (j in 1:nspecs)
+      {
+        spec.num <- paste0("specialty",j)
+        s.list <- list(spec=xmlValue(company[[i]]$specialties[[j]]))
+        names(s.list) <- spec.num
+        spec.list <- c(spec.list, s.list)
+      }
+    }
+    
+    # Industries
+    ninds <- tryCatch({
+      out <- xmlAttrs(company[[i]]$industries)[[1]]
+    },
+    error=function(cond){
+      out <- 0
+      return(out)
+    })
+    ind.list <- list()
+    if(ninds==0){
+      ind.list <- list(industry="NA")
+    }
+    else {
+      for (j in 1:ninds)
+      {
+        ind.num <- paste0("industry",j)
+        i.list <- list(ind=xmlValue(company[[i]]$industries[[j]]))
+        names(i.list) <- ind.num
+        ind.list <- c(ind.list, i.list)
+      }
+    }
+  }
+  q.list[[i]] <- c(q.list[[i]], spec.list, ind.list)
+  return(q.list)                 
 }
 
 
