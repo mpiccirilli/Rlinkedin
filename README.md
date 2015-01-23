@@ -69,7 +69,9 @@ Profile API
 ------
 The [Profile API](https://developer.linkedin.com/documents/profile-api) returns a member's LinkedIn profile. This function can retrieve proflie information about to yourself, your connections, or an individual.
 
-To Do: Include positions in results
+To Do: <br>
+1/14: Include positions in results <br>
+1/22: Added positions into results, need to update example in readme (below).  <br>
 
 ```{r}
 my.profile <- getProfile(in.auth)
@@ -136,7 +138,9 @@ The arguments available to be used in a search: <br>
 - postal code <br>
 - distance 
 
-To Do: Include positions in results
+To Do: <br>
+1/14: Include positions in results<br>
+1/22: Added positions into results, need to update example in readme (below).  Results are now a list, not a df.
 ```{r}
 search.ppl <- searchPeople(token=in.auth, first_name="Michael", last_name="Piccirilli")
 
