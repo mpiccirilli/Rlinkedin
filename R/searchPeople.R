@@ -56,12 +56,12 @@ searchPeople <- function(token, keywords=NULL, first_name=NULL, last_name=NULL, 
     stop(q.content[["string(//error/message)"]])
   }
   else {
-    p1 <- searchPeopleToDF(q.content)
+    p1 <- profileToList(query)
     search.total <- as.numeric(xmlAttrs(q.content[["//people-search/people"]])[[1]])
     search.count <- if(search.total<10) search.total else as.numeric(xmlAttrs(q.content[["//people-search/people"]])[[2]])
     total.pages <- ceiling(search.total/search.count)
     if(total.pages>1){
-      q.df <- data.frame()
+      q.list <- list()
       for(i in 2:total.pages)
       { 
         if(i==1) start <- 0 else start <- (i-1)*search.count
@@ -69,12 +69,11 @@ searchPeople <- function(token, keywords=NULL, first_name=NULL, last_name=NULL, 
                       curr_sch, ctry_code, pstl_code, dist)
         pages_url <- paste0(full_url, "start=",start,"&",ct)
         query <- GET(pages_url, config(token = token))
-        q.content <- content(query)
-        q.tmp <- searchPeopleToDF(q.content)
-        q.df <- rbind(q.df, q.tmp)
+        q.tmp <- profileToList(query)
+        q.list <- c(q.list, q.tmp)
       }
     }
-    out <- rbind(p1,q.df)
+    out <- c(p1,q.list)
     return(out)
   }
 }

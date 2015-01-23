@@ -204,24 +204,6 @@ profileToList <- function(x)
   return(q.list)
 }
 
-searchPeopleToDF <- function(x)
-{
-  # Need to build in positions 
-  nodes <- getNodeSet(x, "//person")  
-  q.df <- data.frame(id=unlistWithNAs(nodes, "./id"),
-                     fname=unlistWithNAs(nodes, "./first-name"),
-                     lname=unlistWithNAs(nodes, "./last-name"),
-                     formatted_name=unlistWithNAs(nodes, "./formatted-name"),
-                     location=unlistWithNAs(nodes,"./location/name"),
-                     headline=unlistWithNAs(nodes, "./headline"),
-                     industry=unlistWithNAs(nodes, "./industry"),
-                     connections=unlistWithNAs(nodes, "./num-connections"),
-                     profile_summary=unlistWithNAs(nodes, "./summary"),
-                     num_positions=unlistWithNAs(nodes, "./positions", "Attrs")
-  )
-  return(q.df)
-}
-
 companyToList <- function(x)
 {
   xml <- xmlTreeParse(x, useInternalNodes=TRUE)
