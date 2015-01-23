@@ -354,6 +354,6 @@ submitShare(token = in.auth, comment=comment, content_title=title, content_url=u
 To Do:
 --------
 - Get Network Updates and Statistics API: The Get Network Updates API returns the users network updates, which is the LinkedIn term for the user's feed. This call returns most of what shows up in the middle column of the LinkedIn.com home page, either for the member or the member's connections.
-- Company Search API: The Company Search API enables search across company pages.
+
 
 
