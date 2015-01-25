@@ -281,7 +281,7 @@ length(company.id)
 #### Company Search API
 Use the [Company Search API](https://developer.linkedin.com/documents/company-search) to find companies using keywords, industry, location, or some other criteria. It returns a collection of matching companies. Each entry can contain much of the information available on the company page.
 
-Coming soon...
+1/22:  Added searchCompanies() to repo.  Will add/update readme w/ example soon...
 
 
 
@@ -354,6 +354,6 @@ submitShare(token = in.auth, comment=comment, content_title=title, content_url=u
 To Do:
 --------
 - Get Network Updates and Statistics API: The Get Network Updates API returns the users network updates, which is the LinkedIn term for the user's feed. This call returns most of what shows up in the middle column of the LinkedIn.com home page, either for the member or the member's connections.
-- Company Search API: The Company Search API enables search across company pages.
+
 
 
