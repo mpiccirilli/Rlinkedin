@@ -19,6 +19,6 @@ Michael Piccirilli \email{mrp2181@columbia.edu}
 \code{\link{getGroups}}, \code{\link{getJobs}},
 \code{\link{searchJobs}}, \code{\link{searchPeople}},
 \code{\link{submitGroupPost}}, \code{\link{submitShare}},
-\code{\link{getCompany}}
+\code{\link{getCompany}}, \code{\link{searchCompanies}}
 }
 
