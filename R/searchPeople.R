@@ -55,6 +55,9 @@ searchPeople <- function(token, keywords=NULL, first_name=NULL, last_name=NULL, 
   if(!is.na(q.content[["number(//error/status)"]]==403)){
     stop(q.content[["string(//error/message)"]])
   }
+  if(unlistWithNAs(getNodeSet(q.content, "//people-search"), "./people", "Attrs")==0){
+    stop("Sorry, no results containing all your search terms were found")
+  }
   else {
     p1 <- profileToList(query)
     search.total <- as.numeric(xmlAttrs(q.content[["//people-search/people"]])[[1]])
