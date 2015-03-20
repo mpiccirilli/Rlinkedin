@@ -72,6 +72,7 @@ The [Profile API](https://developer.linkedin.com/documents/profile-api) returns 
 To Do: <br>
 1/14: Include positions in results <br>
 1/22: Added positions into results, need to update example in readme (below).  <br>
+3/19: Updated ReadMe, gave example to turn list into df
 
 ```{r}
 my.profile <- getProfile(in.auth)
@@ -146,6 +147,7 @@ The arguments available to be used in a search: <br>
 To Do: <br>
 1/14: Include positions in results<br>
 1/22: Added positions into results, need to update example in readme (below).  Results are now a list, not a df.
+3/19: Updated ReadMe, gave example to turn list into df
 ```{r}
 search.ppl <- searchPeople(token=in.auth, first_name="Michael", last_name="Piccirilli")
 class(search.ppl)
@@ -300,7 +302,7 @@ length(company.id)
 Use the [Company Search API](https://developer.linkedin.com/documents/company-search) to find companies using keywords, industry, location, or some other criteria. It returns a collection of matching companies. Each entry can contain much of the information available on the company page.
 
 1/22:  Added searchCompanies() to repo.  Will add/update readme w/ example soon...
-
+3/19:  I will add this function to the ReadMe this weekend.
 
 
 Groups API
