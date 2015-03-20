@@ -14,14 +14,12 @@ unlistWithNAs <- function(node_set, node_path, type="Values")
   }
 }
 
-
 nullObjTest <- function(x) is.null(x) | all(sapply(x, is.null))  
 rmNullElements <- function(x)
 {
   x <- Filter(Negate(nullObjTest),x)
   lapply(x, function(x) if (is.list(x)) rmNullElements(x) else x)
 }
-
 
 listToXML <- function(node, sublist)
 {
@@ -36,7 +34,6 @@ listToXML <- function(node, sublist)
     }
   } 
 }
-
 
 jobsToDF <- function(x)
 {
@@ -65,7 +62,6 @@ jobsToDF <- function(x)
   return(q.df)
 }
 
-
 jobRecsToDF <- function(x)
 {
   nodes <- getNodeSet(x, "//job")
@@ -83,7 +79,6 @@ jobRecsToDF <- function(x)
   return(q.df)
 }
 
-
 jobBookmarksToDF <- function(x)
 {
   nodes <- getNodeSet(x, "//job-bookmark")
@@ -100,7 +95,6 @@ jobBookmarksToDF <- function(x)
   return(q.df)
 }
 
-
 groupsToDF <- function(x)
 {
   nodes <- getNodeSet(x, "//group-membership") 
@@ -114,7 +108,6 @@ groupsToDF <- function(x)
                      )
   return(q.df)
 }
-
 
 groupPostToDF <- function(x)
 { 
@@ -136,7 +129,6 @@ groupPostToDF <- function(x)
   return(q.df)
 }
 
-
 connectionsToDF <- function(x)
 { 
   nodes <- getNodeSet(x, "//person")
@@ -152,7 +144,6 @@ connectionsToDF <- function(x)
   )
   return(q.df)
 }
-
 
 profileToList <- function(x)
 {
@@ -252,7 +243,6 @@ companyProfileToList <- function(x)
   return(q.list)
 }
 
-
 companySearchToList <- function(x)
 {
   xml <- xmlTreeParse(x, useInternalNodes=TRUE)
@@ -324,12 +314,12 @@ companySearchToList <- function(x)
 }
 
 
+
 connectionUpdatesToDF <- function(x)
 { 
   nodes <- getNodeSet(x, "//update[./update-type='CONN']")
-  t <- as.POSIXct(as.numeric(unlistWithNAs(nodes, "./timestamp"))/1000,
-                  origin="1970-01-01 00:00:00")
-  q.df <- data.frame(timestamp=t,
+  q.df <- data.frame(timestamp=as.POSIXct(as.numeric(unlistWithNAs(nodes, "./timestamp"))/1000,
+                                          origin="1970-01-01 00:00:00"),
                      update_type=unlistWithNAs(nodes, "./update-type"),
                      connection_id=unlistWithNAs(nodes, "./update-content/person/id"),
                      connection_fname=unlistWithNAs(nodes, "./update-content/person/first-name"),
@@ -347,9 +337,8 @@ connectionUpdatesToDF <- function(x)
 shareUpdatesToDF <- function(x)
 {
   nodes <- getNodeSet(x, "//update[./update-type='SHAR']")
-  t <- as.POSIXlt(as.numeric(unlistWithNAs(nodes, "./timestamp"))/1000,
-                  origin="1970-01-01 00:00:00")
-  q.df <- data.frame(timestamp=t,
+  q.df <- data.frame(timestamp=as.POSIXlt(as.numeric(unlistWithNAs(nodes, "./timestamp"))/1000,
+                                          origin="1970-01-01 00:00:00"),
                      update_type=unlistWithNAs(nodes, "./update-type"),
                      connection_id=unlistWithNAs(nodes, "./update-content/person/id"),
                      connection_fname=unlistWithNAs(nodes, "./update-content/person/first-name"),
@@ -368,12 +357,43 @@ shareUpdatesToDF <- function(x)
   return(q.df)
 }
 
+viralUpdatesToDF <- function(x)
+{
+  nodes <- getNodeSet(x, "//update[./update-type='VIRL']")
+  q.df <- data.frame(timestamp=as.POSIXlt(as.numeric(unlistWithNAs(nodes, "./timestamp"))/1000,
+                                          origin="1970-01-01 00:00:00"),
+                     update_type=unlistWithNAs(nodes, "./update-type"),
+                     connection_id=unlistWithNAs(nodes, "./update-content/person/id"),
+                     connection_fname=unlistWithNAs(nodes, "./update-content/person/first-name"),
+                     connection_lname=unlistWithNAs(nodes, "./update-content/person/last-name"),
+                     connection_headline=unlistWithNAs(nodes, "./update-content/person/headline"),
+                     connection_profile=unlistWithNAs(nodes, "./update-content/person/site-standard-profile-request/url"),
+                     connection_update=unlistWithNAs(nodes, "./update-content/update-action/action/code"),
+                     original_update_time=as.POSIXlt(as.numeric(unlistWithNAs(nodes, "./update-content/update-action/original-update/timestamp"))/1000,origin="1970-01-01 00:00:00"),
+                     original_update_type=unlistWithNAs(nodes, "./update-content/update-action/original-update/update-type"))
+  return(q.df)
+}
+
+pplFollowUpdatesToDF <- function(x)
+{
+  nodes <- getNodeSet(x, "//update[./update-type='PFOL']")
+  q.df <- data.frame(timestamp=as.POSIXlt(as.numeric(unlistWithNAs(nodes, "./timestamp"))/1000,
+                                          origin="1970-01-01 00:00:00"),
+                     update_type=unlistWithNAs(nodes, "./update-type"),
+                     connection_id=unlistWithNAs(nodes, "./update-content/person/id"),
+                     connection_fname=unlistWithNAs(nodes, "./update-content/person/first-name"),
+                     connection_lname=unlistWithNAs(nodes, "./update-content/person/last-name"),
+                     connection_headline=unlistWithNAs(nodes, "./update-content/person/headline"),
+                     connection_profile=unlistWithNAs(nodes, "./update-content/person/site-standard-profile-request/url"),
+                     num_following=unlistWithNAs(nodes, "./update-content/person/following/people", "Attrs"))
+  return(q.df)
+}
+
 groupUpdatesToDF <- function(x)
 {
   nodes <- getNodeSet(x, "//update[./update-type='JGRP']")
-  t <- as.POSIXlt(as.numeric(unlistWithNAs(nodes, "./timestamp"))/1000,
-                  origin="1970-01-01 00:00:00")
-  q.df <- data.frame(timestamp=t,
+  q.df <- data.frame(timestamp=as.POSIXlt(as.numeric(unlistWithNAs(nodes, "./timestamp"))/1000,
+                                          origin="1970-01-01 00:00:00"),
                      update_type=unlistWithNAs(nodes, "./update-type"),
                      connection_id=unlistWithNAs(nodes, "./update-content/person/id"),
                      connection_fname=unlistWithNAs(nodes, "./update-content/person/first-name"),
@@ -384,30 +404,34 @@ groupUpdatesToDF <- function(x)
                      group_name=unlistWithNAs(nodes, "./update-content/person/member-groups/member-group/name"),
                      group_url=unlistWithNAs(nodes, "./update-content/person/member-groups/member-group/site-group-request/url")
   )
+  return(q.df)
 }
 
+profileUpdatesToDF <- function(x)
+{
+  nodes <- getNodeSet(x, "//update[./update-type='PROF']")
+  q.df <- data.frame(timestamp=as.POSIXlt(as.numeric(unlistWithNAs(nodes, "./timestamp"))/1000,
+                                          origin="1970-01-01 00:00:00"),
+                     update_type=unlistWithNAs(nodes, "./update-type"),
+                     connection_id=unlistWithNAs(nodes, "./update-content/person/id"),
+                     connection_fname=unlistWithNAs(nodes, "./update-content/person/first-name"),
+                     connection_lname=unlistWithNAs(nodes, "./update-content/person/last-name"),
+                     connection_headline=unlistWithNAs(nodes, "./update-content/person/headline"),
+                     connection_profile=unlistWithNAs(nodes, "./update-content/person/site-standard-profile-request/url"))
+  return(q.df)
+}
+
+# This is very limited. I need to update for different
+# types of company update
 companyUpdatesToDF <- function(x)
 {
-  nodes <- getNodeSet(x, "//update[./update-type='CMPY']")
-  t <- as.POSIXlt(as.numeric(unlistWithNAs(nodes, "./timestamp"))/1000,
-                  origin="1970-01-01 00:00:00")
-  
-  
-  
-  
-  q.df <- data.frame(timestamp=t,
+  nodes <- getNodeSet(x, "//update[./update-type='CMPY']")  
+  q.df <- data.frame(timestamp=as.POSIXlt(as.numeric(unlistWithNAs(nodes, "./timestamp"))/1000,
+                                          origin="1970-01-01 00:00:00"),
                      update_type=unlistWithNAs(nodes, "./update-type"),
                      company_id=unlistWithNAs(nodes, "./update-content/company/id"),
                      company_name=unlistWithNAs(nodes, "./update-content/company/name"),
-                     update_id=unlistWithNAs(nodes, "./update-content/company-status-updates/share/id"),
-                     update_visibility=unlistWithNAs(nodes, "./update-content/company-status-update/share/visibility/code"),
-                     update_comment=unlistWithNAs(nodes, "./update-content/company-status-update/share/comment"),
-                     update_url=unlistWithNAs(nodes, "./update-content/company-status-update/share/content/submitted-url"),
-                     update_title=unlistWithNAs(nodes, "./update-content/company-status-update/share/content/title"),
-                     update_description=unlistWithNAs(nodes, "./update-content/company-status-update/share/content/description"),
                      num_likes=unlistWithNAs(nodes, "./num-likes"),
-                     num_comments=unlistWithNAs(nodes, "./update-comments", "Attrs")
-                     )
+                     num_comments=unlistWithNAs(nodes, "./update-comments", "Attrs"))
+  return(q.df)
 }
-
-

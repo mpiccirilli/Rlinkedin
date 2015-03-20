@@ -55,3 +55,4 @@ searchCompanies <- function(token, keywords)
   }
 }
 
+

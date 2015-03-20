@@ -21,31 +21,25 @@
 
 inOAuth <- function(application_name=NULL, consumer_key=NULL, consumer_secret=NULL)
 {
-  # This seems repetitive...
+  full_url <- oauth_callback()
+  message <- paste("If you've created you're own application, be sure to copy and paste the following into \n 'OAuth 2.0 Redirect URLs' in the LinkedIn Application Details:", full_url, "\n When done, press any key to continue...")
+  invisible(readline(message))
+  
   if(is.null(application_name) && is.null(consumer_key) && is.null(consumer_secret)){
     application_name <- "Rlinkedin"
     consumer_key <- "77w6b6fmmu2967"
     consumer_secret <- "JcHFtrazNQAgBVMx"
     linkedin <- oauth_endpoint("requestToken", "authorize", "accessToken",
-                               base_url = "https://api.linkedin.com/uas/oauth/")
+                               base_url = "https://api.linkedin.com/uas/oauth")
     myapp <- oauth_app(appname = application_name, consumer_key, consumer_secret)
     token <- oauth1.0_token(linkedin, myapp)
-  }
-  if(list.files(getwd(), all.files=TRUE, pattern=".httr-oauth")==".httr-oauth"){
-    linkedin <- oauth_endpoint("requestToken", "authorize", "accessToken",
-                               base_url = "https://api.linkedin.com/uas/oauth/")
-    myapp <- oauth_app(appname = application_name, consumer_key, consumer_secret)
-    token <- oauth1.0_token(linkedin, myapp)
+    return(token)
   }
   else {
-    full_url <- oauth_callback()
-    message <- paste("If you've created you're own application, be sure to copy and paste the following into \n 'OAuth 2.0 Redirect URLs' in the LinkedIn Application Details:", full_url, "\n When done, press any key to continue...")
-    
-    invisible(readline(message))
     linkedin <- oauth_endpoint("requestToken", "authorize", "accessToken",
-                               base_url = "https://api.linkedin.com/uas/oauth/")
+                             base_url = "https://api.linkedin.com/uas/oauth")
     myapp <- oauth_app(appname = application_name, consumer_key, consumer_secret)
     token <- oauth1.0_token(linkedin, myapp)
+    return(token)
   }
-  return(token)
 }

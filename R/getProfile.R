@@ -11,7 +11,6 @@
 #' }
 #' @export
 
-
 getProfile <- function(token, connections=FALSE, id=NULL)
 {
   
@@ -44,6 +43,7 @@ getProfile <- function(token, connections=FALSE, id=NULL)
   query <- GET(url, config(token=token))
   q.list <- profileToList(query)
   return(q.list)
+  
   }
   # if connections=TRUE && id=#
   # give an error, cannot perform such search
@@ -51,3 +51,4 @@ getProfile <- function(token, connections=FALSE, id=NULL)
     print("Cannot perform query with connections=TRUE and id #")
   }
 }
+
