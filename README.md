@@ -23,6 +23,8 @@ The default information is not approved to use the People Search API (searchPeop
 
 If you use your own application name, API Key, and Secret Key, you must paste `http://localhost:1410/` into the *'OAuth 2.0 Redirect URLs'* input box and select all of the *'Scope'* parameters, both of which are in the **'OAuth User Agreement'** section. Otherwise, you will not be able to create an authorized connection and these functions will not work properly. 
 
+For a step-by-step tutorial, check this [fantastic blog post](http://thinktostart.com/analyze-linkedin-with-r/) by [JulianHi](https://twitter.com/JulianHi).
+
 ```{r}
 require(devtools)
 install_github("mpiccirilli/Rlinkedin")
