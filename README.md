@@ -172,7 +172,7 @@ data.frame(t(sapply(search.ppl, function(x){
   })))
 
 ##                      formatted_name                      location                            industry num_connections
-##  1               Michael Piccirilli    Greater New York City Area                    Higher Education             306
+##  1               Michael Piccirilli        San Francisco Bay Area                    Higher Education             306
 ##  2                  Mike Piccirilli      Baltimore, Maryland Area                      Graphic Design               1
 ##  3               Michael Piccirilli Providence, Rhode Island Area Information Technology and Services              31
 ##  4               michael piccirilli           Greater Boston Area                             Banking               0
