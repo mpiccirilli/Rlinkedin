@@ -78,9 +78,14 @@ my.profile <- getProfile(in.auth)
 connections.profiles <- getProfile(in.auth, connections = TRUE)
 individual.profile <- getProfile(in.auth, id = my.connections$id[1])
 
+# The output of this function is naturually in a list.
+# However you can convert it into a dataframe quite easily. 
+# I will use 'my.profile' as an example, but the same can be applied to all three above.
+
+# Data as a list:
+
 class(my.profile)
 ##  [1] "list"
-
 
 my.profile
 ##  [[1]]
@@ -97,22 +102,22 @@ my.profile
 ##  [1] "Michael Piccirilli"
 
 ##  [[1]]$location
-##  [1] "Greater New York City Area"
+##  [1] "San Francisco Bay Area"
+....
 
-##  [[1]]$headline
-##  [1] "Graduate Student in Statistics at Columbia University"
 
-##  [[1]]$industry
-##  [1] "Higher Education"
+# Now as a dataframe:
 
-##  [[1]]$num_connections
-##  [1] "282"
+data.frame(t(sapply(my.profile, function(x){ 
+  x[c("fname", "lname", "location")]})))
 
-##  [[1]]$profile_url
-##  [1] "https://www.linkedin.com/in/mikepiccirilli"
+##      fname      lname               location
+##  1 Michael Piccirilli San Francisco Bay Area
 
-##  [[1]]$num_positions
-##  [1] 3
+
+# To see all the elements in the list, simply run:
+sapply(my.profile, function(x) names(x))
+
 ```
 
 
@@ -143,25 +148,38 @@ To Do: <br>
 1/22: Added positions into results, need to update example in readme (below).  Results are now a list, not a df.
 ```{r}
 search.ppl <- searchPeople(token=in.auth, first_name="Michael", last_name="Piccirilli")
+class(search.ppl)
+##  [1] "list"
 
-colnames(search.ppl)
-##  [1] "id"              "fname"           "lname"           "formatted_name"  "location"       
-##  [6] "headline"        "industry"        "connections"     "profile_summary" "num_positions" 
+length(search.ppl)
+##  [1] 12
 
-search.ppl[,c(4,5,7,8)]
-##                   formatted_name                      location                            industry connections
-##               Michael Piccirilli    Greater New York City Area                    Higher Education         282
-##                  Mike Piccirilli      Baltimore, Maryland Area                      Graphic Design           1
-##               Michael Piccirilli Providence, Rhode Island Area Information Technology and Services          30
-##               michael piccirilli           Greater Boston Area                             Banking           0
-##               Michael Piccirilli           Greater Boston Area          Logistics and Supply Chain         398
-##               Michael Piccirilli      Greater Los Angeles Area                       Entertainment         141
-##               Michael Piccirilli           Greater Boston Area International Trade and Development         156
-##                  MIke Piccirilli      Baltimore, Maryland Area                      Graphic Design          22
-##                  Mike Piccirilli          Greater Atlanta Area           Government Administration           4
-##  Sean Michael (Barry) Piccirilli         Portland, Oregon Area              Environmental Services           6
-##                  mike piccirilli     Sharon, Pennsylvania Area        Health, Wellness and Fitness           0
-> 
+# Again, you can use this function to check out the all the elements within each list item (aka, each person)
+sapply(search.ppl, function(x) names(x))
+##  [[1]]
+##  [1] "connection_id"         "fname"                 "lname"                
+##  [4] "formatted_name"        "location"              "headline"             
+##  [7] "industry"              "num_connections"       "profile_url"  
+....
+
+# Now let's turn that into a dataframe: 
+data.frame(t(sapply(search.ppl, function(x){
+  x[c("formatted_name", "location", "industry", "num_connections")]
+  })))
+
+##                      formatted_name                      location                            industry num_connections
+##  1               Michael Piccirilli    Greater New York City Area                    Higher Education             306
+##  2                  Mike Piccirilli      Baltimore, Maryland Area                      Graphic Design               1
+##  3               Michael Piccirilli Providence, Rhode Island Area Information Technology and Services              31
+##  4               michael piccirilli           Greater Boston Area                             Banking               0
+##  5               Michael Piccirilli           Greater Boston Area          Logistics and Supply Chain             414
+##  6               Michael Piccirilli      Greater Los Angeles Area                       Entertainment             143
+##  7               Michael Piccirilli           Greater Boston Area International Trade and Development             157
+##  8                  MIke Piccirilli      Baltimore, Maryland Area                      Graphic Design              22
+##  9                  Mike Piccirilli          Greater Atlanta Area           Government Administration               4
+##  10 Sean Michael (Barry) Piccirilli         Portland, Oregon Area              Environmental Services               6
+##  11                 mike piccirilli     Sharon, Pennsylvania Area        Health, Wellness and Fitness               0
+##  12              MICHAEL PICCIRILLI          Naples, Florida Area                             Banking               2
 
 ```
 
