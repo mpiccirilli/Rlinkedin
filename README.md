@@ -44,7 +44,7 @@ You cannot "browse connections." That is, you cannot get connections of your con
 
 Per LinkedIn: You may never store data returned from the Connections API.
 ```{r}
-my.connections <- getMyConenctions(in.auth)
+my.connections <- getMyConnections(in.auth)
 
 colnames(my.connections)
 ##  [1] "id"  "fname"  "lname"   "headline"   "industry"   "area"  "country"  "api_url" 
