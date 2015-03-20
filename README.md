@@ -303,7 +303,7 @@ length(company.id)
 #### Company Search API
 Use the [Company Search API](https://developer.linkedin.com/documents/company-search) to find companies using keywords, industry, location, or some other criteria. It returns a collection of matching companies. Each entry can contain much of the information available on the company page.
 
-1/22:  Added searchCompanies() to repo.  Will add/update readme w/ example soon...
+1/22:  Added searchCompanies() to repo.  Will add/update readme w/ example soon... <br>
 3/19:  I will add this function to the ReadMe this weekend.
 
 
