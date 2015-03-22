@@ -1,9 +1,17 @@
-#' Get Posts from your LinkedIn Groups
+#' Extract Posts from your LinkedIn Groups
 #'
-#' Currently this will retreive only the last 10 posts from each group
+#' @description
+#' \code{getGroupPosts} will retrieve posts from each LinkedIn group you belong to. 
 #'
-#' @param token Authorization token 
-#' @return Returns posts of groups you belong to
+#' @author
+#' Michael Piccirilli \email{michael.r.piccirilli@@gmail.com}
+#' @seealso \code{\link{getGroups}} \code{\link{submitGroupPost}}
+#'
+#' @param token Authorization token.
+#' 
+#' @return Returns a dataframe with the 10 most recent posts from each
+#' group you belong to.
+#' 
 #' @examples
 #' \dontrun{
 #' 

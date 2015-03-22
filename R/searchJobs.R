@@ -1,24 +1,34 @@
-#' Job Search API: Search for Jobs on LinkedIn
+#' Search for Jobs on LinkedIn
 #'
-#' The Job Search API enables search across LinkedIn's job postings.
+#' @description
+#' \code{searchJobs} searches across LinkedIn's job postings.
 #' 
-#' Job Search API is a part of our Vetted API Access Program. You must apply and get LinkedIn's approval before using this API.
+#' There are several parameters that allow you to conduct either a broad or focused search.
 #' 
-#' Throttle limits: Up to 100 returns per search, 10 returns per page. Each page is one API call. 
+#' In order to use this function, you must create your own appliction and apply for the Vetted API Access here: \link{https://help.linkedin.com/app/ask/path/api-dvr}.
+#' 
+#' 
+#' @details
+#' There are many different search parameters that allow you to make a focused search of a particular job within a certain company some area of the country. Or you can search for all jobs posted based on general keywords. 
+#' 
+#' @author
+#' Michael Piccirilli \email{michael.r.piccirilli@@gmail.com}
+#' @seealso \code{\link{getJobs}} \code{\link{searchCompanies}}
 #'
-#'
-#' @param token Authorization token 
-#' @param keywords Search jobs by keyword
-#' @param company_name Search by company name
-#' @param job_title Search by job title
-#' @param country_code  ISO3166 country code, must be in lower case
-#' @param postal_code Must combined with country-code
-#' @param distance Distance matches members within a distance from a central point. This is measured in miles. This is best used in combination with both country-code and postal-code.
-#' @return Returns jobs based input parameters
+#' @param token Authorization token.
+#' @param keywords A keyword used in the job title or description.
+#' @param company_name Company posting the job.
+#' @param job_title Title of the job.
+#' @param country_code  Specify the country in which to search. This is the ISO3166 country code, and must be in lower case.
+#' @param postal_code Must be combined with the \code{country_code} parameter.
+#' @param distance Distance matches jobs within a distance from a central point. This is measured in miles and is best used in conjunction with both \code{country_code} and \code{postal-code}.
+#' 
+#' @return Returns a dataframe of jobs based input parameters
+#' 
 #' @examples
 #' \dontrun{
 #' 
-#' search.results <- searchJobs(in.auth, keywords = "data scientist")
+#' search.results <- searchJobs(token = in.auth, keywords = "data scientist")
 #' }
 #' @export
 #' 

@@ -1,16 +1,26 @@
-#' Share a Network Update 
+#' Share an update to your network's activity feed
+#'
+#' @description
+#' \code{submitShare} will post a network update to the newsfeed of your connections.  You can select the visibility of your post to be seen either by 'anyone' or 'connections-only'. 
+#' 
+#' @details
+#' If either \code{content_title} or \code{content_desc} is specified, you must also include a \code{content_url} for the post.
 #'
 #'
-#' If one of the content elements is specified you must also include a url for the post
+#' @author
+#' Michael Piccirilli \email{michael.r.piccirilli@@gmail.com}
+#' @seealso \code{\link{submitGroupPost}}
 #'
-#' @param token Authorization token 
-#' @param comment Headline of the post
-#' @param content_title Title of the post
-#' @param content_desc Description of the post 
-#' @param content_url Url to content
-#' @param content_img Url to image
-#' @param visibility 'anyone' or 'connections-only'
-#' @return Creates a post to the network feed
+#' @param token Authorization token.
+#' @param comment Headline of your post.
+#' @param content_title Title of your post.
+#' @param content_desc Description of your post.
+#' @param content_url Url to content you'd like to share. This is required if you specify either \code{content_title} or \code{content_desc}. 
+#' @param content_img Url to an image you would like to include in your post, optional.
+#' @param visibility Choose the visibility of the post. The choices are 'anyone' or 'connections-only'.
+#' 
+#' @return Shares an update to your networks's activity feed.
+#' 
 #' @examples
 #' \dontrun{
 #' 
@@ -19,7 +29,8 @@
 #' url <- "https://github.com/mpiccirilli"
 #' desc <- "Dev version of access to LinkedIn API via R. Collaboration is welcomed!"
 #' 
-#' submitShare(in.auth, comment=comment, content_tile=title, content_url=url, content_desc=desc)
+#' submitShare(token = in.auth, comment=comment, content_tile=title,
+#'             content_url=url, content_desc=desc)
 #' }
 #' @export
 

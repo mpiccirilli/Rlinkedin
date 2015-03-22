@@ -1,26 +1,28 @@
-#' People Search API: Search for People on LinkedIn
+#' Search for People on LinkedIn
 #'
-#' The People Search API returns information about people. It lets you implement most of what shows up when you do a search for "People" in the top right box on LinkedIn.com.
+#' @description
+#' \code{searchPeople} allows you to search for connections on LinkedIn. It returns most of what shows up when you do a search for people in the box at the top of the page on linkedin.com.
 #' 
-#' People Search API is a part of LinkedIn's Vetted API Access Program. You must apply and get LinkedIn's approval before using this API.
+#' There are a number of parameters that allow you to conduct either a broad or focused search.
 #' 
-#' Up to 100 returns per search, 10 returns per page. Each page is one API call. 
+#' In order to use this function, you must create your own appliction and apply for the Vetted API Access here: \link{https://help.linkedin.com/app/ask/path/api-dvr}.
+#' 
 #'
-#' @param token Authorization token 
-#' @param keywords Keyword people search 
-#' @param first_name First Name  
-#' @param last_name Last Name
-#' @param company_name Company Name 
-#' @param current_company TRUE/FALSE
-#' @param title Job Title
-#' @param current_title TRUE/FALSE
-#' @param school_name Name of a school
-#' @param current_school TRUE/FALSE 
-#' @param country_code TRUE/FALSE 
-#' @param postal_code Must be combined with the country-code parameter.
-#' @param distance Distance matches members within a distance from a central point. This is measured in miles.
+#' @param token Authorization token.
+#' @param keywords Keyword people search.
+#' @param first_name First Name.
+#' @param last_name Last Name.
+#' @param company_name The name of a company where someone has as worked.
+#' @param current_company TRUE or FALSE, can only be used in conjunction with \code{company_name}.
+#' @param title A job title someone has held
+#' @param current_title TRUE or FALSE, can only be used in conjunction with \code{title}.
+#' @param school_name The name of a school someone has attended.
+#' @param current_school TRUE or FALSE, can only be used in conjuntion with \code{current_school}.
+#' @param country_code Specify the country in which to search. This is the ISO3166 country code, and must be in lower case.
+#' @param postal_code Must be combined with the \code{country_code} parameter.
+#' @param distance Distance matches members within a distance from a central point. This is measured in miles and and is best used in conjunction with both \code{country_code} and \code{postal-code}.
 #'
-#' @return Returns people search based input parameters
+#' @return Returns a dataframe of people based input parameters
 #' @examples
 #' \dontrun{
 #' 

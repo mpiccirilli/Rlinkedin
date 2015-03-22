@@ -2,25 +2,39 @@
 % Please edit documentation in R/getGroups.R
 \name{getGroups}
 \alias{getGroups}
-\title{Get info from your LinkedIn Groups}
+\title{Retrieve LinkedIn Group Information}
 \usage{
 getGroups(token, details = FALSE)
 }
 \arguments{
-\item{token}{Authorization token}
+\item{token}{Authorization token.}
 
-\item{details}{Group details, TRUE or FALSE}
+\item{details}{TRUE or FALSE. If TRUE, it will return group details. FALSE is default.}
 }
 \value{
-Returns information about what groups you belong to, either with or without group details.
+Returns a dataframe including group profile information.
+
+When \code{details} = FALSE (default), the function will return information about each group's settings such as whether it allows messages from memebers, email frequency, and manager announcements.
+
+When \code{details} = TRUE, the function will return both a short and long
+description of the group.
 }
 \description{
-Get info from your LinkedIn Groups
+\code{getGroups} retrieves information and settings about the LinkedIn groups you belong to.
+}
+\details{
+This function returns information about what groups you belong to, either with or without group details. Group details can be called by setting the option \code{details} = TRUE.
 }
 \examples{
 \dontrun{
 
-my.groups <- getGroups(in.auth, details=TRUE)
+my.groups <- getGroups(token = in.auth, details=TRUE)
 }
+}
+\author{
+Michael Piccirilli \email{michael.r.piccirilli@gmail.com}
+}
+\seealso{
+\code{\link{getGroupPosts}} \code{\link{submitGroupPost}}
 }
 

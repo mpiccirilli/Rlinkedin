@@ -1,13 +1,32 @@
-#' Get info from your LinkedIn Groups
+#' Retrieve LinkedIn Group Information
+#'
+#' @description
+#' \code{getGroups} retrieves information and settings about the LinkedIn groups you belong to. 
+#' 
+#' @details
+#' This function returns information about what groups you belong to, either with or without group details. Group details can be called by setting the option \code{details} = TRUE.
+#' 
+#'
+#' @author
+#' Michael Piccirilli \email{michael.r.piccirilli@@gmail.com}
+#' @seealso \code{\link{getGroupPosts}} \code{\link{submitGroupPost}}
 #'
 #'
-#' @param token Authorization token 
-#' @param details Group details, TRUE or FALSE
-#' @return Returns information about what groups you belong to, either with or without group details.
+#' @param token Authorization token.
+#' @param details TRUE or FALSE. If TRUE, it will return group details. FALSE is default.
+#' 
+#' @return Returns a dataframe including group profile information.
+#' 
+#' When \code{details} = FALSE (default), the function will return information about each group's settings such as whether it allows messages from memebers, email frequency, and manager announcements.
+#' 
+#' When \code{details} = TRUE, the function will return both a short and long
+#' description of the group.
+#' 
+#'  
 #' @examples
 #' \dontrun{
 #' 
-#' my.groups <- getGroups(in.auth, details=TRUE)
+#' my.groups <- getGroups(token = in.auth, details=TRUE)
 #' }
 #' @export
 

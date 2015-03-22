@@ -2,27 +2,47 @@
 % Please edit documentation in R/getProfile.R
 \name{getProfile}
 \alias{getProfile}
-\title{Get LinkedIn Profile Information}
+\title{Extract LinkedIn Profile Information}
 \usage{
 getProfile(token, connections = FALSE, id = NULL)
 }
 \arguments{
-\item{token}{Authorization token}
+\item{token}{Authorization token.}
 
-\item{connections}{TRUE or FALSE. If TRUE, will return profile information of your connections}
+\item{connections}{TRUE or FALSE. If TRUE, will return profile information of your connections. FALSE is default.}
 
-\item{id}{Numeric ID number of a LinkedIn member}
+\item{id}{Numeric ID number of a LinkedIn member.}
 }
 \value{
-Returns profile information of yourself, your connections, or an idividual LinkedIn member
+Returns a list of profile information.
 }
 \description{
-Get LinkedIn Profile Information
+\code{getProfile} retrieve's proflie information about to yourself, your connections, or another individual.
+}
+\details{
+There are three separate calls in \code{getProfile}.
+
+The first is return profile information about yourself.  The only input
+into the function under this scenario is the \code{token}.
+
+The second is to return profile information about all your 1st degree
+connections.  You need to supply the \code{token} and set the
+\code{connections} = TRUE.
+
+The third is to return profile information about an individual based on
+their id number.  This can be found if you search your connections using
+the \code{getConnections} function.
 }
 \examples{
 \dontrun{
 
 profiles <- getProfile(in.auth, connections=TRUE)
 }
+}
+\author{
+Michael Piccirilli \email{michael.r.piccirilli@gmail.com}
+}
+\seealso{
+\code{\link{searchPeople}}, \code{\link{getConnections}}
 }
 

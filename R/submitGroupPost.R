@@ -1,17 +1,31 @@
 #' Create a Group Discussion Post
 #'
+#' @description
+#' \code{submitGroupPost} will create a group discussion post in one of the
+#' groups you belong to, specified by a Group Id. 
+#' 
+#' @details
+#' You must include a minimum of a discussion title, discussion summary, and content title.
 #'
-#' Must include a minimum of a discussion title, discussion summary, and content title"
+#' @author
+#' Michael Piccirilli \email{michael.r.piccirilli@@gmail.com}
+#' @seealso \code{\link{getGroups}} \code{\link{getGroupPosts}}
 #'
-#' @param token Authorization token 
-#' @param group_id Numeric Group ID
-#' @param disc_title Group Discussion Title, required
-#' @param disc_summary Group Discussion Summary, required
-#' @param content_url Url for content, optinal
-#' @param content_img Url for an image, optional
-#' @param content_title Title for content, required
-#' @param content_desc Description of content, optional
-#' @return Creates a group discussion 
+#' @param token Authorization token. 
+#' @param group_id Numeric Group ID.
+#' @param disc_title Group discussion title, required.
+#' @param disc_summary Group discussion summary, required.
+#' @param content_title Title for content, required.
+#' @param content_desc Description of content, optional.
+#' @param content_url Url for content, optional.
+#' @param content_img Url for an image, optional.
+#' 
+#' @return There are two possible responses to a successful submittal. 
+#' 
+#' One, your post has been created and is visibile immediately. In this case you have most likely posted to an unmoderated group. 
+#' 
+#' Two, your post has been accepted by the API but is pending approval by the group moderator, in which case you will not see your post until it has bene approved.
+#' 
 #' @examples
 #' \dontrun{
 #' 
@@ -31,9 +45,9 @@
 #' @export
 
 
-submitGroupPost <- function(token, group_id, disc_title=NULL, disc_summary=NULL, content_url=NULL, content_img=NULL, content_title=NULL, content_desc=NULL)
+submitGroupPost <- function(token, group_id, disc_title=NULL, disc_summary=NULL, content_title=NULL, content_url=NULL, content_img=NULL, content_desc=NULL)
 {
-  base_url <- "https://api.linkedin.com/v1/groups/"  
+  base_url <- "https://api.linkedin.com/v1/groups/"
   url <- paste0(base_url, group_id, "/posts")
   share.xml <- newXMLNode("post")
   xml.list <- list(title=disc_title, summary=disc_summary, content=list(title=content_title, description=content_desc, `submitted-url`=content_url, `submitted-image-url`=content_img))

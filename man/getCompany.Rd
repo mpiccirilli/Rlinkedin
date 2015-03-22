@@ -2,28 +2,30 @@
 % Please edit documentation in R/getCompany.R
 \name{getCompany}
 \alias{getCompany}
-\title{Company Profile API}
+\title{Retrieve Company Profile Information}
 \usage{
 getCompany(token, universal_name = NULL, email_domain = NULL,
   company_id = NULL)
 }
 \arguments{
-\item{token}{Authorization token}
+\item{token}{Authorization token.}
 
-\item{universal_name}{LinkedIn universal company name}
+\item{universal_name}{LinkedIn universal company name. This is the exact name seen at the end of the URL on the company page on linkedin.com.}
 
-\item{email_domain}{Email domain used}
+\item{email_domain}{The email domain used by the company.}
 
-\item{company_id}{LinkedIn company ID}
+\item{company_id}{LinkedIn company ID.}
 }
 \value{
 Returns company profile data, such as LinkedIn ID, name, universal-name, email-domains, company-type, ticker, website-url, industries, status, twitter handle, employee-count-range, specialties, locations, description, founded-year, and number of followers.
+
+The output when specifying the \code{universal_name} or \code{company_id} will be in a list, whereas the output when specifying the \code{email_domain} will be a dataframe.
 }
 \description{
-The Company Profile API retrieves and displays company profiles using a company ID, a universal name, or an email domain.
+\code{getCompany} retrieves company profiles using a company Id, a universal name, or an email domain.
 }
 \details{
-Universal name needs to be the exact name seen at the end of the URL on the company page in Linkedin
+The 'universal name' needs to be the exact name seen at the end of the URL on the company page on linkedin.com.
 }
 \examples{
 \dontrun{
@@ -34,7 +36,6 @@ company.email <- getCompany(token=in.auth, email_domain = "columbia.edu")
 
 # Main Columbia Name:
 company.id <- getCompany(token=in.auth, company_id = company.email$company_id[14])
-
 
 }
 }

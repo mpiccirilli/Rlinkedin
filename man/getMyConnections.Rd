@@ -2,23 +2,33 @@
 % Please edit documentation in R/getMyConnections.R
 \name{getMyConnections}
 \alias{getMyConnections}
-\title{Get LinkedIn Connections}
+\title{Retreive 1st Degree LinkedIn Connections}
 \usage{
 getMyConnections(token)
 }
 \arguments{
-\item{token}{Authorization token}
+\item{token}{Authorization token.}
 }
 \value{
-Returns a dataframe of LinkedIn connections
+Returns a dataframe of your 1st degree LinkedIn connections.
 }
 \description{
-Get LinkedIn Connections
+\code{getMyConnections} returns information about your 1st degree
+connections who do not have their profile set to private.
+
+You cannot "browse connections." That is, you cannot get connections
+of your connections (2nd degree connections).
 }
 \examples{
 \dontrun{
 
 my.connections <- getMyConnections(in.auth)
 }
+}
+\author{
+Michael Piccirilli \email{michael.r.piccirilli@gmail.com}
+}
+\seealso{
+\code{\link{getProfile}}, \code{\link{searchPeople}}
 }
 

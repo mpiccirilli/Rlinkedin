@@ -5,31 +5,39 @@
 \title{Create a Group Discussion Post}
 \usage{
 submitGroupPost(token, group_id, disc_title = NULL, disc_summary = NULL,
-  content_url = NULL, content_img = NULL, content_title = NULL,
+  content_title = NULL, content_url = NULL, content_img = NULL,
   content_desc = NULL)
 }
 \arguments{
-\item{token}{Authorization token}
+\item{token}{Authorization token.}
 
-\item{group_id}{Numeric Group ID}
+\item{group_id}{Numeric Group ID.}
 
-\item{disc_title}{Group Discussion Title, required}
+\item{disc_title}{Group discussion title, required.}
 
-\item{disc_summary}{Group Discussion Summary, required}
+\item{disc_summary}{Group discussion summary, required.}
 
-\item{content_url}{Url for content, optinal}
+\item{content_title}{Title for content, required.}
 
-\item{content_img}{Url for an image, optional}
+\item{content_url}{Url for content, optional.}
 
-\item{content_title}{Title for content, required}
+\item{content_img}{Url for an image, optional.}
 
-\item{content_desc}{Description of content, optional}
+\item{content_desc}{Description of content, optional.}
 }
 \value{
-Creates a group discussion
+There are two possible responses to a successful submittal.
+
+One, your post has been created and is visibile immediately. In this case you have most likely posted to an unmoderated group.
+
+Two, your post has been accepted by the API but is pending approval by the group moderator, in which case you will not see your post until it has bene approved.
 }
 \description{
-Must include a minimum of a discussion title, discussion summary, and content title"
+\code{submitGroupPost} will create a group discussion post in one of the
+groups you belong to, specified by a Group Id.
+}
+\details{
+You must include a minimum of a discussion title, discussion summary, and content title.
 }
 \examples{
 \dontrun{
@@ -47,5 +55,11 @@ content.desc <- "Dev version of access to LinkedIn API via R.
 submitGroupPost(in.auth, group_id=id, disc_title=disc.title,
 disc_summary=disc.summary, content_url=url, content_desc=content.desc)
 }
+}
+\author{
+Michael Piccirilli \email{michael.r.piccirilli@gmail.com}
+}
+\seealso{
+\code{\link{getGroups}} \code{\link{getGroupPosts}}
 }
 

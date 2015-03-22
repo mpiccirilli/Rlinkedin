@@ -2,41 +2,49 @@
 % Please edit documentation in R/searchJobs.R
 \name{searchJobs}
 \alias{searchJobs}
-\title{Job Search API: Search for Jobs on LinkedIn}
+\title{Search for Jobs on LinkedIn}
 \usage{
 searchJobs(token, keywords = NULL, company_name = NULL, job_title = NULL,
   country_code = NULL, postal_code = NULL, distance = NULL)
 }
 \arguments{
-\item{token}{Authorization token}
+\item{token}{Authorization token.}
 
-\item{keywords}{Search jobs by keyword}
+\item{keywords}{A keyword used in the job title or description.}
 
-\item{company_name}{Search by company name}
+\item{company_name}{Company posting the job.}
 
-\item{job_title}{Search by job title}
+\item{job_title}{Title of the job.}
 
-\item{country_code}{ISO3166 country code, must be in lower case}
+\item{country_code}{Specify the country in which to search. This is the ISO3166 country code, and must be in lower case.}
 
-\item{postal_code}{Must combined with country-code}
+\item{postal_code}{Must be combined with the \code{country_code} parameter.}
 
-\item{distance}{Distance matches members within a distance from a central point. This is measured in miles. This is best used in combination with both country-code and postal-code.}
+\item{distance}{Distance matches jobs within a distance from a central point. This is measured in miles and is best used in conjunction with both \code{country_code} and \code{postal-code}.}
 }
 \value{
-Returns jobs based input parameters
+Returns a dataframe of jobs based input parameters
 }
 \description{
-The Job Search API enables search across LinkedIn's job postings.
+\code{searchJobs} searches across LinkedIn's job postings.
+
+There are several parameters that allow you to conduct either a broad or focused search.
+
+In order to use this function, you must create your own appliction and apply for the Vetted API Access here: \link{https://help.linkedin.com/app/ask/path/api-dvr}.
 }
 \details{
-Job Search API is a part of our Vetted API Access Program. You must apply and get LinkedIn's approval before using this API.
-
-Throttle limits: Up to 100 returns per search, 10 returns per page. Each page is one API call.
+There are many different search parameters that allow you to make a focused search of a particular job within a certain company some area of the country. Or you can search for all jobs posted based on general keywords.
 }
 \examples{
 \dontrun{
 
-search.results <- searchJobs(in.auth, keywords = "data scientist")
+search.results <- searchJobs(token = in.auth, keywords = "data scientist")
 }
+}
+\author{
+Michael Piccirilli \email{michael.r.piccirilli@gmail.com}
+}
+\seealso{
+\code{\link{getJobs}} \code{\link{searchCompanies}}
 }
 

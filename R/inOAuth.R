@@ -1,19 +1,36 @@
-#' LinkedIn Job Recommendations and Job Search
+#' Create OAuth token to LinkedIn R session
 #'
-#' Establishes a connection to the LinkedIn API. 
+#' @description
+#' \code{inOAuth} creates a long-lived OAuth access token that enables R to make
+#' authenticated calls to the LinkedIn API. This function relies on the
+#' \code{httr} package to create the OAuth token.
 #'
 #'
-#' @param application_name Name of your application
-#' @param consumer_key Consumer API Key of your application
-#' @param consumer_secret Consumer Secret Key of your application
-#' @return Authorization token to be used in other functions
+#' @details
+#' There are two ways to create an authenticated connection.  One is to use 
+#' the default credentials supplied in the package.  The second is to obtain
+#' your own credentials and using them as inputs into the function.
+#' Examples of both are shown below. 
+#' 
+#' Create your own application here: \url{https://developer.linkedin.com/}
+#'
+#'
+#' @author
+#' Michael Piccirilli \email{michael.r.piccirilli@@gmail.com}
+#' @seealso \code{\link{getProfile}}, \code{\link{getConnections}}
+#'
+#'
+#' @param application_name Name of your application.
+#' @param consumer_key Consumer API Key of your application.
+#' @param consumer_secret Consumer Secret Key of your application.
+#' @return Authorization token to be used in other functions.
 #' @examples
 #' \dontrun{
 #' 
-#' \# To use the default API and Secret Key for the Rlinkedin package:
+#' ## Default Consumer and Secret Key for the Rlinkedin package:
 #' in.auth <- inOAuth()
 #' 
-#' \# To use your own application's API and Secret Key:
+#' ## Use your own Consumer and Secret Key:
 #' in.auth <- inOAuth("your_app_name", "your_consumer_key", "your_consumer_secret")
 #' }
 #' @export

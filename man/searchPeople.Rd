@@ -2,7 +2,7 @@
 % Please edit documentation in R/searchPeople.R
 \name{searchPeople}
 \alias{searchPeople}
-\title{People Search API: Search for People on LinkedIn}
+\title{Search for People on LinkedIn}
 \usage{
 searchPeople(token, keywords = NULL, first_name = NULL, last_name = NULL,
   company_name = NULL, current_company = NULL, title = NULL,
@@ -10,42 +10,41 @@ searchPeople(token, keywords = NULL, first_name = NULL, last_name = NULL,
   country_code = NULL, postal_code = NULL, distance = NULL)
 }
 \arguments{
-\item{token}{Authorization token}
+\item{token}{Authorization token.}
 
-\item{keywords}{Keyword people search}
+\item{keywords}{Keyword people search.}
 
-\item{first_name}{First Name}
+\item{first_name}{First Name.}
 
-\item{last_name}{Last Name}
+\item{last_name}{Last Name.}
 
-\item{company_name}{Company Name}
+\item{company_name}{The name of a company where someone has as worked.}
 
-\item{current_company}{TRUE/FALSE}
+\item{current_company}{TRUE or FALSE, can only be used in conjunction with \code{company_name}.}
 
-\item{title}{Job Title}
+\item{title}{A job title someone has held}
 
-\item{current_title}{TRUE/FALSE}
+\item{current_title}{TRUE or FALSE, can only be used in conjunction with \code{title}.}
 
-\item{school_name}{Name of a school}
+\item{school_name}{The name of a school someone has attended.}
 
-\item{current_school}{TRUE/FALSE}
+\item{current_school}{TRUE or FALSE, can only be used in conjuntion with \code{current_school}.}
 
-\item{country_code}{TRUE/FALSE}
+\item{country_code}{Specify the country in which to search. This is the ISO3166 country code, and must be in lower case.}
 
-\item{postal_code}{Must be combined with the country-code parameter.}
+\item{postal_code}{Must be combined with the \code{country_code} parameter.}
 
-\item{distance}{Distance matches members within a distance from a central point. This is measured in miles.}
+\item{distance}{Distance matches members within a distance from a central point. This is measured in miles and and is best used in conjunction with both \code{country_code} and \code{postal-code}.}
 }
 \value{
-Returns people search based input parameters
+Returns a dataframe of people based input parameters
 }
 \description{
-The People Search API returns information about people. It lets you implement most of what shows up when you do a search for "People" in the top right box on LinkedIn.com.
-}
-\details{
-People Search API is a part of LinkedIn's Vetted API Access Program. You must apply and get LinkedIn's approval before using this API.
+\code{searchPeople} allows you to search for connections on LinkedIn. It returns most of what shows up when you do a search for people in the box at the top of the page on linkedin.com.
 
-Up to 100 returns per search, 10 returns per page. Each page is one API call.
+There are a number of parameters that allow you to conduct either a broad or focused search.
+
+In order to use this function, you must create your own appliction and apply for the Vetted API Access here: \link{https://help.linkedin.com/app/ask/path/api-dvr}.
 }
 \examples{
 \dontrun{

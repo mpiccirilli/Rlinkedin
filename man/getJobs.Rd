@@ -7,17 +7,22 @@
 getJobs(token, suggestions = NULL, bookmarks = NULL)
 }
 \arguments{
-\item{token}{Authorization token}
+\item{token}{Authorization token.}
 
-\item{suggestions}{LinkedIn job recommendations}
+\item{suggestions}{TRUE or FALSE. If TRUE, it will return LinkedIn's job recommendations.}
 
-\item{bookmarks}{LinkedIn jobs you've bookmarked}
+\item{bookmarks}{TRUE or FALSE. If TRUE, it will return jobs you've bookmarked on LinkedIn.}
 }
 \value{
-Returns LinkedIn recommended or bookmarked jobs
+Returns a dataframe of recommended or bookmarked jobs.
 }
 \description{
-Bookmarked and Recommended Jobs on LinkedIn
+\code{getJobs} can be used to retrieve your bookmarked and
+suggested jobs.
+}
+\details{
+This function can return either jobs you've bookmarked on LinkedIn,
+or jobs LinkedIn is recommending for you, but not both at the same time.
 }
 \examples{
 \dontrun{
@@ -25,8 +30,15 @@ Bookmarked and Recommended Jobs on LinkedIn
 job.suggestions <- getJobs(in.auth, suggestions=TRUE)
 job.bookmarks <- getJobs(in.auth, bookmarks=TRUE)
 
-job.fail <- getJobs(in.auth) \\# Will return null
+## Will return NULL
+job.fail <- getJobs(in.auth)
 
 }
+}
+\author{
+Michael Piccirilli \email{michael.r.piccirilli@gmail.com}
+}
+\seealso{
+\code{\link{searchJobs}}
 }
 

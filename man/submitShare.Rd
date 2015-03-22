@@ -2,32 +2,35 @@
 % Please edit documentation in R/submitShare.R
 \name{submitShare}
 \alias{submitShare}
-\title{Share a Network Update}
+\title{Share an update to your network's activity feed}
 \usage{
 submitShare(token, comment = NULL, content_title = NULL,
   content_desc = NULL, content_url = NULL, content_img = NULL,
   visibility = "anyone")
 }
 \arguments{
-\item{token}{Authorization token}
+\item{token}{Authorization token.}
 
-\item{comment}{Headline of the post}
+\item{comment}{Headline of your post.}
 
-\item{content_title}{Title of the post}
+\item{content_title}{Title of your post.}
 
-\item{content_desc}{Description of the post}
+\item{content_desc}{Description of your post.}
 
-\item{content_url}{Url to content}
+\item{content_url}{Url to content you'd like to share. This is required if you specify either \code{content_title} or \code{content_desc}.}
 
-\item{content_img}{Url to image}
+\item{content_img}{Url to an image you would like to include in your post, optional.}
 
-\item{visibility}{'anyone' or 'connections-only'}
+\item{visibility}{Choose the visibility of the post. The choices are 'anyone' or 'connections-only'.}
 }
 \value{
-Creates a post to the network feed
+Shares an update to your networks's activity feed.
 }
 \description{
-If one of the content elements is specified you must also include a url for the post
+\code{submitShare} will post a network update to the newsfeed of your connections.  You can select the visibility of your post to be seen either by 'anyone' or 'connections-only'.
+}
+\details{
+If either \code{content_title} or \code{content_desc} is specified, you must also include a \code{content_url} for the post.
 }
 \examples{
 \dontrun{
@@ -37,7 +40,14 @@ title <- "Im creating an R package to connect to the LinkedIn API, this is a tes
 url <- "https://github.com/mpiccirilli"
 desc <- "Dev version of access to LinkedIn API via R. Collaboration is welcomed!"
 
-submitShare(in.auth, comment=comment, content_tile=title, content_url=url, content_desc=desc)
+submitShare(token = in.auth, comment=comment, content_tile=title,
+            content_url=url, content_desc=desc)
 }
+}
+\author{
+Michael Piccirilli \email{michael.r.piccirilli@gmail.com}
+}
+\seealso{
+\code{\link{submitGroupPost}}
 }
 

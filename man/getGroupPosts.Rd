@@ -2,23 +2,30 @@
 % Please edit documentation in R/getGroupPosts.R
 \name{getGroupPosts}
 \alias{getGroupPosts}
-\title{Get Posts from your LinkedIn Groups}
+\title{Extract Posts from your LinkedIn Groups}
 \usage{
 getGroupPosts(token)
 }
 \arguments{
-\item{token}{Authorization token}
+\item{token}{Authorization token.}
 }
 \value{
-Returns posts of groups you belong to
+Returns a dataframe with the 10 most recent posts from each
+group you belong to.
 }
 \description{
-Currently this will retreive only the last 10 posts from each group
+\code{getGroupPosts} will retrieve posts from each LinkedIn group you belong to.
 }
 \examples{
 \dontrun{
 
 my.groups <- getGroupPosts(in.auth)
 }
+}
+\author{
+Michael Piccirilli \email{michael.r.piccirilli@gmail.com}
+}
+\seealso{
+\code{\link{getGroups}} \code{\link{submitGroupPost}}
 }
 
