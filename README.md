@@ -148,7 +148,7 @@ The arguments available to be used in a search: <br>
 
 To Do: <br>
 1/14: Include positions in results<br>
-1/22: Added positions into results, need to update example in readme (below).  Results are now a list, not a df.
+1/22: Added positions into results, need to update example in readme (below).  Results are now a list, not a df.<br>
 3/19: Updated ReadMe, gave example to turn list into df
 ```{r}
 search.ppl <- searchPeople(token=in.auth, first_name="Michael", last_name="Piccirilli")
