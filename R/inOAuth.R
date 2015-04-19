@@ -17,7 +17,7 @@
 #'
 #' @author
 #' Michael Piccirilli \email{michael.r.piccirilli@@gmail.com}
-#' @seealso \code{\link{getProfile}}, \code{\link{getConnections}}
+#' @seealso \code{\link{getProfile}}, \code{\link{getMyConnections}}
 #'
 #'
 #' @param application_name Name of your application.

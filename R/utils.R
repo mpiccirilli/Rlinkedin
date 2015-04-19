@@ -248,10 +248,10 @@ companySearchToList <- function(x)
   xml <- xmlTreeParse(x, useInternalNodes=TRUE)
   company <- xpathApply(xml, "//company", xmlChildren)
   n.companies <- length(company)
-  
+  q.list <- list()
   for(i in 1:n.companies)
   {
-    q.list[[i]] <- list(company_id=xmlValue(company[[4]]$id),
+    q.list[[i]] <- list(company_id=xmlValue(company[[i]]$id),
                    company_name=xmlValue(company[[i]]$name),
                    universal_name=xmlValue(company[[i]]$`universal-name`),
                    website=xmlValue(company[[i]]$`website-url`),
@@ -312,7 +312,6 @@ companySearchToList <- function(x)
   q.list[[i]] <- c(q.list[[i]], spec.list, ind.list)
   return(q.list)                 
 }
-
 
 
 connectionUpdatesToDF <- function(x)

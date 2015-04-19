@@ -6,7 +6,7 @@
 #' @details
 #' There are three separate calls in \code{getProfile}.
 #' 
-#' The first is return profile information about yourself.  The only input
+#' The first is to return profile information about yourself.  The only input
 #' into the function under this scenario is the \code{token}. 
 #' 
 #' The second is to return profile information about all your 1st degree
@@ -15,11 +15,11 @@
 #' 
 #' The third is to return profile information about an individual based on 
 #' their id number.  This can be found if you search your connections using
-#' the \code{getConnections} function. 
+#' the \code{getMyConnections} function. 
 #' 
 #' @author
 #' Michael Piccirilli \email{michael.r.piccirilli@@gmail.com}
-#' @seealso \code{\link{searchPeople}}, \code{\link{getConnections}}
+#' @seealso \code{\link{searchPeople}}, \code{\link{getMyConnections}}
 #'
 #' @param token Authorization token.
 #' @param connections TRUE or FALSE. If TRUE, will return profile information of your connections. FALSE is default.

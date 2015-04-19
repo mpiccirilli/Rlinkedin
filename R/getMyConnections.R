@@ -1,4 +1,4 @@
-#' Retreive 1st Degree LinkedIn Connections
+#' Retrieve 1st Degree LinkedIn Connections
 #'
 #' @description
 #' \code{getMyConnections} returns information about your 1st degree 

@@ -5,13 +5,16 @@
 #' 
 #' There are a number of parameters that allow you to conduct either a broad or focused search.
 #' 
-#' In order to use this function, you must create your own appliction and apply for the Vetted API Access here: \link{https://help.linkedin.com/app/ask/path/api-dvr}.
+#' In order to use this function, you must create your own appliction and apply for the Vetted API Access here: \url{https://help.linkedin.com/app/ask/path/api-dvr}.
 #' 
+#' @author
+#' Michael Piccirilli \email{michael.r.piccirilli@@gmail.com}
+#' @seealso \code{\link{getProfile}}
 #'
 #' @param token Authorization token.
-#' @param keywords Keyword people search.
-#' @param first_name First Name.
-#' @param last_name Last Name.
+#' @param keywords A keyword used in a person's profile. Multiple words should be separated by a space.
+#' @param first_name Search by a user's first name.
+#' @param last_name Search by a user's last name.
 #' @param company_name The name of a company where someone has as worked.
 #' @param current_company TRUE or FALSE, can only be used in conjunction with \code{company_name}.
 #' @param title A job title someone has held
@@ -35,7 +38,7 @@ searchPeople <- function(token, keywords=NULL, first_name=NULL, last_name=NULL, 
 {
   base_url <- "https://api.linkedin.com/v1/people-search:(people:(id,first-name,last-name,formatted-name,location:(name),headline,industry,num-connections,summary,specialties,positions))?"
 
-  # Should build a nicer way of doing this...
+  # Should build a nicer way of doing this, maybe with 'switch'?
   kw <- if(!is.null(keywords)) URLencode(paste0("keywords=",keywords,"&"))
   fname <- if(!is.null(first_name)) URLencode(paste0("first-name=",first_name,"&"))
   lname <- if(!is.null(last_name)) URLencode(paste0("last-name=",last_name,"&"))

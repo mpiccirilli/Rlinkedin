@@ -5,7 +5,7 @@
 #' 
 #' There are several parameters that allow you to conduct either a broad or focused search.
 #' 
-#' In order to use this function, you must create your own appliction and apply for the Vetted API Access here: \link{https://help.linkedin.com/app/ask/path/api-dvr}.
+#' In order to use this function, you must create your own appliction and apply for the Vetted API Access here: \url{https://help.linkedin.com/app/ask/path/api-dvr}.  You cannot use the default credentials supplied in the Rlinkedin package. 
 #' 
 #' 
 #' @details
@@ -16,7 +16,7 @@
 #' @seealso \code{\link{getJobs}} \code{\link{searchCompanies}}
 #'
 #' @param token Authorization token.
-#' @param keywords A keyword used in the job title or description.
+#' @param keywords A keyword used in the job title or description. Multiple words should be separated by a space.
 #' @param company_name Company posting the job.
 #' @param job_title Title of the job.
 #' @param country_code  Specify the country in which to search. This is the ISO3166 country code, and must be in lower case.
