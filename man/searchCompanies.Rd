@@ -27,7 +27,7 @@ In order to narrow the search down by location or industry, you must look up the
 \examples{
 \dontrun{
 
-search.comp <- searchCompanies(in.auth, "LinkedIn")
+search.comp <- searchCompanies(in.auth, keywords = "LinkedIn")
 
 }
 }
