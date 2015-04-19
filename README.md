@@ -305,6 +305,21 @@ Use the [Company Search API](https://developer-programs.linkedin.com/documents/c
 
 1/22:  Added searchCompanies() to repo.  Will add/update readme w/ example soon... <br>
 3/19:  I will add this function to the ReadMe this weekend.
+``` {r}
+search.comp <- searchCompanies(in.auth, keywords = "LinkedIn")
+
+# Find list elements of interest:
+sapply(search.comp, function(x) names(x))[[1]]
+
+##  [1] "company_id"     "company_name"   "universal_name" "website"        "twitter_handle"
+##  [6] "employee_count" "company_status" "founded"        "num_followers"  "description"   
+
+data.frame(t(sapply(search.comp, function(x){
+  x[c("company_id", "company_name", "universal_name", "website", "num_followers")]
+})))
+
+```
+
 
 
 Groups API
