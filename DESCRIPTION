@@ -1,9 +1,9 @@
 Package: Rlinkedin
-Title: Access to the LinkedIn API via R
 Version: 0.1
-Author: Michael Piccirilli <mrp2181@columbia.edu>
-Maintainer: Michael Piccirilli <mrp2181@columbia.edu>
+Title: Access to the LinkedIn API via R
 Description: Provides an interface to the LinkedIn API
+Author: Michael Piccirilli <michael.r.piccirilli@gmail.com>
+Maintainer: Michael Piccirilli <michael.r.piccirilli@gmail.com>
 Depends: 
     R (>= 2.12.0),
     httr,
@@ -11,3 +11,4 @@ Depends:
     httpuv    
 License: GPL-2
 LazyData: true
+URL: https://github.com/mpiccirilli/Rlinkedin
