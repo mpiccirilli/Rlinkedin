@@ -12,11 +12,11 @@ searchPeople(token, keywords = NULL, first_name = NULL, last_name = NULL,
 \arguments{
 \item{token}{Authorization token.}
 
-\item{keywords}{Keyword people search.}
+\item{keywords}{A keyword used in a person's profile. Multiple words should be separated by a space.}
 
-\item{first_name}{First Name.}
+\item{first_name}{Search by a user's first name.}
 
-\item{last_name}{Last Name.}
+\item{last_name}{Search by a user's last name.}
 
 \item{company_name}{The name of a company where someone has as worked.}
 
@@ -44,12 +44,18 @@ Returns a dataframe of people based input parameters
 
 There are a number of parameters that allow you to conduct either a broad or focused search.
 
-In order to use this function, you must create your own appliction and apply for the Vetted API Access here: \link{https://help.linkedin.com/app/ask/path/api-dvr}.
+In order to use this function, you must create your own appliction and apply for the Vetted API Access here: \url{https://help.linkedin.com/app/ask/path/api-dvr}.
 }
 \examples{
 \dontrun{
 
 search.results <- searchPeople(token=in.auth, first_name="Michael", last_name="Piccirilli")
 }
+}
+\author{
+Michael Piccirilli \email{michael.r.piccirilli@gmail.com}
+}
+\seealso{
+\code{\link{getProfile}}
 }
 

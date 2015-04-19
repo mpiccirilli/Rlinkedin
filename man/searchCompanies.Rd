@@ -2,20 +2,27 @@
 % Please edit documentation in R/searchCompanies.R
 \name{searchCompanies}
 \alias{searchCompanies}
-\title{Company Search API: Search for Companies on LinkedIn}
+\title{Search for Companies on LinkedIn}
 \usage{
-searchCompanies(token, keywords)
+searchCompanies(token, keywords, location = NULL, industry = NULL)
 }
 \arguments{
-\item{token}{Authorization token}
+\item{token}{Authorization token.}
 
-\item{keywords}{Keyword people search}
+\item{keywords}{A keyword used anywhere in a company's listing. Multiple words should be separated by a space.}
+
+\item{location}{LinkedIn geography code, found here: \url{https://developer.linkedin.com/docs/reference/geography-codes}.}
+
+\item{industry}{LinkedIn industry code, found here: \url{https://developer.linkedin.com/docs/reference/industry-codes}.}
 }
 \value{
-Returns a search of companies based on keywords, industries, or location
+Returns a list, information includes company id, company name, universal name, website, twitter handle, employee count, founded date, number of followers, and company description.
 }
 \description{
-The Company Search API enables search across company pages.
+\code{searchCompanies} searches across LinkedIn's companies pages based on keywords, location, and industry.
+}
+\details{
+In order to narrow the search down by location or industry, you must look up the proper input codes on the linkedin website.  The geography codes can be found here: \url{https://developer.linkedin.com/docs/reference/geography-codes}, and the industry codes can be found here: \url{https://developer.linkedin.com/docs/reference/industry-codes}.
 }
 \examples{
 \dontrun{
@@ -23,5 +30,11 @@ The Company Search API enables search across company pages.
 search.comp <- searchCompanies(in.auth, "LinkedIn")
 
 }
+}
+\author{
+Michael Piccirilli \email{michael.r.piccirilli@gmail.com}
+}
+\seealso{
+\code{\link{getCompany}} \code{\link{searchJobs}}
 }
 

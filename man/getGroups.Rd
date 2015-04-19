@@ -14,7 +14,7 @@ getGroups(token, details = FALSE)
 \value{
 Returns a dataframe including group profile information.
 
-When \code{details} = FALSE (default), the function will return information about each group's settings such as whether it allows messages from memebers, email frequency, and manager announcements.
+When \code{details} = FALSE (default), the function will return information about each group's settings such as whether it allows messages from members, email frequency, and manager announcements.
 
 When \code{details} = TRUE, the function will return both a short and long
 description of the group.

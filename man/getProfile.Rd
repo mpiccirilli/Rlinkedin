@@ -22,7 +22,7 @@ Returns a list of profile information.
 \details{
 There are three separate calls in \code{getProfile}.
 
-The first is return profile information about yourself.  The only input
+The first is to return profile information about yourself.  The only input
 into the function under this scenario is the \code{token}.
 
 The second is to return profile information about all your 1st degree
@@ -31,7 +31,7 @@ connections.  You need to supply the \code{token} and set the
 
 The third is to return profile information about an individual based on
 their id number.  This can be found if you search your connections using
-the \code{getConnections} function.
+the \code{getMyConnections} function.
 }
 \examples{
 \dontrun{
@@ -43,6 +43,6 @@ profiles <- getProfile(in.auth, connections=TRUE)
 Michael Piccirilli \email{michael.r.piccirilli@gmail.com}
 }
 \seealso{
-\code{\link{searchPeople}}, \code{\link{getConnections}}
+\code{\link{searchPeople}}, \code{\link{getMyConnections}}
 }
 

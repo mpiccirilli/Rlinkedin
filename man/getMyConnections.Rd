@@ -2,7 +2,7 @@
 % Please edit documentation in R/getMyConnections.R
 \name{getMyConnections}
 \alias{getMyConnections}
-\title{Retreive 1st Degree LinkedIn Connections}
+\title{Retrieve 1st Degree LinkedIn Connections}
 \usage{
 getMyConnections(token)
 }

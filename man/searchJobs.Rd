@@ -10,7 +10,7 @@ searchJobs(token, keywords = NULL, company_name = NULL, job_title = NULL,
 \arguments{
 \item{token}{Authorization token.}
 
-\item{keywords}{A keyword used in the job title or description.}
+\item{keywords}{A keyword used in the job title or description. Multiple words should be separated by a space.}
 
 \item{company_name}{Company posting the job.}
 
@@ -30,7 +30,7 @@ Returns a dataframe of jobs based input parameters
 
 There are several parameters that allow you to conduct either a broad or focused search.
 
-In order to use this function, you must create your own appliction and apply for the Vetted API Access here: \link{https://help.linkedin.com/app/ask/path/api-dvr}.
+In order to use this function, you must create your own appliction and apply for the Vetted API Access here: \url{https://help.linkedin.com/app/ask/path/api-dvr}.  You cannot use the default credentials supplied in the Rlinkedin package.
 }
 \details{
 There are many different search parameters that allow you to make a focused search of a particular job within a certain company some area of the country. Or you can search for all jobs posted based on general keywords.

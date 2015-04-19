@@ -44,6 +44,6 @@ in.auth <- inOAuth("your_app_name", "your_consumer_key", "your_consumer_secret")
 Michael Piccirilli \email{michael.r.piccirilli@gmail.com}
 }
 \seealso{
-\code{\link{getProfile}}, \code{\link{getConnections}}
+\code{\link{getProfile}}, \code{\link{getMyConnections}}
 }
 

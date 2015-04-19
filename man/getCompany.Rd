@@ -39,4 +39,10 @@ company.id <- getCompany(token=in.auth, company_id = company.email$company_id[14
 
 }
 }
+\author{
+Michael Piccirilli \email{michael.r.piccirilli@gmail.com}
+}
+\seealso{
+\code{\link{searchCompanies}}
+}
 
