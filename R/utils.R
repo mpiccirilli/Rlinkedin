@@ -145,11 +145,12 @@ connectionsToDF <- function(x)
   return(q.df)
 }
 
+
 profileToList <- function(x)
 {
   # Need to build in positions
   xml <- xmlTreeParse(x, useInternalNodes=TRUE)
-  persons <- xpathApply(xml, "//person", xmlChildren) 
+  persons <- xpathApply(xml, "//person", xmlChildren)
   n.positions <- unlistWithNAs(getNodeSet(xml, "//person"), "./positions", "Attrs")
   n.persons <- length(persons)
   q.list <- list()
@@ -163,6 +164,7 @@ profileToList <- function(x)
       p.nodes <- xmlChildren(persons[[i]]$positions)
       for(j in 1:n.positions[i])
       {
+        if(j==1){ p.list <- list(); position.list <- list()}
         id.n <- paste0("position",j,"_id"); comp.n <- paste0("position",j,"_company"); 
         ttl.n <- paste0("position",j,"_title"); year.n <- paste0("position",j,"_start_year"); 
         month.n <- paste0("position",j,"_start_month"); curr.n <- paste0("position",j,"_is_current"); 
@@ -178,7 +180,7 @@ profileToList <- function(x)
         names(p.list) <- c(id.n, comp.n, ttl.n, year.n, month.n, curr.n, sum.n)
         position.list <- c(position.list, p.list)
       }
-    }
+    } 
     profile.list <- list(connection_id=xmlValue(persons[[i]]$id),
                          fname=xmlValue(persons[[i]]$`first-name`),
                          lname=xmlValue(persons[[i]]$`last-name`),
