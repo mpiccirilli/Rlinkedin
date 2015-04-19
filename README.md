@@ -40,7 +40,7 @@ in.auth <- inOAuth("your_app_name", "your_consumer_key", "your_consumer_secret")
 
 Connections API
 -----
-The [Connections API](https://developer.linkedin.com/documents/connections-api) returns a list of 1st degree connections for a user who has granted access to his/her account.
+The [Connections API](https://developer-programs.linkedin.com/documents/connections-api) returns a list of 1st degree connections for a user who has granted access to his/her account.
 
 You cannot "browse connections." That is, you cannot get connections of your connections (2nd degree connections).
 
@@ -69,7 +69,7 @@ head(conn.freq[order(-conn.freq$freq),])
 
 Profile API
 ------
-The [Profile API](https://developer.linkedin.com/documents/profile-api) returns a member's LinkedIn profile. This function can retrieve proflie information about to yourself, your connections, or an individual.
+The [Profile API](https://developer-programs.linkedin.com/documents/profile-api) returns a member's LinkedIn profile. This function can retrieve proflie information about to yourself, your connections, or an individual.
 
 To Do: <br>
 1/14: Include positions in results <br>
@@ -126,7 +126,7 @@ sapply(my.profile, function(x) names(x))
 
 People Search API
 -------
-The [People Search API](https://developer.linkedin.com/documents/people-search-api) returns information about people. It lets you implement most of what shows up when you do a search for "People" in the top right box on LinkedIn.com.
+The [People Search API](https://developer-programs.linkedin.com/documents/people-search-api) returns information about people. It lets you implement most of what shows up when you do a search for "People" in the top right box on LinkedIn.com.
 
 People Search API is a part of their Vetted API Access Program. You must [apply here](https://help.linkedin.com/app/ask/path/api-dvr) and get LinkedIn's approval before using this API.  The default token in the package is not approved for this use. 
 
@@ -148,7 +148,7 @@ The arguments available to be used in a search: <br>
 
 To Do: <br>
 1/14: Include positions in results<br>
-1/22: Added positions into results, need to update example in readme (below).  Results are now a list, not a df.
+1/22: Added positions into results, need to update example in readme (below).  Results are now a list, not a df.<br>
 3/19: Updated ReadMe, gave example to turn list into df
 ```{r}
 search.ppl <- searchPeople(token=in.auth, first_name="Michael", last_name="Piccirilli")
@@ -191,7 +191,7 @@ data.frame(t(sapply(search.ppl, function(x){
 
 Job Bookmarks & Suggestions
 --------
-The API can be used to retrieve the current members [bookmarked and suggested jobs](https://developer.linkedin.com/documents/job-bookmarks-and-suggestions).
+The API can be used to retrieve the current members [bookmarked and suggested jobs](https://developer-programs.linkedin.com/documents/job-bookmarks-and-suggestions).
 
 ```{r}
 job.recs <- getJobs(token = in.auth, suggestions = TRUE)
@@ -206,7 +206,7 @@ colnames(job.recs)
 
 Job Search API
 --------
-The [Job Search API](https://developer.linkedin.com/documents/job-search-api#) enables search across LinkedIn's job postings.
+The [Job Search API](https://developer-programs.linkedin.com/documents/job-search-api#) enables search across LinkedIn's job postings.
 
 Job Search API is a part of their Vetted API Access Program. You must [apply here](https://help.linkedin.com/app/ask/path/api-dvr) and get LinkedIn's approval before using this API. The default token in the package is not approved for this use. 
 
@@ -241,7 +241,7 @@ head(search.jobs[,c(5,6,8)], 3)
 Company APIs
 --------
 #### Company Profile API
-Use the [Company Profile API](https://developer.linkedin.com/documents/company-lookup-api-and-fields) to find companies using a company ID, a universal name, or an email domain.
+Use the [Company Profile API](https://developer-programs.linkedin.com/documents/company-lookup-api-and-fields) to find companies using a company ID, a universal name, or an email domain.
 
 The universal name needs to be the exact name seen at the end of the URL on the company page on LinkedIn. In most cases this is simply the name of the company, but not always.  For example, let's consider Coca-Cola.  The company's LinkedIn page is:
 - https://www.linkedin.com/company/the-coca-cola-company
@@ -301,7 +301,7 @@ length(company.id)
 ```
 
 #### Company Search API
-Use the [Company Search API](https://developer.linkedin.com/documents/company-search) to find companies using keywords, industry, location, or some other criteria. It returns a collection of matching companies. Each entry can contain much of the information available on the company page.
+Use the [Company Search API](https://developer-programs.linkedin.com/documents/company-search) to find companies using keywords, industry, location, or some other criteria. It returns a collection of matching companies. Each entry can contain much of the information available on the company page.
 
 1/22:  Added searchCompanies() to repo.  Will add/update readme w/ example soon... <br>
 3/19:  I will add this function to the ReadMe this weekend.
@@ -309,7 +309,7 @@ Use the [Company Search API](https://developer.linkedin.com/documents/company-se
 
 Groups API
 ---------
-The [Groups API](https://developer.linkedin.com/documents/groups-api) enables members to view and interact with groups off of LinkedIn.com with the same rules that apply on the LinkedIn site. Data available includes group profile information, discussion posts, comments on posts, and likes.
+The [Groups API](https://developer-programs.linkedin.com/documents/groups-api) enables members to view and interact with groups off of LinkedIn.com with the same rules that apply on the LinkedIn site. Data available includes group profile information, discussion posts, comments on posts, and likes.
 
 #### Group Information
 ```{r}
@@ -357,7 +357,7 @@ submitGroupPost(in.auth, group_id=id, disc_title=disc.title, disc_summary=disc.s
 
 Share API
 --------
-You can share network updates through the [Share API](https://developer.linkedin.com/documents/share-api).
+You can share network updates through the [Share API](https://developer-programs.linkedin.com/documents/share-api).
 
 Note: If one of the content elements is specified you must also include include a url for the post
 ```{r}
