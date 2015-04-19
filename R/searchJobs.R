@@ -56,7 +56,8 @@ searchJobs <- function(token, keywords=NULL, company_name=NULL, job_title=NULL, 
     search.count <- if(search.total<10) search.total else as.numeric(xmlAttrs(q.content[["//job-search/jobs"]])[[2]])
     total.pages <- ceiling(search.total/search.count)
     q.df <- data.frame()
-    if(total.pages>1){
+    if(total.pages>1 && total.pages >10){
+      total.pages <- 10  # To prevent Thr
       for(i in 2:total.pages)
       {
         if(i==1) start <- 0 else start <- (i-1)*search.count

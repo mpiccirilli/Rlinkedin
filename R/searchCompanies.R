@@ -19,7 +19,7 @@
 #' @examples
 #' \dontrun{
 #' 
-#' search.comp <- searchCompanies(in.auth, "LinkedIn")
+#' search.comp <- searchCompanies(in.auth, keywords = "LinkedIn")
 #' 
 #' }
 #' @export

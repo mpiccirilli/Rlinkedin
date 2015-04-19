@@ -68,7 +68,8 @@ searchPeople <- function(token, keywords=NULL, first_name=NULL, last_name=NULL, 
     search.total <- as.numeric(xmlAttrs(q.content[["//people-search/people"]])[[1]])
     search.count <- if(search.total<10) search.total else as.numeric(xmlAttrs(q.content[["//people-search/people"]])[[2]])
     total.pages <- ceiling(search.total/search.count)
-    if(total.pages>1){
+    if(total.pages>1 && total.pages >10){
+      total.pages <- 10  # To prevent Throttle limits..
       q.list <- list()
       for(i in 2:total.pages)
       { 
