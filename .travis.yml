@@ -1,3 +1,9 @@
-sudo: required
-
 language: r
+sudo: required
+warnings_are_errors: true
+r_binary_packages:
+  - XML
+  - httpuv
+  - httr
+
+
