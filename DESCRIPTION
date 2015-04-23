@@ -1,7 +1,11 @@
 Package: Rlinkedin
 Version: 0.1
 Title: Access to the LinkedIn API via R
-Description: Provides an interface to the LinkedIn API
+Description: This package provides a series of 
+  functions that allow users to access the LinkedIn API
+  to get information about connections, search for
+  people and jobs, share updates with their
+  network, and create group discussions.
 Author: Michael Piccirilli <michael.r.piccirilli@gmail.com>
 Maintainer: Michael Piccirilli <michael.r.piccirilli@gmail.com>
 Depends: 
