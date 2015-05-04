@@ -14,8 +14,16 @@ If you'd like to contribute or simply learn more about accessing the API, get st
 
 Installation and Authentication
 -------
+The current CRAN release is 0.1, however you can download the package with the most recent additions from GitHub:
+```{r}
+# From CRAN:
+install.packages("Rlinkedin")
 
-Since this package is still in development, it can only be installed or downloaded via GitHub.
+# From GitHub:
+library(devtools)
+install_github("mpiccirilli/Rlinkedin")
+library(Rlinkedin)
+```
 
 You can establish an authenticated connection to the LinkedIn API in one of two ways:<br>
 1) Use the default API and Secret Key information.<br>
@@ -25,13 +33,9 @@ The default information is not approved to use the People Search API (searchPeop
 
 If you use your own application name, API Key, and Secret Key, you must paste `http://localhost:1410/` into the *'OAuth 2.0 Redirect URLs'* input box and select all of the *'Scope'* parameters, both of which are in the **'OAuth User Agreement'** section. Otherwise, you will not be able to create an authorized connection and these functions will not work properly. 
 
-For a step-by-step tutorial, check this [fantastic blog post](http://thinktostart.com/analyze-linkedin-with-r/) by [JulianHi](https://twitter.com/JulianHi).
+For a step-by-step tutorial, check out this [fantastic blog post](http://thinktostart.com/analyze-linkedin-with-r/) by [JulianHi](https://twitter.com/JulianHi).
 
 ```{r}
-require(devtools)
-install_github("mpiccirilli/Rlinkedin")
-require(Rlinkedin)
-
 # To use the default API and Secret Key for the Rlinkedin package:
 in.auth <- inOAuth()
 
