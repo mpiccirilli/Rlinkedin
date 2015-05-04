@@ -14,7 +14,7 @@ If you'd like to contribute or simply learn more about accessing the API, get st
 
 Installation and Authentication
 -------
-The current CRAN release is 0.1, however you can download the package with the most recent additions from GitHub:
+The current CRAN release is 0.1, however you can download the package with the most recent additions from GitHub.
 ```{r}
 # From CRAN:
 install.packages("Rlinkedin")
