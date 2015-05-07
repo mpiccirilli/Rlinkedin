@@ -17,7 +17,7 @@ Installation and Authentication
 The current CRAN release is 0.1, however you can download the package with the most recent additions from GitHub.
 ```{r}
 # From CRAN:
-install.packages("Rlinkedin")
+# install.packages("Rlinkedin")
 
 # From GitHub:
 library(devtools)
