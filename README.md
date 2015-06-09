@@ -6,7 +6,7 @@ Rlinkedin
 
 ## May 12th API Changes
 
-On May 12th 2015 LinkedIn changed the availability for most of their API endpoints.  In order to gain full access to the API, you must apply to their [Partnership Program](https://developer.linkedin.com/partner-programs).  You can find detailed information regarding what endpoints are still openly available in their [Transaction Guide](https://developer.linkedin.com/support/developer-program-transition).  
+On May 12th 2015 LinkedIn changed the availability for most of their API endpoints.  In order to gain full access to the API, you must apply to their [Partnership Program](https://developer.linkedin.com/partner-programs).  You can find detailed information regarding what endpoints are still openly available in their [Transition Guide](https://developer.linkedin.com/support/developer-program-transition).  
 
 **Regarding this R package, the following lists cover which functions are and are not available for *non-partners*.**  If I gain access to their partnership program I will update the package accordingly. 
 
