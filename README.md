@@ -4,6 +4,32 @@ Rlinkedin
 [![Build Status](https://travis-ci.org/mpiccirilli/Rlinkedin.svg?branch=master)](https://travis-ci.org/mpiccirilli/Rlinkedin)
 
 
+## May 12th API Changes
+
+On May 12th 2015 LinkedIn changed the availability for most of their API endpoints.  In order to gain full access to the API, you must apply to their [Partnership Program](https://developer.linkedin.com/partner-programs).  You can find detailed information regarding what endpoints are still openly available in their [Transaction Guide](https://developer.linkedin.com/support/developer-program-transition).  
+
+**Regarding this R package, the following lists cover which functions are and are not available for *non-partners*.**  If I gain access to their partnership program I will update the package accordingly. 
+
+### Available: <br>
+- getProfile(token)
+- searchCompanies(token, ...)
+- submitShare(token, ...)
+
+### Not available: <br>
+- getMyConnections(token)
+- getProfile(token, connections = TRUE)
+- getProfile(token, id = ...)
+- searchPeople(token, ...)
+- getJobs(token, ...)
+- searchJobs(token, ...)
+- getCompany(token, ...)
+- getGroups(token, ...)
+- getGroupPosts(token, ...)
+- submitGroupPost(token, ...)
+
+
+
+
 This is a development version of an R package to access the LinkedIn API.  I was motivated to create this after using and contributing to Pablo Barberá's awesome [Rfacebook](https://github.com/pablobarbera/Rfacebook) package. 
 
 Contributions are welcomed, and if you come across any errors please don't hesitate to open a new issue.  At the bottom of this readme is a list of the functions I would still like to add to the package. 
