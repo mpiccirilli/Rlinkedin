@@ -45,8 +45,14 @@
 #' @export
 
 
-submitGroupPost <- function(token, group_id, disc_title=NULL, disc_summary=NULL, content_title=NULL, content_url=NULL, content_img=NULL, content_desc=NULL)
+submitGroupPost <- function(token, group_id, disc_title=NULL, disc_summary=NULL, content_title=NULL, content_url=NULL, content_img=NULL, content_desc=NULL, partner = 0)
 {
+  
+  if(partner == 0){
+    stop("This function is no longer available through LinkedIn's open API.  \n
+  If you are a member of the Partnership Program, set the 'partner' input of this function equal to 1 (default: 0).")
+  }
+  
   base_url <- "https://api.linkedin.com/v1/groups/"
   url <- paste0(base_url, group_id, "/posts")
   share.xml <- newXMLNode("post")

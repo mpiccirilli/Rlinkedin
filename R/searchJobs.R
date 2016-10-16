@@ -33,8 +33,15 @@
 #' @export
 #' 
 
-searchJobs <- function(token, keywords=NULL, company_name=NULL, job_title=NULL, country_code=NULL, postal_code=NULL, distance=NULL)
+searchJobs <- function(token, keywords=NULL, company_name=NULL, job_title=NULL, country_code=NULL, postal_code=NULL, distance=NULL, partner = 0)
 {
+  
+  if(partner == 0){
+    stop("This function is no longer available through LinkedIn's open API.  \n
+  If you are a member of the Partnership Program, set the 'partner' input of this function equal to 1 (default: 0).")
+  }
+  
+  
   base_url <- "https://api.linkedin.com/v1/job-search:(jobs:(id,customer-job-code,active,posting-date,expiration-date,posting-timestamp,expiration-timestamp,company:(id,name),position:(title,location,job-functions,industries,job-type,experience-level),skills-and-experience,description-snippet,description,salary,job-poster:(id,first-name,last-name,headline),referral-bonus,site-job-url,location-description))?"
   
   kw <- if(!is.null(keywords)) URLencode(paste0("keywords=",keywords,"&"))
@@ -47,13 +54,14 @@ searchJobs <- function(token, keywords=NULL, company_name=NULL, job_title=NULL, 
   url <- paste0(base_url, kw, comp_name, jb_ttl, ctry_code, pstl_code, dist, ct)
   query <- GET(url, config(token=token))
   q.content <- content(query)
-  if(!is.na(q.content[["number(//error/status)"]]==403)){
-    stop(q.content[["string(//error/message)"]])
+  xml <- xmlTreeParse(q.content, useInternalNodes=TRUE)
+  if(!is.na(xml[["number(//error/status)"]]==404)){
+    stop(xml[["string(//error/message)"]])
   }
   else {
     p1 <- jobsToDF(q.content)
-    search.total <- as.numeric(xmlAttrs(q.content[["//job-search/jobs"]])[[1]])
-    search.count <- if(search.total<10) search.total else as.numeric(xmlAttrs(q.content[["//job-search/jobs"]])[[2]])
+    search.total <- as.numeric(xmlAttrs(xml[["//job-search/jobs"]])[[1]])
+    search.count <- if(search.total<10) search.total else as.numeric(xmlAttrs(xml[["//job-search/jobs"]])[[2]])
     total.pages <- ceiling(search.total/search.count)
     q.df <- data.frame()
     if(total.pages>1 && total.pages >10){
