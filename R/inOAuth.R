@@ -39,14 +39,6 @@
 inOAuth <- function(application_name=NULL, consumer_key=NULL, consumer_secret=NULL)
 {
   
-  install.packages('XML')
-  install.packages('httpuv')
-  
-  
-  library(httr)
-  library(httpuv)
-  
-  
   full_url <- oauth_callback()
   message <- paste("If you've created you're own application, be sure to copy and paste the following into \n 'OAuth 2.0 Redirect URLs' in the LinkedIn Application Details:", full_url, "\n When done, press any key to continue...")
   invisible(readline(message))
