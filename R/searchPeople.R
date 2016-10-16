@@ -34,8 +34,14 @@
 #' @export
 
 
-searchPeople <- function(token, keywords=NULL, first_name=NULL, last_name=NULL, company_name=NULL, current_company=NULL, title=NULL, current_title=NULL, school_name=NULL, current_school=NULL, country_code=NULL, postal_code=NULL, distance=NULL)
+searchPeople <- function(token, keywords=NULL, first_name=NULL, last_name=NULL, company_name=NULL, current_company=NULL, title=NULL, current_title=NULL, school_name=NULL, current_school=NULL, country_code=NULL, postal_code=NULL, distance=NULL, partner = 0)
 {
+  
+  if(partner == 0){
+    stop("This function is no longer available through LinkedIn's open API.  \n
+  If you are a member of the Partnership Program, set the 'partner' input of this function equal to 1 (default: 0).")
+  }
+  
   base_url <- "https://api.linkedin.com/v1/people-search:(people:(id,first-name,last-name,formatted-name,location:(name),headline,industry,num-connections,summary,specialties,positions))?"
 
   # Should build a nicer way of doing this, maybe with 'switch'?
@@ -57,16 +63,19 @@ searchPeople <- function(token, keywords=NULL, first_name=NULL, last_name=NULL, 
                curr_sch, ctry_code, pstl_code,dist,ct)
   query <- GET(url, config(token=token))
   q.content <- content(query)
-  if(!is.na(q.content[["number(//error/status)"]]==403)){
-    stop(q.content[["string(//error/message)"]])
+  xml <- xmlTreeParse(q.content, useInternalNodes=TRUE)
+  if(!is.na(xml[["number(//error/status)"]]==403)){
+    stop(xml[["string(//error/message)"]])
   }
   if(unlistWithNAs(getNodeSet(q.content, "//people-search"), "./people", "Attrs")==0){
     stop("Sorry, no results containing all your search terms were found")
   }
   else {
     p1 <- profileToList(query)
-    search.total <- as.numeric(xmlAttrs(q.content[["//people-search/people"]])[[1]])
-    search.count <- if(search.total<10) search.total else as.numeric(xmlAttrs(q.content[["//people-search/people"]])[[2]])
+    xml <- xmlTreeParse(q.content, useInternalNodes=TRUE)
+    
+    search.total <- as.numeric(xmlAttrs(xml[["//people-search/people"]])[[1]])
+    search.count <- if(search.total<10) search.total else as.numeric(xmlAttrs(xml[["//people-search/people"]])[[2]])
     total.pages <- ceiling(search.total/search.count)
     if(total.pages>1 && total.pages >10){
       total.pages <- 10  # To prevent Throttle limits..
