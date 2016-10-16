@@ -52,7 +52,6 @@ getGroups <- function(token, details=FALSE, partner = 0)
     query <- GET(url, config(token=token))
     q.content <- content(query)
     xml <- xmlTreeParse(q.content, useInternalNodes=TRUE)
-    
     r <- xmlRoot(xml)
     if(xmlAttrs(r)[[1]]==0){
       print("You are not currently a member of any groups.")
@@ -70,7 +69,6 @@ getGroups <- function(token, details=FALSE, partner = 0)
     query <- GET(url, config(token=token))
     q.content <- content(query)
     xml <- xmlTreeParse(q.content, useInternalNodes=TRUE)
-    
     r <- xmlRoot(xml)
     if(xmlAttrs(r)[[1]]==0){
       print("You are not currently a member of any groups.")
@@ -83,6 +81,10 @@ getGroups <- function(token, details=FALSE, partner = 0)
         url <- paste0(groups_url, gp.ids[i], details_fields)  
         query <- GET(url, config(token=token))
         q.content <- content(query)
+        xml <- xmlTreeParse(q.content, useInternalNodes=TRUE)
+        if(!is.na(xml[["number(//error/status)"]]==404)){
+          stop(xml[["string(//error/message)"]])
+        }
         xml <- xmlTreeParse(q.content, useInternalNodes=TRUE)
         temp.df <- data.frame(group_id=xml["number(//group/id/text())"],
                               group_name=xml["string(//group/name/text())"],

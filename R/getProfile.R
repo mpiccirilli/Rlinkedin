@@ -34,36 +34,54 @@
 #' }
 #' @export
 
-getProfile <- function(token, connections=FALSE, id=NULL)
+
+
+getProfile <- function(token, connections=FALSE, id=NULL, partner = 0)
 {
+  
+  if( (isTRUE(connections) | !is.null(id)) & partner == 0 ){
+    stop("This function is no longer available through LinkedIn's open API.  \n
+  If you are a member of the Partnership Program, set the 'partner' input of this function equal to 1 (default: 0).")
+  }
+  
   
   base_url <- "https://api.linkedin.com/v1/people/"
   profile_fields <- ":(id,first-name,last-name,formatted-name,location:(name),headline,industry,num-connections,summary,specialties,positions,public-profile-url)"
   
   # if connections=FALSE && id=NULL:
   # This will return all basic profile information about yourself
-  if(is.null(id) && !isTRUE(connections)){
+  if( is.null(id) && !isTRUE(connections) ){
     url <- paste0(base_url,"~",profile_fields)
     query <- GET(url, config(token=token))
     q.list <- profileToList(query)
     return(q.list)
   }
   
-  
+
   # if connections=FALSE && id=#
   # This will return all basic profile information about person
-  if(!isTRUE(connections) && length(id)==1){
+  if( !isTRUE(connections) && length(id)==1 ){
     url <- paste0(base_url, "id=", id, profile_fields)
     query <- GET(url, config(token=token))
+    q.content <- content(query)
+    xml <- xmlTreeParse(q.content, useInternalNodes=TRUE)
+    if(!is.na(xml[["number(//error/status)"]]==404)){
+      stop(xml[["string(//error/message)"]])
+    }
     q.list <- profileToList(query)
     return(q.list)
   }
   
   # if connections=TRUE && id=NULL
   # This will return profile information of all your connections
-  if(isTRUE(connections) && is.null(id)){
+  if(isTRUE(connections) && is.null(id) && partner != 0){
   url <- paste0(base_url, "~/connections",profile_fields)
   query <- GET(url, config(token=token))
+  q.content <- content(query)
+  xml <- xmlTreeParse(q.content, useInternalNodes=TRUE)
+  if(!is.na(xml[["number(//error/status)"]]==404)){
+    stop(xml[["string(//error/message)"]])
+  }
   q.list <- profileToList(query)
   return(q.list)
   
@@ -74,4 +92,3 @@ getProfile <- function(token, connections=FALSE, id=NULL)
     print("Cannot perform query with connections=TRUE and id #")
   }
 }
-

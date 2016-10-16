@@ -41,7 +41,9 @@ getGroupPosts <- function(token, partner = 0)
   query <- GET(url, config(token=token))
   q.content <- content(query)
   xml <- xmlTreeParse(q.content, useInternalNodes=TRUE)
-  
+  if(!is.na(xml[["number(//error/status)"]]==404)){
+    stop(xml[["string(//error/message)"]])
+  }
   
   if(as.numeric(xmlAttrs(xml[["//group-memberships[@total]"]])[[1]])==0){
     print("You are not currently a member of any groups.")

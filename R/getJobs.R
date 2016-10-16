@@ -48,6 +48,10 @@ getJobs <- function(token, suggestions=NULL, bookmarks=NULL, partner = 0)
   url <- "http://api.linkedin.com/v1/people/~/suggestions/job-suggestions"
   query <- GET(url, config(token = token))
   q.content <- content(query)
+  xml <- xmlTreeParse(q.content, useInternalNodes=TRUE)
+  if(!is.na(xml[["number(//error/status)"]]==404)){
+    stop(xml[["string(//error/message)"]])
+  }
   q.df <- jobRecsToDF(q.content)
   return(q.df)
   }
@@ -56,6 +60,10 @@ getJobs <- function(token, suggestions=NULL, bookmarks=NULL, partner = 0)
     url <- "https://api.linkedin.com/v1/people/~/job-bookmarks"
     query <- GET(url, config(token = token))
     q.content <- content(query)
+    xml <- xmlTreeParse(q.content, useInternalNodes=TRUE)
+    if(!is.na(xml[["number(//error/status)"]]==404)){
+      stop(xml[["string(//error/message)"]])
+    }
     q.df <- jobBookmarksToDF(q.content)
     return(q.df)
   }

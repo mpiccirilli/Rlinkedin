@@ -35,6 +35,10 @@ getMyConnections <- function(token, partner = 0)
   base_url <- "http://api.linkedin.com/v1/people/~/connections"
   query <- GET(base_url, config(token = token))
   q.content <- content(query) 
+  xml <- xmlTreeParse(q.content, useInternalNodes=TRUE)
+  if(!is.na(xml[["number(//error/status)"]]==404)){
+    stop(xml[["string(//error/message)"]])
+  }
   q.df <- connectionsToDF(q.content)
   return(q.df)
 }
