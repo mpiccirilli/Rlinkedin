@@ -24,15 +24,10 @@
 #' }
 #' @export
 
-# keywords <- "general motors"
-# location <- "us:35"
-# location <- NULL
-# industry <- 4
-# industry <- NULL
 
 searchCompanies <- function(token, keywords, location=NULL, industry=NULL)
 {
-  
+
   base_url <- "https://api.linkedin.com/v1/company-search:(companies:(id,name,universal-name,website-url,industries,status,logo-url,blog-rss-url,twitter-id,employee-count-range,specialties,locations,description,stock-exchange,founded-year,end-year,num-followers))?"
   
   kw <- if(!is.null(keywords)) URLencode(paste0("keywords=",keywords,"&"))
@@ -54,8 +49,10 @@ searchCompanies <- function(token, keywords, location=NULL, industry=NULL)
   }
   else {
     p1 <- companySearchToList(query)
-    search.total <- as.numeric(xmlAttrs(q.content[["//company-search/companies"]])[[1]])
-    search.count <- if(search.total<10) search.total else as.numeric(xmlAttrs(q.content[["//company-search/companies"]])[[2]])
+    xml <- xmlTreeParse(q.content, useInternalNodes=TRUE)
+    search.total <- as.numeric(xmlAttrs(xml[["//company-search/companies"]]))[[1]]
+    search.count <- if(search.total<10) search.total else as.numeric(xmlAttrs(xml[["//company-search/companies"]])[[2]])
+    
     total.pages <- ceiling(search.total/search.count)
     if(total.pages>1 && total.pages >10){
       total.pages <- 10  # To prevent Throttle limits..
