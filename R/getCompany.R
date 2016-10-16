@@ -32,8 +32,14 @@
 #' }
 #' @export
 
-getCompany <- function(token, universal_name=NULL, email_domain=NULL, company_id=NULL)
+getCompany <- function(token, universal_name=NULL, email_domain=NULL, company_id=NULL, partner = 0)
 { 
+  if(partner == 0){
+    stop("This function is no longer available through LinkedIn's open API.  \n
+  If you are a member of the Partnership Program, set the 'partner' input of this function equal to 1 (default: 0).")
+  }
+  
+  
   base_url <- "https://api.linkedin.com/v1/companies"
   field_selectors <- ":(id,name,universal-name,email-domains,company-type,ticker,website-url,industries,status,twitter-id,employee-count-range,specialties,locations,description,founded-year,num-followers)"
   
@@ -44,8 +50,9 @@ getCompany <- function(token, universal_name=NULL, email_domain=NULL, company_id
     url <- paste0(base_url,email_addy)
     query <- GET(url, config(token=token))
     q.content <- content(query)
-    if(!is.na(q.content[["number(//error/status)"]]==404)){
-      stop(q.content[["string(//error/message)"]])
+    xml <- xmlTreeParse(q.content, useInternalNodes=TRUE)
+    if(!is.na(xml[["number(//error/status)"]]==404)){
+      stop(xml[["string(//error/message)"]])
     }
     n.companies <- unlistWithNAs(getNodeSet(q.content, "//companies"), "//companies", "Attrs")
     nodes <- getNodeSet(q.content, "//company")  
@@ -62,8 +69,9 @@ getCompany <- function(token, universal_name=NULL, email_domain=NULL, company_id
     url <- paste0(base_url, uni_name, field_selectors)
     query <- GET(url, config(token=token))
     q.content <- content(query)
-    if(!is.na(q.content[["number(//error/status)"]]==404)){
-      stop(q.content[["string(//error/message)"]])
+    xml <- xmlTreeParse(q.content, useInternalNodes=TRUE)
+    if(!is.na(xml[["number(//error/status)"]]==404)){
+      stop(xml[["string(//error/message)"]])
     }
     q.list <- companyProfileToList(query)
     return(q.list)
@@ -75,8 +83,9 @@ getCompany <- function(token, universal_name=NULL, email_domain=NULL, company_id
     url <- paste0(base_url,"/",company_id,field_selectors)
     query <- GET(url, config(token=token))
     q.content <- content(query)
-    if(!is.na(q.content[["number(//error/status)"]]==404)){
-      stop(q.content[["string(//error/message)"]])
+    xml <- xmlTreeParse(q.content, useInternalNodes=TRUE)
+    if(!is.na(xml[["number(//error/status)"]]==404)){
+      stop(xml[["string(//error/message)"]])
     }
     q.list <- companyProfileToList(query)
     return(q.list)

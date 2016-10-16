@@ -23,8 +23,14 @@
 #' @export
 
 
-getMyConnections <- function(token)
+getMyConnections <- function(token, partner = 0)
 { 
+  
+  if(partner == 0){
+    stop("This function is no longer available through LinkedIn's open API.  \n
+  If you are a member of the Partnership Program, set the 'partner' input of this function equal to 1 (default: 0).")
+  }
+  
   # returns default fields
   base_url <- "http://api.linkedin.com/v1/people/~/connections"
   query <- GET(base_url, config(token = token))

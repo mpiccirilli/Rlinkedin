@@ -20,8 +20,15 @@
 #' @export
 
 
-getGroupPosts <- function(token)
+getGroupPosts <- function(token, partner = 0)
 {
+  
+  if(partner == 0){
+    stop("This function is no longer available through LinkedIn's open API.  \n
+  If you are a member of the Partnership Program, set the 'partner' input of this function equal to 1 (default: 0).")
+  }
+  
+  
   membership_url <- "https://api.linkedin.com/v1/people/"
   membership_fields <- "/group-memberships:(group:(id,name),membership-state,show-group-logo-in-profile,allow-messages-from-members,email-digest-frequency,email-announcements-from-managers,email-for-every-new-post)"
   
@@ -33,8 +40,10 @@ getGroupPosts <- function(token)
   url <- paste0(membership_url,"~",membership_fields)
   query <- GET(url, config(token=token))
   q.content <- content(query)
+  xml <- xmlTreeParse(q.content, useInternalNodes=TRUE)
   
-  if(as.numeric(xmlAttrs(q.content[["//group-memberships[@total]"]])[[1]])==0){
+  
+  if(as.numeric(xmlAttrs(xml[["//group-memberships[@total]"]])[[1]])==0){
     print("You are not currently a member of any groups.")
   }
   else {

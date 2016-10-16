@@ -28,8 +28,14 @@
 #' @export
 
 
-getGroups <- function(token, details=FALSE)
+getGroups <- function(token, details=FALSE, partner = 0)
 {
+  
+  if(partner == 0){
+    stop("This function is no longer available through LinkedIn's open API.  \n
+  If you are a member of the Partnership Program, set the 'partner' input of this function equal to 1 (default: 0).")
+  }
+  
   # This function will get all the groups a user (including self) is a member of
   membership_url <- "https://api.linkedin.com/v1/people/"
   membership_fields <- "/group-memberships:(group:(id,name),membership-state,show-group-logo-in-profile,allow-messages-from-members,email-digest-frequency,email-announcements-from-managers,email-for-every-new-post)"
@@ -45,7 +51,9 @@ getGroups <- function(token, details=FALSE)
     url <- paste0(membership_url,"~",membership_fields)
     query <- GET(url, config(token=token))
     q.content <- content(query)
-    r <- xmlRoot(q.content)
+    xml <- xmlTreeParse(q.content, useInternalNodes=TRUE)
+    
+    r <- xmlRoot(xml)
     if(xmlAttrs(r)[[1]]==0){
       print("You are not currently a member of any groups.")
     }
@@ -61,7 +69,9 @@ getGroups <- function(token, details=FALSE)
     url <- paste0(membership_url,"~",membership_fields)
     query <- GET(url, config(token=token))
     q.content <- content(query)
-    r <- xmlRoot(q.content)
+    xml <- xmlTreeParse(q.content, useInternalNodes=TRUE)
+    
+    r <- xmlRoot(xml)
     if(xmlAttrs(r)[[1]]==0){
       print("You are not currently a member of any groups.")
     }
@@ -73,10 +83,11 @@ getGroups <- function(token, details=FALSE)
         url <- paste0(groups_url, gp.ids[i], details_fields)  
         query <- GET(url, config(token=token))
         q.content <- content(query)
-        temp.df <- data.frame(group_id=q.content["number(//group/id/text())"],
-                              group_name=q.content["string(//group/name/text())"],
-                              group_desc_short=q.content["string(//group/short-description/text())"],
-                              group_desc_long=q.content["string(//group/description/text())"]
+        xml <- xmlTreeParse(q.content, useInternalNodes=TRUE)
+        temp.df <- data.frame(group_id=xml["number(//group/id/text())"],
+                              group_name=xml["string(//group/name/text())"],
+                              group_desc_short=xml["string(//group/short-description/text())"],
+                              group_desc_long=xml["string(//group/description/text())"]
                               )
         q.df <- rbind(q.df, temp.df)
       }
