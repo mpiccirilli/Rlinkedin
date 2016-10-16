@@ -44,8 +44,10 @@ searchCompanies <- function(token, keywords, location=NULL, industry=NULL)
   }
   query <- GET(url, config(token=token))
   q.content <- content(query)
-  if(!is.na(q.content[["number(//error/status)"]]==403)){
-    stop(q.content[["string(//error/message)"]])
+  xml <- xmlTreeParse(q.content, useInternalNodes=TRUE)
+  
+  if(!is.na(xml[["number(//error/status)"]]==403)){
+    stop(xml[["string(//error/message)"]])
   }
   else {
     p1 <- companySearchToList(query)
