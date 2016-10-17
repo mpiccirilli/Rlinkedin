@@ -12,6 +12,7 @@
 #'
 #' @param token Authorization token.
 #' @param details TRUE or FALSE. If TRUE, it will return group details. FALSE is default.
+#' @param partner Indicate whether you belong to the Partnership Program. Values: 0 or 1
 #' 
 #' @return Returns a dataframe including group profile information.
 #' 

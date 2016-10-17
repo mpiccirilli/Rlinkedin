@@ -12,7 +12,6 @@ getGroups(token, details = FALSE, partner = 0)
 \item{details}{TRUE or FALSE. If TRUE, it will return group details. FALSE is default.}
 
 \item{partner}{Indicate whether you belong to the Partnership Program. Values: 0 or 1}
-
 }
 \value{
 Returns a dataframe including group profile information.
@@ -21,16 +20,12 @@ When \code{details} = FALSE (default), the function will return information abou
 
 When \code{details} = TRUE, the function will return both a short and long
 description of the group.
-
-Set \code{partner} = 1, if you belong to LinkedIn's Parternship Program.
-
 }
 \description{
 \code{getGroups} retrieves information and settings about the LinkedIn groups you belong to.
 }
 \details{
 This function returns information about what groups you belong to, either with or without group details. Group details can be called by setting the option \code{details} = TRUE.
-
 }
 \examples{
 \dontrun{

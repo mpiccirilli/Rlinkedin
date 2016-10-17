@@ -26,7 +26,6 @@ submitGroupPost(token, group_id, disc_title = NULL, disc_summary = NULL,
 \item{content_desc}{Description of content, optional.}
 
 \item{partner}{Indicate whether you belong to the Partnership Program. Values: 0 or 1}
-
 }
 \value{
 There are two possible responses to a successful submittal. 
@@ -34,9 +33,6 @@ There are two possible responses to a successful submittal.
 One, your post has been created and is visibile immediately. In this case you have most likely posted to an unmoderated group. 
 
 Two, your post has been accepted by the API but is pending approval by the group moderator, in which case you will not see your post until it has bene approved.
-
-\item{partner}{Indicate whether you belong to the Partnership Program. Values: 0 or 1}
-
 }
 \description{
 \code{submitGroupPost} will create a group discussion post in one of the

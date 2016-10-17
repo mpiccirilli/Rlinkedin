@@ -19,6 +19,7 @@
 #' @param content_desc Description of content, optional.
 #' @param content_url Url for content, optional.
 #' @param content_img Url for an image, optional.
+#' @param partner Indicate whether you belong to the Partnership Program. Values: 0 or 1
 #' 
 #' @return There are two possible responses to a successful submittal. 
 #' 

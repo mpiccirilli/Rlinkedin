@@ -24,6 +24,7 @@
 #' @param token Authorization token.
 #' @param connections TRUE or FALSE. If TRUE, will return profile information of your connections. FALSE is default.
 #' @param id Numeric ID number of a LinkedIn member.
+#' @param partner Indicate whether you belong to the Partnership Program. Values: 0 or 1
 #' 
 #' @return Returns a list of profile information.
 #' 

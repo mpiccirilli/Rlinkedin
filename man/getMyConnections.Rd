@@ -10,14 +10,9 @@ getMyConnections(token, partner = 0)
 \item{token}{Authorization token.}
 
 \item{partner}{Indicate whether you belong to the Partnership Program. Values: 0 or 1}
-
 }
 \value{
 Returns a dataframe of your 1st degree LinkedIn connections.
-
-Set \code{partner} = 1, if you belong to LinkedIn's Parternship Program.
-
-
 }
 \description{
 \code{getMyConnections} returns information about your 1st degree 

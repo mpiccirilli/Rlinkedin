@@ -22,6 +22,7 @@
 #' @param country_code  Specify the country in which to search. This is the ISO3166 country code, and must be in lower case.
 #' @param postal_code Must be combined with the \code{country_code} parameter.
 #' @param distance Distance matches jobs within a distance from a central point. This is measured in miles and is best used in conjunction with both \code{country_code} and \code{postal-code}.
+#' @param partner Indicate whether you belong to the Partnership Program. Values: 0 or 1
 #' 
 #' @return Returns a dataframe of jobs based input parameters
 #' 

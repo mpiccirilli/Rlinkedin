@@ -8,6 +8,7 @@
 #' @seealso \code{\link{getGroups}} \code{\link{submitGroupPost}}
 #'
 #' @param token Authorization token.
+#' @param partner Indicate whether you belong to the Partnership Program. Values: 0 or 1
 #' 
 #' @return Returns a dataframe with the 10 most recent posts from each
 #' group you belong to.

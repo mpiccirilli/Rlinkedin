@@ -10,20 +10,14 @@ getGroupPosts(token, partner = 0)
 \item{token}{Authorization token.}
 
 \item{partner}{Indicate whether you belong to the Partnership Program. Values: 0 or 1}
-
 }
 \value{
 Returns a dataframe with the 10 most recent posts from each
 group you belong to.
-
-
-Set \code{partner} = 1, if you belong to LinkedIn's Parternship Program.
-
 }
 \description{
 \code{getGroupPosts} will retrieve posts from each LinkedIn group you belong to.
 }
-
 \examples{
 \dontrun{
 

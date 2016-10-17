@@ -15,6 +15,7 @@
 #' @param token Authorization token.
 #' @param suggestions TRUE or FALSE. If TRUE, it will return LinkedIn's job recommendations.
 #' @param bookmarks TRUE or FALSE. If TRUE, it will return jobs you've bookmarked on LinkedIn.
+#' @param partner Indicate whether you belong to the Partnership Program. Values: 0 or 1
 #' 
 #' @return Returns a dataframe of recommended or bookmarked jobs.
 #' 

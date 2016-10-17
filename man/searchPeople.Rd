@@ -37,13 +37,9 @@ searchPeople(token, keywords = NULL, first_name = NULL, last_name = NULL,
 \item{distance}{Distance matches members within a distance from a central point. This is measured in miles and and is best used in conjunction with both \code{country_code} and \code{postal-code}.}
 
 \item{partner}{Indicate whether you belong to the Partnership Program. Values: 0 or 1}
-
 }
 \value{
-Returns a dataframe of people based input parameters.
-
-\item{partner}{Indicate whether you belong to the Partnership Program. Values: 0 or 1}
-
+Returns a dataframe of people based input parameters
 }
 \description{
 \code{searchPeople} allows you to search for connections on LinkedIn. It returns most of what shows up when you do a search for people in the box at the top of the page on linkedin.com.

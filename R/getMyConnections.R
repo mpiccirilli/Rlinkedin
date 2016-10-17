@@ -12,6 +12,7 @@
 #' @seealso \code{\link{getProfile}}, \code{\link{searchPeople}}
 #'
 #' @param token Authorization token.
+#' @param partner Indicate whether you belong to the Partnership Program. Values: 0 or 1
 #' 
 #' @return Returns a dataframe of your 1st degree LinkedIn connections.
 #' 

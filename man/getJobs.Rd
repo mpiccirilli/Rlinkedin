@@ -14,15 +14,9 @@ getJobs(token, suggestions = NULL, bookmarks = NULL, partner = 0)
 \item{bookmarks}{TRUE or FALSE. If TRUE, it will return jobs you've bookmarked on LinkedIn.}
 
 \item{partner}{Indicate whether you belong to the Partnership Program. Values: 0 or 1}
-
-
 }
 \value{
 Returns a dataframe of recommended or bookmarked jobs.
-
-Set \code{partner} = 1, if you belong to LinkedIn's Parternship Program.
-
-
 }
 \description{
 \code{getJobs} can be used to retrieve your bookmarked and 
@@ -31,7 +25,6 @@ suggested jobs.
 \details{
 This function can return either jobs you've bookmarked on LinkedIn, 
 or jobs LinkedIn is recommending for you, but not both at the same time.
-
 }
 \examples{
 \dontrun{

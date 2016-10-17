@@ -14,6 +14,7 @@
 #' @param universal_name LinkedIn universal company name. This is the exact name seen at the end of the URL on the company page on linkedin.com.
 #' @param email_domain The email domain used by the company.
 #' @param company_id LinkedIn company ID. 
+#' @param partner Indicate whether you belong to the Partnership Program. Values: 0 or 1
 #'
 #' @return Returns company profile data, such as LinkedIn ID, name, universal-name, email-domains, company-type, ticker, website-url, industries, status, twitter handle, employee-count-range, specialties, locations, description, founded-year, and number of followers.
 #' 

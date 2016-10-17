@@ -14,13 +14,9 @@ getProfile(token, connections = FALSE, id = NULL, partner = 0)
 \item{id}{Numeric ID number of a LinkedIn member.}
 
 \item{partner}{Indicate whether you belong to the Partnership Program. Values: 0 or 1}
-
 }
 \value{
 Returns a list of profile information.
-
-Set \code{partner} = 1, if you belong to LinkedIn's Parternship Program.
-
 }
 \description{
 \code{getProfile} retrieve's proflie information about to yourself, your connections, or another individual.

@@ -17,23 +17,17 @@ getCompany(token, universal_name = NULL, email_domain = NULL,
 \item{company_id}{LinkedIn company ID.}
 
 \item{partner}{Indicate whether you belong to the Partnership Program. Values: 0 or 1}
-
 }
 \value{
 Returns company profile data, such as LinkedIn ID, name, universal-name, email-domains, company-type, ticker, website-url, industries, status, twitter handle, employee-count-range, specialties, locations, description, founded-year, and number of followers.
 
 The output when specifying the \code{universal_name} or \code{company_id} will be in a list, whereas the output when specifying the \code{email_domain} will be a dataframe.
-
-
-Set \code{partner} = 1, if you belong to LinkedIn's Parternship Program.
-
 }
 \description{
 \code{getCompany} retrieves company profiles using a company Id, a universal name, or an email domain.
 }
 \details{
 The 'universal name' needs to be the exact name seen at the end of the URL on the company page on linkedin.com.
-
 }
 \examples{
 \dontrun{

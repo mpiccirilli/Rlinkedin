@@ -23,14 +23,9 @@ searchJobs(token, keywords = NULL, company_name = NULL, job_title = NULL,
 \item{distance}{Distance matches jobs within a distance from a central point. This is measured in miles and is best used in conjunction with both \code{country_code} and \code{postal-code}.}
 
 \item{partner}{Indicate whether you belong to the Partnership Program. Values: 0 or 1}
-
 }
 \value{
-Returns a dataframe of jobs based input parameters.
-
-Set \code{partner} = 1, if you belong to LinkedIn's Parternship Program.
-
-
+Returns a dataframe of jobs based input parameters
 }
 \description{
 \code{searchJobs} searches across LinkedIn's job postings.
