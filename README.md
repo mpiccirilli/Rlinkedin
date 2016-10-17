@@ -336,7 +336,7 @@ length(company.id)
 # This is so long because there are 261 email domain names associated 'columbia.edu'
 ```
 
-<a name="searchCompany">#### Company Search API </a>
+#### <a name="searchCompany">Company Search API </a>
 Use the [Company Search API](https://developer-programs.linkedin.com/documents/company-search) to find companies using keywords, industry, location, or some other criteria. It returns a collection of matching companies. Each entry can contain much of the information available on the company page.
 
 1/22:  Added searchCompanies() to repo.  Will add/update readme w/ example soon... <br>
