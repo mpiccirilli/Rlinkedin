@@ -10,10 +10,13 @@ On May 12th 2015 LinkedIn changed the availability for most of their API endpoin
 
 **Regarding this R package, the following lists cover which functions are and are not available for *non-partners*.**  If I gain access to their partnership program I will update the package accordingly. 
 
+
 ### Available: <br>
-- getProfile(token)
-- searchCompanies(token, ...)
-- submitShare(token, ...)
+
+
+- [getProfile(token)](#profileapi)
+- [searchCompanies(token, ...)](#searchCompany)
+- [submitShare(token, ...)](#submitShare)
 
 ### Not available: <br>
 - getMyConnections(token)
@@ -100,7 +103,7 @@ head(conn.freq[order(-conn.freq$freq),])
 ```
 
 
-Profile API
+<a name="profileapi">Profile API</a>
 ------
 The [Profile API](https://developer-programs.linkedin.com/documents/profile-api) returns a member's LinkedIn profile. This function can retrieve proflie information about to yourself, your connections, or an individual.
 
@@ -333,7 +336,7 @@ length(company.id)
 # This is so long because there are 261 email domain names associated 'columbia.edu'
 ```
 
-#### Company Search API
+<a name="searchCompany">#### Company Search API </a>
 Use the [Company Search API](https://developer-programs.linkedin.com/documents/company-search) to find companies using keywords, industry, location, or some other criteria. It returns a collection of matching companies. Each entry can contain much of the information available on the company page.
 
 1/22:  Added searchCompanies() to repo.  Will add/update readme w/ example soon... <br>
@@ -403,7 +406,7 @@ submitGroupPost(in.auth, group_id=id, disc_title=disc.title, disc_summary=disc.s
 
 
 
-Share API
+<a name="submitShare"> Share API </a>
 --------
 You can share network updates through the [Share API](https://developer-programs.linkedin.com/documents/share-api).
 
