@@ -1,5 +1,5 @@
 Package: Rlinkedin
-Version: 0.1.1
+Version: 0.2
 Title: Access to the LinkedIn API via R
 Description: A series of functions that allow users
     to access the 'LinkedIn' API to get information about connections,
@@ -8,12 +8,15 @@ Description: A series of functions that allow users
     the API please visit <https://developer.linkedin.com/>.
 Author: Michael Piccirilli <michael.r.piccirilli@gmail.com>
 Maintainer: Michael Piccirilli <michael.r.piccirilli@gmail.com>
-Depends:
+Depends:  
     R (>= 2.12.0),
     httr,
     XML,
     httpuv
+Imports:
+  methods
 License: GPL-2
 LazyData: true
 URL: https://github.com/mpiccirilli/Rlinkedin
+BugReports: https://github.com/mpiccirilli/Rlinkedin/issues
 RoxygenNote: 5.0.1

@@ -11,7 +11,7 @@ to access the LinkedIn API to get information about connections, search for peop
 search for jobs, share updates with your network, and create group discussions.
 }
 \author{
-Michael Piccirilli \email{mrp2181@columbia.edu}
+Michael Piccirilli \email{michael.r.piccirilli@gmail.com}
 }
 \seealso{
 \code{\link{inOAuth}}, \code{\link{getProfile}}, 

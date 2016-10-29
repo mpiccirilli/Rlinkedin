@@ -13,6 +13,8 @@
 #' @name Rlinkedin-package
 #' @aliases Rlinkedin
 #' @docType package
-#' @author Michael Piccirilli \email{mrp2181@@columbia.edu}
+#' @author Michael Piccirilli \email{michael.r.piccirilli@gmail.com}
 #' @import httr XML httpuv
+#' @importFrom utils URLencode
+#' @importFrom methods as
 NULL
