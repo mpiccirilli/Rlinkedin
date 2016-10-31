@@ -1,7 +1,13 @@
 Rlinkedin
 =========
 
-[![Build Status](https://travis-ci.org/mpiccirilli/Rlinkedin.svg?branch=master)](https://travis-ci.org/mpiccirilli/Rlinkedin)
+
+[![Build Status](https://travis-ci.org/mpiccirilli/Rlinkedin.svg?branch=master)](https://travis-ci.org/mpiccirilli/Rlinkedin) 
+
+<p> 
+
+The current CRAN release (and GitHub version) is 0.2.
+
 
 
 ## May 12th API Changes
